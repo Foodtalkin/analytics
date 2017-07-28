@@ -1,0 +1,214 @@
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-sm-4">
+        	<div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Users
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getUserChart()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text-center">
+                            	<div jq-sparkline class="sparkline-chart m-t-25" ng-model="userpie" opts="{{ user_pie_options }}"></div>
+                            </div>
+							<div class="col-sm-4 m-t-30 text-center" ng-repeat="usercount in UserCounts">
+								<span class="hint-text fs-11 bold">{{usercount.status}}</span>
+								<h5>
+									{{usercount.count}}
+								</h5>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-8">
+        	<div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Users Onboarding
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li>
+                                        <div class="dropdown">
+                                            <a id="portlet-settings" data-target="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                                                <i class="portlet-icon portlet-icon-settings "></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="portlet-settings">
+                                                <li><a ng-click="userOnboard = allData.user7days">7 Days</a>
+                                                </li>
+                                                <li><a ng-click="userOnboard = allData.user30days">30 Days</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li><a href="" ng-click="getareaChats()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                            	<nvd3 options='user_area_options' class="line-chart m-t-30 text-center" data='userOnboard'></nvd3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+	<div class="row">
+        <div class="col-sm-7">
+        	<div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Offer Redemption
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                	<li>
+                                        <div class="dropdown">
+                                            <a id="portlet-settings" data-target="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                                                <i class="portlet-icon portlet-icon-settings "></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="portlet-settings">
+                                                <li><a ng-click="offerRedemp = allData.Offers7days;">7 Days</a>
+                                                </li>
+                                                <li><a ng-click="offerRedemp = allData.Offers30days;">30 Days</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li><a href="" ng-click="getareaChats()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                        	<div>
+                            	<nvd3 options='offer_area_options1' class="line-chart m-t-30 text-center" data='offerRedemp'></nvd3>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-5">
+        	<div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Redemption of each offer type
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getRedemptionchart()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text-center">
+                            	<div jq-sparkline class="sparkline-chart m-t-20" ng-model="offerpie" opts="{{ offer_pie_options }}"></div>
+                            </div>
+							<div class="col-sm-4 m-t-10 text-center" ng-repeat="offerall in offerall">
+								<span class="hint-text fs-10 bold" style="">{{offerall.title}}</span>
+								<h5>
+									{{offerall.count}}
+								</h5>
+							</div>
+							<span class="fs-10 hint-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-sm-4">
+    		<div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Partners count
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getRestaurantStats()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h6 class="bold text-complete">Total restaurants</h6>
+                            <h3>{{restaurant.restaurants[0].count}}</h3>
+
+                            <h6 class="bold text-complete">Total Outlets</h6>
+                            <h3>{{restaurant.outlet[0].count}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</div>
+    	<div class="col-sm-4">
+    		<div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Latest Top Redeption
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getRestaurantStats()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div ng-repeat="latest in restaurant.latest_top">
+                            	<h5 class="text-gray bold fs-13">{{latest.name}} <span class="pull-right text-complete">{{latest.count}}</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</div>
+    	<div class="col-sm-4">
+    		<div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">All Time top Redemption
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getRestaurantStats()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+							<div ng-repeat="allTime in restaurant.top">
+                            	<h5 class="text-gray bold fs-13">{{allTime.name}} <span class="pull-right text-complete">{{allTime.count}}</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</div>
+    </div>
+</div>

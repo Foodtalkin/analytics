@@ -1,0 +1,187 @@
+
+<div class="container-fluid container-fixed-lg" style="">
+   <div class="row">
+       <div class="col-md-3" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px);">
+           <div class="p-t-30 p-b-10">
+               <button class="btn btn-primary btn-block" ng-click="openCreateform()">Create New Restaurant</button>
+               <h5>Restaurant List</h5>
+               <div class="form-group">
+                   <input type="text" ng-model="searchTerm" class="form-control" placeholder="serach...">
+               </div>
+           </div>
+           <!-- Restro List -->
+           <div class="p-t-20 p-b-20 scrollable" style="height: calc(100% - 170px);">
+                
+               <button class="btn btn-white btn-block text-left" ng-repeat="restro in filtered = (restroList | filter:searchTerm | orderBy:'name')" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenRestro(restro.id)">{{ restro.name }}</button>
+           </div>
+       </div>
+       <div class="col-md-9">
+            <!-- form -->
+           <div class="col-sm-10 col-sm-offset-1 p-t-10 p-b-30" ng-show="showForm">
+                <h2>Create New Restaurant</h2>
+               <form name="CreateNewRestro" id="form-CreateNewRestro" role="form" novalidate>
+                    <div class="row clearfix">
+                        <div class="col-sm-8">
+                            <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : CreateNewRestro.name.$invalid && !CreateNewRestro.name.$pristine }">
+                                <label>Restaurant Name</label>
+                                <input type="text" class="form-control" name="name" ng-model="restro.name" required>
+                            </div>
+                            <label class="error" for="name" ng-show="CreateNewRestro.name.$invalid && !CreateNewRestro.name.$pristine">This field is required.</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div pg-form-group class="form-group form-group-default input-group required" ng-class="{ 'has-error' : CreateNewRestro.cost.$invalid && !CreateNewRestro.cost.$pristine }">
+                                <label>Cost</label>
+                                <input type="text" class="form-control" name="cost" placeholder="700" ng-model="restro.cost" required>
+                                <span class="input-group-addon">
+                                                   For one
+                                </span>
+                            </div>
+                            <label class="error" for="cost" ng-show="CreateNewRestro.cost.$invalid && !CreateNewRestro.cost.$pristine">This field is required.</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : CreateNewRestro.one_liner.$invalid && !CreateNewRestro.one_liner.$pristine }">
+                                <label>One Liner</label>
+                                <input type="text" class="form-control" name="one_liner" placeholder="Maximum of 80 characters." ng-model="restro.one_liner" required maxlength="80">
+                            </div>
+                            <label class="error" for="one_liner" ng-show="CreateNewRestro.one_liner.$invalid && !CreateNewRestro.one_liner.$pristine">This field is required.</label>
+                            <label class="error" for="one_liner" ng-show="CreateNewRestro.one_liner.$error.minlength">One Liner should have at least 4 characters</label>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="direct_upload" 
+                            ngf-drop="uploadFiles($files)"
+                            ngf-drag-over-class="dragOverClass($event)"
+                            ng-model="files"
+                            ng-multiple="fasle" ngf-dimensions="$width == 400 && $height == 400">
+                            <div class="col-md-12 no-padding">
+                              <form>  
+                                <div class="form_line">
+                                    <!-- <label>Image:</label> -->
+                                    <div class="form_controls">
+                                        <div class="upload_button_holder" style="text-align: center; border: 1px dotted #9e9e9e;padding: 20px;width: 100%;">
+                                            <div href="#" class="upload_button btn btn-fw btn-primary" ngf-select="uploadFiles($files)" title="upload" resetOnClick="true" ngf-dimensions="$width == 400 && $height == 400">Upload</div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                    </div>                  
+                    <div class="clearfix"></div>
+                    <button class="btn btn-primary pull-right m-t-30" type="button" ng-click="createRestro()" ng-disabled="(CreateNewRestro.$invalid) || (cover == '')">Create a new account</button>
+                </form>
+           </div>
+           <!-- restro Details -->
+           <div class="col-sm-12 m-t-30" ng-show="showDetails">
+               <div class="row">
+                    <div class="col-sm-3">
+                        <img ng-src="{{RestaurantData.card_image}}" alt="" class="img-responsive img-rounded">
+                        <button class="btn btn-icon no-border bg-transparent" style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,.8);"><i class="fa fa-edit fa-2x"></i></button>
+                    </div>
+                    <div class="col-sm-5">
+                        <button class="btn btn-link text-complete pull-right">edit</button>
+                        <h3>{{RestaurantData.name}}</h3>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p class="hint-text m-t-0 m-b-5 bold fs-13">One Liner</p>
+                                <h5 class="semi-bold m-t-0">{{RestaurantData.one_liner}}</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Cost For one</p>
+                                <h5 class="semi-bold m-t-0">{{RestaurantData.cost}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <button class="btn btn-link text-complete pull-right" ng-hide="noCusine">edit</button>
+                        <button class="btn btn-success m-t-60" ng-show="noCusine">
+                            Add Cuisine
+                        </button>
+                        <div class="text-left m-t-20" ng-hide="noCusine">
+                            <p class="hint-text m-t-0 m-b-5 bold fs-13">Cuisines</p>
+                            <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{cuisine.title}}</p>
+                        </div>
+                    </div>
+               </div>
+               <div class="row m-t-20" ng-hide="noOutlet">
+                   <div class="col-sm-12">
+                       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default" ng-repeat="outlets in RestaurantData.outlet">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                    <a ng-class="{collapsed:!collapseOne}" ng-click="collapseOne=!collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                     {{outlets.name}}, {{outlets.area}} <span class="bold">( {{outlets.pin}} )</span>
+                                    </a>
+                                  </h4>
+                                </div>
+                                <div class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" ng-class="{in:collapseOne}">
+                                    <div class="panel-body">
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                              <div class="col-xs-6">
+                                                <p class="hint-text m-t-0 m-b-5 bold fs-13">City Id</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.city_id}}</p>
+                                              </div>
+                                              <div class="col-xs-6">
+                                                <p class="hint-text m-t-0 m-b-5 bold fs-13">City Zone Id</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.city_zone_id}}</p>
+                                              </div>
+                                              <div class="col-xs-6">
+                                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Latitude</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.latitude}}</p>
+                                              </div>
+                                              <div class="col-xs-6">
+                                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Longitude</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.longitude}}</p>
+                                              </div>
+                                              <div class="col-xs-6">
+                                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Work hours</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.work_hours}}</p>
+                                              </div>
+                                              <div class="col-xs-6">
+                                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Suggested Dishes</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.suggested_dishes}}</p>
+                                              </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <!-- START PANEL -->
+                                            <div class="panel panel-transparent">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">Address
+                                                    </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <address class="margin-bottom-20 margin-top-10">
+                                                        <strong>{{outlets.name}}</strong>
+                                                        <br>{{outlets.address}}
+                                                        <br>Postcode: {{outlets.postcode}}
+                                                        <br>
+                                                        <abbr title="Phone">P:</abbr>{{outlets.phone}}
+                                                    </address>
+                                                </div>
+                                            </div>
+                                            <!-- END PANEL -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+               <div class="row">
+                   <div class="col-sm-12 m-t-20 m-b-20">
+                       <button class="btn btn-default btn-block text-complete">Add Outlet</button>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
