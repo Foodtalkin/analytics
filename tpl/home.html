@@ -14,7 +14,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="height: 400px;">
                             <div class="text-center">
                             	<div jq-sparkline class="sparkline-chart m-t-25" ng-model="userpie" opts="{{ user_pie_options }}"></div>
                             </div>
@@ -58,8 +58,9 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <div>
-                            	<nvd3 options='user_area_options' class="line-chart m-t-30 text-center" data='userOnboard'></nvd3>
+                            <div id="tab-nvd3-line" style="height: 400px;">
+                            	<!-- <nvd3 options='user_area_options' class="line-chart m-t-30 text-center" data='userOnboard'></nvd3> -->
+                                <nvd3 options='user_line_options' class="line-chart m-t-30 text-center" data='userOnboard' api="nvd3_line_api" data-x-grid="true"></nvd3>
                             </div>
                         </div>
                     </div>
@@ -97,8 +98,9 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                        	<div>
-                            	<nvd3 options='offer_area_options1' class="line-chart m-t-30 text-center" data='offerRedemp'></nvd3>
+                        	<div style="height: 400px;">
+                            	<!-- <nvd3 options='offer_area_options1' class="line-chart m-t-30 text-center" data='offerRedemp'></nvd3> -->
+                                <nvd3 options='offer_line_options' class="line-chart m-t-30 text-center" data='offerRedemp' api="nvd3_line_api" data-x-grid="true" ></nvd3>
                             </div>
                             
                         </div>

@@ -27,7 +27,7 @@ angular.module('sparkline')
                 var render = function() {
                     var model;
                     if (attrs.opts) angular.extend(opts, angular.fromJson(attrs.opts));
-                    console.log(opts);
+                    //console.log(opts);
                     // Trim trailing comma if we are a string
                     angular.isString(ngModel.$viewValue) ? model = ngModel.$viewValue.replace(/(^,)|(,$)/g, "") : model = ngModel.$viewValue;
                     var data;

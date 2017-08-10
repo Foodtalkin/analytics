@@ -14,6 +14,7 @@ angular.module('app')
                 $scope.allData = response;
                 $scope.userOnboard = $scope.allData.user7days;
                 $scope.offerRedemp = $scope.allData.Offers7days;
+                console.log($scope.allData);
             });
         }
         	
@@ -64,13 +65,10 @@ angular.module('app')
 
 
         // chart options
-    	$scope.user_area_options = {
+    	$scope.user_line_options = {
             chart: {
-                type: 'stackedAreaChart',
+                type: 'lineChart',
                 height: 400,
-                margin: {
-                    left: 15
-                },
                 x: function(d) {
                     return d[0]
                 },
@@ -78,44 +76,28 @@ angular.module('app')
                     return d[1]
                 },
                 color: [
-                    '#10cfbd ',
-                    '#3b4752',
-                    '#f55753', //south america
-                    '#f8d053',
-                    '#48b0f7', //europe
-                    '#6d5cae',
-                    '#0da899',
-                    '#788195' //antarctica
+                    '#259b24',
+                    '#e51c23',
+                    '#212121'//antarctica
 
                 ],
                 useInteractiveGuideline: true,
-                rightAlignYAxis: true,
                 transitionDuration: 500,
-                showControls: true,
-                clipEdge: true,
                 xAxis: {
                     tickFormat: function(d) {
-                        return d3.time.format('%x')(new Date(d))
+                        return d3.time.format('%d/%m/%Y')(new Date(d))
                     }
                 },
                 yAxis: {
-                    tickFormat: d3.format('d')
-                },
-                legend: {
-                    margin: {
-                        top: 30
-                    }
+                    tickFormat: d3.format("")
                 }
             }
         }
 
-        $scope.offer_area_options1 = {
+        $scope.offer_line_options = {
             chart: {
-                type: 'stackedAreaChart',
-                height: 500,
-                margin: {
-                    left: 15
-                },
+                type: 'lineChart',
+                height: 400,
                 x: function(d) {
                     return d[0]
                 },
@@ -123,66 +105,70 @@ angular.module('app')
                     return d[1]
                 },
                 color: [
-                    '#f8d053',
-                    '#10cfbd',
-                    '#3b4752',
-                    '#f55753',
-                    '#48b0f7', 
-                    '#6d5cae',
-                    '#0da899',
-                    '#788195' 
+                    '#673ab7',
+                    '#e91e63',
+                    '#ff9800',
+                    '#9c27b0',
+                    '#3f51b5', 
+                    '#ffc107'
 
                 ],
                 useInteractiveGuideline: true,
-                rightAlignYAxis: true,
                 transitionDuration: 500,
-                showControls: true,
-                clipEdge: true,
                 xAxis: {
                     tickFormat: function(d) {
-                        return d3.time.format('%x')(new Date(d))
+                        return d3.time.format('%d/%m/%Y')(new Date(d))
                     }
                 },
                 yAxis: {
-                    tickFormat: d3.format('d')
-                },
-                legend: {
-                    margin: {
-                        top: 30
-                    }
+                    tickFormat: d3.format("")
                 }
             }
         }
-        $scope.user_pie_options = {
-            type: 'pie',
-            width: '200',
-            height: '200',
-            tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
-		    tooltipValueLookups: {
-		        'offset': {
-		            0: 'Paid',
-		            1: 'Un Paid'
-		        }
-		    },sliceColors: ['#f55753', '#f8d053', '#48b0f7', '#6d5cae',]
-        };
 
-        $scope.offer_pie_options = {
-            type: 'pie', 
-            width: '200',
-            height: '200',
-            tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
-            tooltipValueLookups: {
-                'offset': {
-                    0: '1+1 Appetizer ' ,
-                    1: '1+1 Main Course ',
-                    2: '1+1 Cocktail ',
-                    3: '15% off on Food & Drinks ',
-                    4: '20% off on Food only ',
-                    5: '1+1 on Buffet '
-                }
-            },sliceColors: ['#f55753','#f8d053','#10cfbd','#3b4752','#48b0f7','#6d5cae','#0da899','#788195' ]
+        $scope.$watch('userpie', function() {
+            $scope.user_pie_options = {
+                type: 'pie',
+                width: '200',
+                height: '200',
+                tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
+                transitionDuration: 500,
+                tooltipValueLookups: {
+                    'offset': {
+                        0: 'Paid',
+                        1: 'Un Paid'
+                    }
+                },sliceColors: ['#259b24 ',
+                        '#e51c23']
+            };
+        });
+            
+        $scope.$watch('offerpie', function(){
+            $scope.offer_pie_options = {
+                type: 'pie', 
+                width: '200',
+                height: '200',
+                tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
+                transitionDuration: 500,
+                tooltipValueLookups: {
+                    'offset': {
+                        0: '1+1 Appetizer ' ,
+                        1: '1+1 Main Course ',
+                        2: '1+1 Cocktail ',
+                        3: '15% off on Food & Drinks ',
+                        4: '20% off on Food only ',
+                        5: '1+1 on Buffet '
+                    }
+                },sliceColors: ['#673ab7',
+                        '#e91e63',
+                        '#ff9800',
+                        '#9c27b0',
+                        '#3f51b5', 
+                        '#ffc107']
 
-        };
+            };
+        })
+            
 
     }])
     .factory('homeFact', ['$http', function($http){
@@ -240,6 +226,7 @@ angular.module('app')
     			// paid user Last 7 days
     			var mypaidobj = {
     				"key" : "Paid",
+                    // lineColor:"red",
     				"values" : []
     			}
     			angular.forEach(userApi.datewise.paid, function(value, key) {
@@ -251,6 +238,7 @@ angular.module('app')
 				// unpaid user last 7 days
 				var myunpaidobj = {
     				"key" : "unPaid",
+                    // lineColor:"red",
     				"values" : []
     			}
     			angular.forEach(userApi.datewise.unpaid, function(value, key) {
@@ -261,7 +249,8 @@ angular.module('app')
 				// total users last 7 days
 				var mytotalobj = {
     				"key" : "total",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(userApi.datewise.total, function(value, key) {
 				  var temp = dateformat(value.date, value.count);
@@ -276,7 +265,8 @@ angular.module('app')
     			// paid user 30 days
     			var mypaidobj = {
     				"key" : "Paid",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(userApi30.datewise.paid, function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -286,7 +276,8 @@ angular.module('app')
 				// unpaid user 30 days
 				var myunpaidobj = {
     				"key" : "unPaid",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(userApi30.datewise.unpaid, function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -296,7 +287,8 @@ angular.module('app')
 				// total user 30 days
 				var mytotalobj = {
     				"key" : "total",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(userApi30.datewise.total, function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -311,7 +303,8 @@ angular.module('app')
     			// offer 1+1 appetizer
     			var myOverallobj = {
     				"key" : "1+1 Appetizer",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['1'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -321,7 +314,8 @@ angular.module('app')
 				// offer main course
 				var myOverallobj = {
     				"key" : "1+1 Main",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['2'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -332,7 +326,8 @@ angular.module('app')
 				// offer Cocktail
 				var myOverallobj = {
     				"key" : "1+1 Cocktail",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['3'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -343,7 +338,8 @@ angular.module('app')
 				// 15% off on Food & Drinks
 				var myOverallobj = {
     				"key" : "15% off on Food & Drinks",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['4'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -354,7 +350,8 @@ angular.module('app')
 				// 20% off on Food only
 				var myOverallobj = {
     				"key" : "20% off on Food only",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['5'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -365,7 +362,8 @@ angular.module('app')
 				// 1+1 on Buffet
 				var myOverallobj = {
     				"key" : "1+1 on Buffet",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['6'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -380,7 +378,8 @@ angular.module('app')
     			// offer 1+1 appetizer
     			var myOverallobj = {
     				"key" : "1+1 Appetizer",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['1'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -390,7 +389,8 @@ angular.module('app')
 				// offer main course
 				var myOverallobj = {
     				"key" : "1+1 Main",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['2'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -401,7 +401,8 @@ angular.module('app')
 				// offer Cocktail
 				var myOverallobj = {
     				"key" : "1+1 Cocktail",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['3'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -412,7 +413,8 @@ angular.module('app')
 				// 15% off on Food & Drinks
 				var myOverallobj = {
     				"key" : "15% off on Food & Drinks",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['4'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -423,7 +425,8 @@ angular.module('app')
 				// 20% off on Food only
 				var myOverallobj = {
     				"key" : "20% off on Food only",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['5'], function(value, key) {
 				   var temp = dateformat(value.date, value.count);
@@ -434,7 +437,8 @@ angular.module('app')
 				// 1+1 on Buffet
 				var myOverallobj = {
     				"key" : "1+1 on Buffet",
-    				"values" : []
+    				// lineColor:"red",
+                    "values" : []
     			}
     			angular.forEach(datewise['6'], function(value, key) {
 				    var temp = dateformat(value.date, value.count);
