@@ -1,0 +1,193 @@
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-md-4" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px);">
+            <div class="p-t-30 p-b-10">
+                <button class="btn btn-primary btn-block" ng-click="openCreateform()">Create New Notification</button>
+                <h5>Notification List</h5>
+                <div class="form-group">
+                   <input type="text" ng-model="searchTerm" class="form-control" placeholder="serach...">
+                </div>
+            </div>
+            <!-- Restro List -->
+            <div class="p-t-20 p-b-20 scrollable" style="height: calc(100% - 170px);">
+                
+                <button class="btn btn-white btn-block text-left" ng-repeat="listitem in filtered = (allList | filter:searchTerm | orderBy:'-push_time')" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenDetails(listitem.id)">{{ listitem.push.data.alert }}</button>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-xs-12" ng-hide="hideForm">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-transparent">
+                        <div class="panel-body no-padding">
+                            <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                                <div class="panel-heading ">
+                                    <div class="panel-title">Schedule Notification
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <form name="newNoti" id="form-newNoti" role="form" novalidate>
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : newNoti.msgtxt.$invalid && !newNoti.msgtxt.$pristine }">
+                                                    <label>Notification text</label>
+                                                    <input type="text" class="form-control" name="msgtxt" placeholder="text" ng-model="Notification.msgtxt" required>
+                                                </div>
+                                                <label class="error" for="msgtxt" ng-show="newNoti.msgtxt.$invalid && !newNoti.msgtxt.$pristine">This field is required.</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div pg-form-group class="form-group form-group-default input-group" ng-class="{ 'has-error' : newNoti.date.$invalid && !newNoti.date.$pristine }">
+                                                    <label>date</label>
+                                                    <input type="text" class="form-control" placeholder="Pick a date" id="datepicker-component2" ui-jq="datepicker"  ng-model="Notification.date" data-date-format="yyyy-mm-dd" name="date" > 
+                                                    <span class="input-group-addon">
+                                                      <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <label class="error" for="date" ng-show="newNoti.date.$invalid && !newNoti.date.$pristine">This field is required.</label>
+                                                <label class="error" for="date" ng-show="newNoti.date.$error.minlength">date should have at least 4 characters</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group form-group-default input-group bootstrap-timepicker" ng-class="{ 'has-error' : newNoti.time.$invalid && !newNoti.time.$pristine }">
+                                                    <label>time</label>
+                                                    <input id="timepicker" type="text" class="form-control" ng-model="Notification.time" timepicker>
+                                                    <span class="input-group-addon"><i class="pg-clock"></i></span>
+                                                </div>
+                                                <label class="error" for="time" ng-show="newNoti.time.$invalid && !newNoti.time.$pristine">This field is required.</label>
+                                                <label class="error" for="time" ng-show="newNoti.time.$error.minlength">time should have at least 4 characters</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : newNoti.phonelist.$invalid && !newNoti.phonelist.$pristine }">
+                                                    <label>Group</label>
+                                                    <select class="cs-select cs-skin-slide" ng-model="Notification.phonelist" ng-model="Notification.group" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
+                                                        <option value="all">All</option>
+                                                        <option value="android">Android</option>
+                                                        <option value="ios">iOS</option>
+                                                    </select>
+                                                </div>
+                                                <label class="error" for="phonelist" ng-show="newNoti.phonelist.$invalid && !newNoti.phonelist.$pristine">Enter a valid phonelist.</label>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <button class="btn btn-primary" type="submit" ng-disabled="newNoti.$invalid" ng-click="createNotification()">send Notification</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12" ng-show="hideForm">
+                <div class="row">
+                    <div class="col-xs-12 col-md-10 col-md-offset-1" ng-hide="editDetails">
+                        <div class="col-sm-12">
+                            <div class="m-t-40">
+                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Message</p>
+                                <h3>{{ notificationDetails.push.data.alert}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <div class="m-t-20">
+                                    <p class="hint-text m-t-0 m-b-5 bold fs-13">Scheduled Time</p>
+                                    <h5>{{ notificationDetails.push_time}}</h5>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="m-t-20">
+                                    <p class="hint-text m-t-0 m-b-5 bold fs-13">Created At</p>
+                                    <h5>{{ notificationDetails.created_at}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <div class="m-t-20">
+                                    <p class="hint-text m-t-0 m-b-5 bold fs-13">Device Type</p>
+                                    <h5>{{ notificationDetails.push.where.deviceType.$in[0][0]}}</h5>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="m-t-20">
+                                    <p class="hint-text m-t-0 m-b-5 bold fs-13">Status</p>
+                                    <h5>{{ notificationDetails.status}}</h5>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary" ng-click="openedit()">Edit Notification</button>
+                            <button class="btn btn-danger pull-right" ng-click="deleteNotification(notificationDetails.id)" ng-disabled="notificationDetails.is_disabled">Delete Notification</button>
+                        </div>    
+                    </div>
+                    <div class="col-xs-12" ng-show="editDetails">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-transparent">
+                                <div class="panel-body no-padding">
+                                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                                        <div class="panel-heading ">
+                                            <div class="panel-title">Schedule Notification
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <form name="editnoti" id="form-editnoti" role="form" novalidate>
+                                                <div class="row clearfix">
+                                                    <div class="col-sm-12">
+                                                        <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : editnoti.msgtxt.$invalid && !editnoti.msgtxt.$pristine }">
+                                                            <label>Notification text</label>
+                                                            <input type="text" class="form-control" name="msgtxt" placeholder="text" ng-model="notificationDetails.msg" required>
+                                                        </div>
+                                                        <label class="error" for="msgtxt" ng-show="editnoti.msgtxt.$invalid && !editnoti.msgtxt.$pristine">This field is required.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div pg-form-group class="form-group form-group-default input-group" ng-class="{ 'has-error' : editnoti.date.$invalid && !editnoti.date.$pristine }">
+                                                            <label>date</label>
+                                                            <input type="text" class="form-control" placeholder="Pick a date" id="datepicker-component2" ui-jq="datepicker"  ng-model="notificationDetails.push_time[0]" data-date-format="yyyy-mm-dd" name="date" > 
+                                                            <span class="input-group-addon">
+                                                              <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                        <label class="error" for="date" ng-show="editnoti.date.$invalid && !editnoti.date.$pristine">This field is required.</label>
+                                                        <label class="error" for="date" ng-show="editnoti.date.$error.minlength">date should have at least 4 characters</label>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default input-group bootstrap-timepicker" ng-class="{ 'has-error' : editnoti.time.$invalid && !editnoti.time.$pristine }">
+                                                            <label>time</label>
+                                                            <input id="timepicker" type="text" class="form-control" ng-model="notificationDetails.push_time[1]" timepicker>
+                                                            <span class="input-group-addon"><i class="pg-clock"></i></span>
+                                                        </div>
+                                                        <label class="error" for="time" ng-show="editnoti.time.$invalid && !editnoti.time.$pristine">This field is required.</label>
+                                                        <label class="error" for="time" ng-show="editnoti.time.$error.minlength">time should have at least 4 characters</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : editnoti.phonelist.$invalid && !editnoti.phonelist.$pristine }">
+                                                            <label>Group</label>
+                                                            <select class="cs-select cs-skin-slide" ng-model="sms.phonelist" ng-model="myusergroup" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
+                                                                <option value="all">All</option>
+                                                                <option value="android">Android</option>
+                                                                <option value="ios">iOS</option>
+                                                            </select>
+                                                        </div>
+                                                        <label class="error" for="phonelist" ng-show="editnoti.phonelist.$invalid && !editnoti.phonelist.$pristine">Enter a valid phonelist.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <button class="btn btn-danger" ng-click="stopedit">cancel</button>
+                                                <button class="btn btn-primary" type="submit" ng-disabled="editnoti.$invalid" ng-click="editNotification(notificationDetails.id)">Edit Notification</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

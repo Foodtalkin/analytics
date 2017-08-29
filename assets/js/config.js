@@ -67,6 +67,27 @@ angular.module('app')
                         }]
                     }
                 })
+                .state('app.notification', {
+                    url: "/notification",
+                    templateUrl: "tpl/notification.html",
+                    controller: 'notificationCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'moment',
+                                    'datepicker',
+                                    'timepicker'
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/notification.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
                 .state('app.privilege', {
                     url: "/privilege",
                     templateUrl: "tpl/privilege.html",
