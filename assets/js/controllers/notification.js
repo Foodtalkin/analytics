@@ -36,11 +36,7 @@ angular.module('app')
 					  "push": {
 					    "where": {
 					      
-					      "deviceType": {
-					        "$in": [
-					          "android"
-					        ]
-					      }
+					      
 					    },
 					    "data": {
 					      "alert": $scope.Notification.msgtxt,
@@ -48,15 +44,18 @@ angular.module('app')
 					    }
 					  }
 					}
+					//console.log($scope.Notification.group);
 		if($scope.Notification.group == 'all'){
 			data.push.where.deviceType = {};
 		}else if($scope.Notification.group == 'android'){
+			//console.log('android');
 			data.push.where.deviceType = {
 					        "$in": [
 					          "android"
 					        ]
 					      };
 		}else if($scope.Notification.group == 'ios'){
+			//console.log('ios');
 			data.push.where.deviceType = {
 					        "$in": [
 					          "ios"
@@ -110,9 +109,7 @@ angular.module('app')
 					  "push": {
 					    "where": {
 					      "deviceType": {
-					        "$in": [
-					          "android"
-					        ]
+					        
 					      }
 					    },
 					    "data": {

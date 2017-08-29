@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="col-xs-12" ng-hide="hideForm">
+            <div class="col-xs-12 m-t-40" ng-hide="hideForm">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-transparent">
                         <div class="panel-body no-padding">
@@ -61,7 +61,7 @@
                                             <div class="col-sm-12">
                                                 <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : newNoti.phonelist.$invalid && !newNoti.phonelist.$pristine }">
                                                     <label>Group</label>
-                                                    <select class="cs-select cs-skin-slide" ng-model="Notification.phonelist" ng-model="Notification.group" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
+                                                    <select class="cs-select cs-skin-slide" ng-model="Notification.group" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
                                                         <option value="all">All</option>
                                                         <option value="android">Android</option>
                                                         <option value="ios">iOS</option>
@@ -121,7 +121,7 @@
                             <button class="btn btn-danger pull-right" ng-click="deleteNotification(notificationDetails.id)" ng-disabled="notificationDetails.is_disabled">Delete Notification</button>
                         </div>    
                     </div>
-                    <div class="col-xs-12" ng-show="editDetails">
+                    <div class="col-xs-12 m-t-40" ng-show="editDetails">
                         <div class="col-md-10 col-md-offset-1">
                             <div class="panel panel-transparent">
                                 <div class="panel-body no-padding">
@@ -167,7 +167,7 @@
                                                     <div class="col-sm-12">
                                                         <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : editnoti.phonelist.$invalid && !editnoti.phonelist.$pristine }">
                                                             <label>Group</label>
-                                                            <select class="cs-select cs-skin-slide" ng-model="sms.phonelist" ng-model="myusergroup" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
+                                                            <select class="cs-select cs-skin-slide" ng-model="myusergroup" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
                                                                 <option value="all">All</option>
                                                                 <option value="android">Android</option>
                                                                 <option value="ios">iOS</option>
