@@ -46,7 +46,11 @@ angular.module('app')
 					}
 					//console.log($scope.Notification.group);
 		if($scope.Notification.group == 'all'){
-			data.push.where.deviceType = {};
+			data.push.where.deviceType = {
+					        "$in": [
+					          "android", "ios"
+					        ]
+					      };
 		}else if($scope.Notification.group == 'android'){
 			//console.log('android');
 			data.push.where.deviceType = {
@@ -62,7 +66,7 @@ angular.module('app')
 					        ]
 					      };
 		}
-		//console.log(data);
+		console.log(data);
 		notificationFact.sendNotification('http://api.foodtalk.in/privilege/push', 'POST', data, function(response){
 			console.log(response);
 			if(response.data.code == "200"){
@@ -119,7 +123,11 @@ angular.module('app')
 					  }
 					}
 		if($scope.myusergroup == 'all'){
-			data.push.where.deviceType = {};
+			data.push.where.deviceType = {
+				"$in": [
+				          "android", "ios"
+				        ]
+			};
 		}else if($scope.myusergroup == 'android'){
 			data.push.where.deviceType = {
 					        "$in": [
