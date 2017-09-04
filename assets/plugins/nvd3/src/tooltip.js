@@ -80,7 +80,7 @@ window.nv.tooltip.* also has various helper methods.
                 .attr("colspan",3)
                 .append("strong")
                     .classed("x-value",true)
-                    .html(headerFormatter(d.value));
+                    .html(headerFormatter(d.value) + "<br> Total : " + d.total );
 
             var tbodyEnter = table.selectAll("tbody")
                 .data([d])
@@ -103,7 +103,6 @@ window.nv.tooltip.* also has various helper methods.
                 .classed("value",true)
                 .html(function(p,i) { return valueFormatter(p.value,i) });
 
-
             trowEnter.selectAll("td").each(function(p) {
                 if (p.highlight) {
                     var opacityScale = d3.scale.linear().domain([0,1]).range(["#fff",p.color]);
@@ -118,6 +117,7 @@ window.nv.tooltip.* also has various helper methods.
             var html = table.node().outerHTML;
             if (d.footer !== undefined)
                 html += "<div class='footer'>" + d.footer + "</div>";
+            //console.log(html);
             return html;
 
         };
@@ -177,9 +177,13 @@ window.nv.tooltip.* also has various helper methods.
         function nvtooltip() {
             if (!enabled) return;
             if (!dataSeriesExists(data)) return;
-
             convertViewBoxRatio();
-
+            var tot = 0;
+            for(var k= 0; k<data.series.length; k++){
+                tot = tot + data.series[k].value;
+            }
+            data.total = tot;
+            //console.log(data);
             var left = position.left;
             var top = (fixedTop != null) ? fixedTop : position.top;
             var container = getTooltipContainer(contentGenerator(data));

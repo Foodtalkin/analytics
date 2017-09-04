@@ -246,17 +246,6 @@ angular.module('app')
 				  myunpaidobj.values.push(temp);
 				});
 				allData.user7days.push(myunpaidobj);
-				// total users last 7 days
-				var mytotalobj = {
-    				"key" : "total",
-    				// lineColor:"red",
-                    "values" : []
-    			}
-    			angular.forEach(userApi.datewise.total, function(value, key) {
-				  var temp = dateformat(value.date, value.count);
-				  mytotalobj.values.push(temp);
-				});
-				allData.user7days.push(mytotalobj);
 
     		});
     		
@@ -284,22 +273,24 @@ angular.module('app')
 				  myunpaidobj.values.push(temp);
 				});
 				allData.user30days.push(myunpaidobj);
-				// total user 30 days
-				var mytotalobj = {
-    				"key" : "total",
-    				// lineColor:"red",
-                    "values" : []
-    			}
-    			angular.forEach(userApi30.datewise.total, function(value, key) {
-				   var temp = dateformat(value.date, value.count);
-				  mytotalobj.values.push(temp);
-				});
-				allData.user30days.push(mytotalobj);
     		})
 
     		homeFact.getredemption("7", function(response){
     			offerApi = response.data.result;
     			var datewise = offerApi.datewise;
+                // total 
+                // var myOverallobj = {
+                //     "key" : "Total",
+                //     // lineColor:"red",
+                //     "values" : []
+                // }
+                // angular.forEach(datewise, function(value, key) {
+                //     console.log(value);
+                //    var temp = dateformat(value.date, value.count);
+                //   myOverallobj.values.push(temp);
+                // });
+                // allData.Offers7days.push(myOverallobj);
+
     			// offer 1+1 appetizer
     			var myOverallobj = {
     				"key" : "1+1 Appetizer",
@@ -311,6 +302,7 @@ angular.module('app')
 				  myOverallobj.values.push(temp);
 				});
 				allData.Offers7days.push(myOverallobj);
+
 				// offer main course
 				var myOverallobj = {
     				"key" : "1+1 Main",
