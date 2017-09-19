@@ -105,7 +105,9 @@
                         </button>
                         <div class="text-left m-t-20" ng-hide="noCusine">
                             <p class="hint-text m-t-0 m-b-5 bold fs-13">Cuisines</p>
-                            <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{cuisine.title}}</p>
+                            <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{cuisine.title}} 
+                            <span ng-show="{{cuisine.id == RestaurantData.primary_cuisine.id }}"><i class="fa fa-star" aria-hidden="true" style="color:  #D4AF37;"></i></span>
+                            </p>
                         </div>
                     </div>
                </div>
@@ -126,27 +128,27 @@
                                             <div class="row">
                                               <div class="col-xs-6">
                                                 <p class="hint-text m-t-0 m-b-5 bold fs-13">City Id</p>
-                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.city_id}}</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.city_id}}</p>
                                               </div>
                                               <div class="col-xs-6">
                                                 <p class="hint-text m-t-0 m-b-5 bold fs-13">City Zone Id</p>
-                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.city_zone_id}}</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.city_zone_id}}</p>
                                               </div>
                                               <div class="col-xs-6">
                                                 <p class="hint-text m-t-0 m-b-5 bold fs-13">Latitude</p>
-                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.latitude}}</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.latitude}}</p>
                                               </div>
                                               <div class="col-xs-6">
                                                 <p class="hint-text m-t-0 m-b-5 bold fs-13">Longitude</p>
-                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.longitude}}</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.longitude}}</p>
                                               </div>
                                               <div class="col-xs-6">
                                                 <p class="hint-text m-t-0 m-b-5 bold fs-13">Work hours</p>
-                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.work_hours}}</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.work_hours}}</p>
                                               </div>
                                               <div class="col-xs-6">
                                                 <p class="hint-text m-t-0 m-b-5 bold fs-13">Suggested Dishes</p>
-                                                <p class="semi-bold m-t-0 m-b-5 fs-15" ng-repeat="cuisine in RestaurantData.cuisine">{{outlets.suggested_dishes}}</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.suggested_dishes}}</p>
                                               </div>
                                             </div>
                                             

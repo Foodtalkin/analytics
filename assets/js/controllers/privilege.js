@@ -14,7 +14,7 @@ angular.module('app')
 	    $scope.getRestroList = function(){
 	    	privilegeFact.getRestroList(function(response){
 		    	$scope.restroList = response.data.result;
-		    	console.log(response);
+		    	//console.log(response);
 		    });
 	    }
 	    $scope.getRestroList();
