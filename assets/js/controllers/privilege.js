@@ -99,8 +99,8 @@ angular.module('app')
 	    	$scope.showForm = false;
     		$scope.showDetails = true;
     		privilegeFact.getrestrodata(id, function(response){
-    			console.log(response.data.result);
     			$scope.RestaurantData = response.data.result;
+    			 $scope.getOutletOffers();
     			if($scope.RestaurantData.cuisine.length == 0){
     				$scope.noCusine = true;
     			}else{
@@ -109,10 +109,17 @@ angular.module('app')
     		})
 	    }
 
-	    $scope.getOutletOffers = function(id){
-	    	privilegeFact.getOutletOffers(id, function(response){
-	    		
+	    $scope.getOutletOffers = function(){
+	    	angular.forEach($scope.RestaurantData.outlet, function(key, value){
+	    		privilegeFact.getOutletOffers(key.id, function(response){
+	    			console.log(response.data.result);
+		    		if(key.id == response.data.result.id){
+		    			$scope.RestaurantData.outlet[value].offer = [];
+		    			$scope.RestaurantData.outlet[value].offer.push(response.data.result.offer);
+		    		}
+		    	})
 	    	})
+	    	
 	    }
 
 	    var d = new Date();
@@ -212,7 +219,7 @@ angular.module('app')
 		privilegeFact.getOutletOffers = function(id, callback){
 			$http({
 				method: 'GET',
-				url: 'http://stg-api.foodtalk.in/privilege/outlet-offer/'+id
+				url: 'http://api.foodtalk.in/privilege/outlet/'+id
 			}).then(function(response){
 				callback(response);
 			})

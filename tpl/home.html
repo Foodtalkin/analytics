@@ -212,5 +212,51 @@
                 </div>
             </div>
     	</div>
+        <div class="col-sm-4">
+            <div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Latest Top Users (30 days/ Top 5)
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getUsersStats()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div ng-repeat="latest_u in topUsers.latest_top">
+                                <h5 class="text-gray bold fs-13">{{latest_u.name}} <span class="pull-right text-complete">{{latest_u.count}}</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">All Time top Users (All Time/ Top 5)
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getUsersStats()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div ng-repeat="allTime_u in topUsers.top">
+                                <h5 class="text-gray bold fs-13">{{allTime_u.name}} <span class="pull-right text-complete">{{allTime_u.count}}</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

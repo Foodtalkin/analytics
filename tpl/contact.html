@@ -3,14 +3,14 @@
    <div class="row">
        <div class="col-md-4" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px);">
            <div class="p-t-30 p-b-10">
-               <h5>Contact Request</h5>
-               <div class="form-group">
-                   <input type="text" ng-model="searchTerm" class="form-control" placeholder="serach...">
-               </div>
+              <h5>Contact Request</h5>
+              <div class="form-group">
+                  <input type="text" ng-model="searchTerm" class="form-control" placeholder="serach...">
+              </div>
            </div>
            <!-- Restro List -->
-           <div class="p-t-20 p-b-20 scrollable" style="height: calc(100% - 170px);">
-                
+            <div class="p-t-20 p-b-20 scrollable" style="height: calc(100% - 170px); width: 100%;">
+               <!--  " -->
                <button class="btn btn-white btn-block text-left" ng-repeat="req in filtered = (contactData | filter:searchTerm )" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenMessage(req)">{{ req.purpose }} : {{ req.name }} <span class="pull-right p-r-5 p-l-5 text-danger" ng-show="{{req.status == '1' ? false : true}}"><i class="fa fa-exclamation" aria-hidden="true"></i></span></button>
                <h6 ng-click="nextPage(NextUrl)" class="text-center" style="cursor: pointer;"><i class="fa fa-chevron-down"></i></h6>
            </div>

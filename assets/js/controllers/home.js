@@ -24,7 +24,15 @@ angular.module('app')
                 $scope.restaurant = response.data.result;
             });
         }
-            
+        
+        $scope.getUsersStats = function(){
+            homeFact.getTopUsers("30","5", function(response){
+                console.log(response);
+                $scope.topUsers = response.data.result;
+            });
+        }  
+
+        $scope.getUsersStats();
         $scope.getUserChart = function(){
             homeFact.getUsers("30", function(response){
                 $scope.UserCounts = response.data.result.overall;
@@ -199,6 +207,15 @@ angular.module('app')
 	            callback(response);
 	        });
     	}
+
+        homeFact.getTopUsers = function(days,top, callback){
+            $http({
+                method: 'GET',
+                url: 'http://api.foodtalk.in/privilege/analytics/restaurants/'+days+'/'+top
+            }).then(function (response) {
+                callback(response);
+            });
+        }
     	return homeFact;
     }]).factory('sortData', ['homeFact', function(homeFact){
     	var sortData = {};
