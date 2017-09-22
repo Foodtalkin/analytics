@@ -20,14 +20,14 @@ angular.module('app')
         }
         	
         $scope.getRestaurantStats = function(){
-            homeFact.getRestaurant("30","5", function(response){
+            homeFact.getRestaurant("30","10", function(response){
                 console.log(response);
                 $scope.restaurant = response.data.result;
             });
         }
         
         $scope.getUsersStats = function(){
-            homeFact.getTopUsers("30","5", function(response){
+            homeFact.getTopUsers("30","10", function(response){
                 console.log(response);
                 $scope.topUsers = response.data.result;
             });
