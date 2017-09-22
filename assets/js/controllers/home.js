@@ -6,6 +6,7 @@ angular.module('app')
     .controller('HomeCtrl', ['$scope','sortData','homeFact', function($scope, sortData, homeFact) {
         $scope.users = {};
         $scope.restaurant = {};
+        $scope.topUsers = {};
         $scope.users.all = 0;
         $scope.users.paid = 0;
         $scope.users.unpaid = 0;
@@ -211,7 +212,7 @@ angular.module('app')
         homeFact.getTopUsers = function(days,top, callback){
             $http({
                 method: 'GET',
-                url: 'http://api.foodtalk.in/privilege/analytics/restaurants/'+days+'/'+top
+                url: 'http://api.foodtalk.in/privilege/analytics/topuser/'+days+'/'+top
             }).then(function (response) {
                 callback(response);
             });
