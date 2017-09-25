@@ -111,6 +111,29 @@ angular.module('app')
                         }]
                     }
                 })
+                .state('app.users', {
+                    url: "/users",
+                    templateUrl: "tpl/users.html",
+                    controller: 'usersCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    /* 
+                                        Load any ocLazyLoad module here
+                                        ex: 'wysihtml5'
+                                        Open config.lazyload.js for available modules
+                                    */
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/users.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
                 .state('app.contact', {
                     url: "/contact",
                     templateUrl: "tpl/contact.html",

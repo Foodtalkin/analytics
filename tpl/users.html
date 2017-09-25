@@ -1,0 +1,101 @@
+
+<div class="container-fluid container-fixed-lg" style="">
+   <div class="row">
+       <div class="col-md-4" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px);">
+           <div class="p-t-30 p-b-10">
+              <h5>Privilege Users</h5>
+              <div class="form-group">
+                  <input type="text" ng-model="searchTerm" class="form-control" placeholder="serach...">
+              </div>
+           </div>
+           <!-- Restro List -->
+            <div class="p-t-20 p-b-20 scrollable" style="height: calc(100% - 170px); width: 100%;">
+               <!--  " -->
+               <button class="btn btn-white btn-block text-left" ng-repeat="req in filtered = (usersList | filter:searchTerm )" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenMessage(req.id)" ng-show="{{req.subscription.length == 0 ? false : true}}"">{{ req.name }}</button>
+               <h6 ng-click="nextPage(NextUrl)" class="text-center" style="cursor: pointer;"><i class="fa fa-chevron-down"></i></h6>
+           </div>
+
+       </div>
+       <div class="col-md-8">
+          <div class="col-sm-12 m-t-20" ng-show="showDetails">
+            <div>
+              <div class="row">
+                  <div class="col-xs-6">
+                      <h4 class="semi-bold m-t-0">{{currentUser.name}}&nbsp; <i class="fa {{currentUser.gender == 'Male' ? 'fa-male' : 'fa-female'}}" aria-hidden="true"></i></h4>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-6">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Subscription Expiry</p>
+                      <h5 class="semi-bold m-t-0">{{currentUser.subscription[0].expiry}}</h5>
+                  </div>
+              </div>
+              <div class="row" ng-hide="unpaid">
+                  <div class="col-xs-4">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Email</p>
+                      <h5 class="semi-bold m-t-0">{{currentUser.email}}</h5>
+                  </div>
+                  <div class="col-xs-4">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Phone</p>
+                      <h5 class="semi-bold m-t-0">{{currentUser.phone}}</h5>
+                  </div>
+                  <div class="col-xs-4">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">City</p>
+                      <h5 class="semi-bold m-t-0">{{currentUser.city.name}}</h5>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-4">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">DOB</p>
+                      <h5 class="semi-bold m-t-0">{{currentUser.dob}}</h5>
+                  </div>
+                  <div class="col-xs-4">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Prefrence</p>
+                      <h5 class="semi-bold m-t-0">{{currentUser.preference}}</h5>
+                  </div>
+                  <div class="col-xs-4">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Savings</p>
+                      <h5 class="semi-bold m-t-0">{{currentUser.saving}}</h5>
+                  </div>
+              </div>
+            </div>
+            <div class="row" style="height: calc(100vh - 410px); overflow: auto;">
+              <div class="col-sm-12 m-t-20">
+                <table class="table table-hover" id="basicTable">
+                    <thead>
+                        <tr>
+                            <th style="width:30%">
+                              Date
+                            </th>
+                            <th style="width:40%">
+                              offer
+                            </th>
+                            <th style="width:30%">OutletName</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in currentUser.redemption">
+                            <td class="v-align-middle">
+                              <p>{{item.created_at}}</p>
+                            </td>
+                            <td class="v-align-middle">
+                                <p>{{item.offers_redeemed}} coupons of {{item.title}}</p>
+                            </td>
+                            
+                            <td class="v-align-middle">
+                                <p>{{item.outlet_name}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 text-center" ng-hide="showDetails" style="height: calc(100vh - 135px); position: relative;">
+            <h1 style="position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);color:#9e9e9e;">
+              Click on any item in list to start
+            </h1>
+          </div>
+       </div>
+   </div>
+</div>
