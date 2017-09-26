@@ -17,77 +17,71 @@
 
        </div>
        <div class="col-md-8">
-          <div class="col-sm-12 m-t-20" ng-show="showDetails">
-            <div>
+          <div class="col-sm-12" ng-show="showDetails">
+            <div class="col-sm-6 m-t-20" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px); overflow: auto;">
               <div class="row">
-                  <div class="col-xs-6">
+                  <div class="col-xs-12">
                       <h4 class="semi-bold m-t-0">{{currentUser.name}}&nbsp; <i class="fa {{currentUser.gender == 'Male' ? 'fa-male' : 'fa-female'}}" aria-hidden="true"></i></h4>
+                      <p class="semi-bold m-t-0" style="font-size: 16px;"><i class="fa fa-envelope m-r-5" aria-hidden="true"></i> {{currentUser.email}}</p>
+                      <p class="semi-bold m-t-0" style="font-size: 16px;"><i class="fa fa-phone m-r-5" aria-hidden="true"></i> {{currentUser.phone}}</p>
+                      <p class="semi-bold m-t-0" style="font-size: 16px;"><i class="fa fa-birthday-cake m-r-5" aria-hidden="true"></i> {{currentUser.dob}}</p>
                   </div>
-              </div>
-              <div class="row">
+                  
                   <div class="col-xs-6">
-                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Subscription Expiry</p>
-                      <h5 class="semi-bold m-t-0">{{currentUser.subscription[0].expiry}}</h5>
-                  </div>
-              </div>
-              <div class="row" ng-hide="unpaid">
-                  <div class="col-xs-4">
-                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Email</p>
-                      <h5 class="semi-bold m-t-0">{{currentUser.email}}</h5>
-                  </div>
-                  <div class="col-xs-4">
-                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Phone</p>
-                      <h5 class="semi-bold m-t-0">{{currentUser.phone}}</h5>
-                  </div>
-                  <div class="col-xs-4">
-                      <p class="hint-text m-t-0 m-b-5 bold fs-13">City</p>
-                      <h5 class="semi-bold m-t-0">{{currentUser.city.name}}</h5>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-xs-4">
-                      <p class="hint-text m-t-0 m-b-5 bold fs-13">DOB</p>
-                      <h5 class="semi-bold m-t-0">{{currentUser.dob}}</h5>
-                  </div>
-                  <div class="col-xs-4">
-                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Prefrence</p>
-                      <h5 class="semi-bold m-t-0">{{currentUser.preference}}</h5>
-                  </div>
-                  <div class="col-xs-4">
                       <p class="hint-text m-t-0 m-b-5 bold fs-13">Savings</p>
-                      <h5 class="semi-bold m-t-0">{{currentUser.saving}}</h5>
+                      <p class="semi-bold m-t-0" style="font-size: 16px;">{{currentUser.saving}}</p>
+                  </div>
+                  <div class="col-xs-6">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">City</p>
+                      <p class="semi-bold m-t-0" style="font-size: 16px;">{{currentUser.city.name}}</p>
+                  </div>
+                  <div class="col-xs-12" ng-hide="unpaid">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Subscription Expiry</p>
+                      <p class="semi-bold m-t-0" style="font-size: 16px;">{{currentUser.subscription[0].expiry}}</p>
+                  </div>
+                  <div class="col-xs-12">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Prefrence</p>
+                      <p class="semi-bold m-t-0" style="font-size: 16px;">{{currentUser.preference}}</p>
+                  </div>
+                  
+                  <div class="col-xs-12">
+                      <p class="hint-text m-t-0 m-b-5 bold fs-13">Notes</p>
+                      <textarea ng-model="currentUser.notes" rows="5" style="width: 100%"></textarea>
+                      <button class="btn btn-success" ng-click="saveNotes(currentUser.id)">Save</button>
                   </div>
               </div>
             </div>
-            <div class="row" style="height: calc(100vh - 410px); overflow: auto;">
-              <div class="col-sm-12 m-t-20">
-                <table class="table table-hover" id="basicTable">
-                    <thead>
-                        <tr>
-                            <th style="width:30%">
-                              Date
-                            </th>
-                            <th style="width:40%">
-                              offer
-                            </th>
-                            <th style="width:30%">OutletName</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in currentUser.redemption">
-                            <td class="v-align-middle">
-                              <p>{{item.created_at}}</p>
-                            </td>
-                            <td class="v-align-middle">
-                                <p>{{item.offers_redeemed}} coupons of {{item.title}}</p>
-                            </td>
-                            
-                            <td class="v-align-middle">
-                                <p>{{item.outlet_name}}</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-sm-6">
+              <div class="row" style="height: calc(100vh - 140px); overflow: auto;">
+                <div class="col-sm-12 m-t-20">
+                  <table class="table table-hover" id="basicTable">
+                      <thead>
+                          <tr>
+                              <th style="width:30%">
+                                Date
+                              </th>
+                              <th style="width:40%">
+                                offer
+                              </th>
+                              <th style="width:30%">OutletName</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="item in currentUser.redemption">
+                              <td class="v-align-middle">
+                                <p>{{item.created_at}}</p>
+                              </td>
+                              <td class="v-align-middle">
+                                  <p>{{item.offers_redeemed}} coupons of {{item.title}}</p>
+                              </td>
+                              
+                              <td class="v-align-middle">
+                                  <p>{{item.outlet_name}}</p>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

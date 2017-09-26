@@ -27,11 +27,32 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact', function($sc
     		$scope.currentUser = response.data.result;
     		console.log(response.data.result);
     	})
-    	// if($scope.currentUser.subscription.length == 0){
-    	// 	$scope.unpaid = true;
-    	// }else{
-    	// 	$scope.unpaid = false;
-    	// }
+     }
+
+     $scope.saveNotes = function(id){
+        userFact.saveNotes(id, $scope.currentUser.notes, function(response){
+            if(response){
+                    $scope.showDetails = false;
+                    $scope.getList($scope.mainpage);
+                    var message ="Hurray!"
+                        $('body').pgNotification({
+                            style: 'bar',
+                            message: message,
+                            position: 'top',
+                            timeout: 5000,
+                            type: 'success'
+                        }).show();
+                }else{
+                    var message ="Oops! somthing went wrong. Please try again"
+                        $('body').pgNotification({
+                            style: 'bar',
+                            message: message,
+                            position: 'top',
+                            timeout: 5000,
+                            type: 'error'
+                        }).show();
+                }
+        })
      }
 }])
 .factory('userFact', ['$http', function($http){
@@ -52,5 +73,25 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact', function($sc
 	            callback(response);
 	        });
     	}
+        userFact.saveNotes = function(id, notes, callback){
+            $http({
+              method: 'PuT',
+              url: ' http://api.foodtalk.in/privilege/user/'+id,
+              data : {
+                "notes":notes
+              }
+            }).then(function (response) {
+                console.log(response);
+                if(response.data.code === "200"){
+                    callback(true);
+                    //console.log(response);
+                }else{
+                  //Create an error Box and display the 
+                  alert('something went wrong please try again after refreshing the page');
+                  //console.log(response);
+                  callback(false);
+                }
+            });
+        }
 	return userFact;
 }])
