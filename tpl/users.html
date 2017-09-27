@@ -5,13 +5,13 @@
            <div class="p-t-30 p-b-10">
               <h5>Privilege Users</h5>
               <div class="form-group">
-                  <input type="text" ng-model="searchTerm" class="form-control" placeholder="serach...">
+                  <input type="text" ng-model="searchTerm" ng-keyup="searchUser()" class="form-control" placeholder="serach...">
               </div>
            </div>
            <!-- Restro List -->
             <div class="p-t-20 p-b-20 scrollable" style="height: calc(100% - 170px); width: 100%;">
                <!--  " -->
-               <button class="btn btn-white btn-block text-left" ng-repeat="req in filtered = (usersList | filter:searchTerm )" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenMessage(req.id)" ng-show="{{req.subscription.length == 0 ? false : true}}"">{{ req.name }}</button>
+               <button class="btn btn-white btn-block text-left" ng-repeat="req in usersList" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenMessage(req.id)" ng-show="{{req.subscription.length == 0 ? false : true}}"">{{ req.name }}</button>
                <h6 ng-click="nextPage(NextUrl)" class="text-center" style="cursor: pointer;"><i class="fa fa-chevron-down"></i></h6>
            </div>
 

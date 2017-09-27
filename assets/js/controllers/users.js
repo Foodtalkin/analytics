@@ -12,6 +12,15 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact', function($sc
         	$scope.NextUrl = response.data.result.next_page_url;
         })
     }
+
+    $scope.searchUser = function(){
+        if($scope.searchTerm.length >= 3){
+            var base = "http://api.foodtalk.in/privilege/user?search="+encodeURI($scope.searchTerm);
+            $scope.getList(base);
+        }else if($scope.searchTerm.length == 0){
+            $scope.getList($scope.mainpage);
+        }
+    }
     $scope.getList($scope.mainpage);
     $scope.nextPage = function(url){
     	userFact.getList(url,function(response){
