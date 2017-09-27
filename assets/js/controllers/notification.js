@@ -45,12 +45,16 @@ angular.module('app')
 					  }
 					}
 					//console.log($scope.Notification.group);
+
+		if($scope.Notification.city == "1"){
+			data.push.where.city_id = "1";
+		}else if($scope.Notification.city == "2"){
+			data.push.where.city_id = "2";
+		}else{
+			delete data.push.where.city_id;
+		}
 		if($scope.Notification.group == 'all'){
-			data.push.where.deviceType = {
-					        "$in": [
-					          "android", "ios"
-					        ]
-					      };
+			delete data.push.where.deviceType;
 		}else if($scope.Notification.group == 'android'){
 			//console.log('android');
 			data.push.where.deviceType = {
@@ -66,6 +70,7 @@ angular.module('app')
 					        ]
 					      };
 		}
+		
 		console.log(data);
 		notificationFact.sendNotification('http://api.foodtalk.in/privilege/push', 'POST', data, function(response){
 			console.log(response);
@@ -123,11 +128,7 @@ angular.module('app')
 					  }
 					}
 		if($scope.myusergroup == 'all'){
-			data.push.where.deviceType = {
-				"$in": [
-				          "android", "ios"
-				        ]
-			};
+			delete data.push.where.deviceType;
 		}else if($scope.myusergroup == 'android'){
 			data.push.where.deviceType = {
 					        "$in": [
@@ -140,6 +141,14 @@ angular.module('app')
 					          "ios"
 					        ]
 					      };
+		}
+
+		if($scope.userCity == "1"){
+			data.push.where.city_id = "1";
+		}else if($scope.userCity == "2"){
+			data.push.where.city_id = "2";
+		}else{
+			delete data.push.where.city_id;
 		}
 		//console.log(data);
 		notificationFact.sendNotification('http://api.foodtalk.in/privilege/push/'+id, 'PUT', data, function(response){

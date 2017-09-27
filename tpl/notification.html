@@ -58,7 +58,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6">
                                                 <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : newNoti.phonelist.$invalid && !newNoti.phonelist.$pristine }">
                                                     <label>Group</label>
                                                     <select class="cs-select cs-skin-slide" ng-model="Notification.group" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
@@ -68,6 +68,17 @@
                                                     </select>
                                                 </div>
                                                 <label class="error" for="phonelist" ng-show="newNoti.phonelist.$invalid && !newNoti.phonelist.$pristine">Enter a valid phonelist.</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : newNoti.city.$invalid && !newNoti.city.$pristine }">
+                                                    <label>City</label>
+                                                    <select class="cs-select cs-skin-slide" ng-model="Notification.city" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
+                                                        <option value="">All</option>
+                                                        <option value="1">Delhi NCR</option>
+                                                        <option value="2">Mumbai</option>
+                                                    </select>
+                                                </div>
+                                                <label class="error" for="city" ng-show="newNoti.city.$invalid && !newNoti.city.$pristine">Enter a valid city.</label>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -167,7 +178,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-6">
                                                         <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : editnoti.phonelist.$invalid && !editnoti.phonelist.$pristine }">
                                                             <label>Group</label>
                                                             <select class="cs-select cs-skin-slide" ng-model="myusergroup" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
@@ -177,6 +188,17 @@
                                                             </select>
                                                         </div>
                                                         <label class="error" for="phonelist" ng-show="editnoti.phonelist.$invalid && !editnoti.phonelist.$pristine">Enter a valid phonelist.</label>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : editnoti.userCity.$invalid && !editnoti.userCity.$pristine }">
+                                                            <label>City</label>
+                                                            <select class="cs-select cs-skin-slide" ng-model="userCity" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
+                                                                <option value="">All</option>
+                                                                <option value="1">Delhi NCR</option>
+                                                                <option value="2">Mumbai</option>
+                                                            </select>
+                                                        </div>
+                                                        <label class="error" for="userCity" ng-show="editnoti.userCity.$invalid && !editnoti.userCity.$pristine">Enter a valid City.</label>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix"></div>
