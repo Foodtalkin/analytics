@@ -106,6 +106,17 @@ angular.module('app')
 		}else{
 			$scope.notificationDetails.msg = "";
 		}
+		
+		if($scope.notificationDetails.push.where.deviceType){
+			if($scope.notificationDetails.push.where.deviceType.$in[0][0] == "android"){
+				$scope.notificationDetails.myusergroup = 'android';
+			}else if($scope.notificationDetails.push.where.deviceType.$in[0][0] == "ios"){
+				$scope.notificationDetails.myusergroup = 'ios';
+			}
+		}else{
+			$scope.notificationDetails.myusergroup = 'all';
+		}
+		console.log($scope.notificationDetails.myusergroup);
 	}	
 	$scope.openCreateform = function(){
 		$scope.hideForm = false;
@@ -113,13 +124,12 @@ angular.module('app')
 	$scope.editNotification = function(id){
 		//console.log($scope.notificationDetails.msg);
 		// "userId": "1384",
+		console.log($scope.notificationDetails.myusergroup);
 		var data = {
 					  "push_time": $scope.notificationDetails.push_time[0] + " " + $scope.notificationDetails.push_time[1],
 					  "push": {
 					    "where": {
-					      "deviceType": {
-					        
-					      }
+					      
 					    },
 					    "data": {
 					      "alert": $scope.notificationDetails.msg,
@@ -127,15 +137,15 @@ angular.module('app')
 					    }
 					  }
 					}
-		if($scope.myusergroup == 'all'){
+		if($scope.notificationDetails.myusergroup == 'all'){
 			delete data.push.where.deviceType;
-		}else if($scope.myusergroup == 'android'){
+		}else if($scope.notificationDetails.myusergroup == 'android'){
 			data.push.where.deviceType = {
 					        "$in": [
 					          "android"
 					        ]
 					      };
-		}else if($scope.myusergroup == 'ios'){
+		}else if($scope.notificationDetails.myusergroup == 'ios'){
 			data.push.where.deviceType = {
 					        "$in": [
 					          "ios"
@@ -150,9 +160,8 @@ angular.module('app')
 		}else{
 			delete data.push.where.city_id;
 		}
-		//console.log(data);
+		console.log(data);
 		notificationFact.sendNotification('http://api.foodtalk.in/privilege/push/'+id, 'PUT', data, function(response){
-			//console.log(response);
 			if(response.data.code == "200"){
                     $scope.getallList();
                     $scope.editDetails = false;

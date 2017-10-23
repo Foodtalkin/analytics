@@ -80,7 +80,7 @@ angular.module('app')
 			            $('body').pgNotification({
 	                        style: 'bar',
 	                        message: message,
-	                        position: top,
+	                        position: 'top',
 	                        timeout: 5000,
 	                        type: 'error'
 	                    }).show();

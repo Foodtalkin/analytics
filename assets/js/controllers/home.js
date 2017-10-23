@@ -15,20 +15,20 @@ angular.module('app')
                 $scope.allData = response;
                 $scope.userOnboard = $scope.allData.user7days;
                 $scope.offerRedemp = $scope.allData.Offers7days;
-                console.log($scope.allData);
+                //console.log($scope.allData);
             });
         }
         	
         $scope.getRestaurantStats = function(){
             homeFact.getRestaurant("30","10", function(response){
-                console.log(response);
+                //console.log(response);
                 $scope.restaurant = response.data.result;
             });
         }
         
         $scope.getUsersStats = function(){
             homeFact.getTopUsers("30","10", function(response){
-                console.log(response);
+                //console.log(response);
                 $scope.topUsers = response.data.result;
             });
         }  
@@ -187,6 +187,7 @@ angular.module('app')
 				method: 'GET',
 				url: 'http://api.foodtalk.in/privilege/analytics/user/'+days
 			}).then(function (response) {
+                console.log(response);
 	            callback(response);
 	        });
     	}
