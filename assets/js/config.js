@@ -111,6 +111,49 @@ angular.module('app')
                         }]
                     }
                 })
+                .state('app.experience', {
+                    url: "/experience",
+                    templateUrl: "tpl/experience.html",
+                    controller: 'experienceCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    /* 
+                                        Load any ocLazyLoad module here
+                                        ex: 'wysihtml5'
+                                        Open config.lazyload.js for available modules
+                                    */
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/experience.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
+                .state('app.createxperience', {
+                    url: "/experience/create",
+                    templateUrl: "tpl/createxperience.html",
+                    controller: 'createxperienceCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'wizard',
+                                    'inputMask'
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/createxperience.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
                 .state('app.users', {
                     url: "/users",
                     templateUrl: "tpl/users.html",

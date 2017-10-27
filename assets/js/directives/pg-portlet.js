@@ -23,6 +23,7 @@ angular.module('app')
                 };
 
                 element.portlet(options);
+                //element.portlet('collapse');
 
                 scope.maximize = function() {
                     element.portlet('maximize');

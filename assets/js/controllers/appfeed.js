@@ -63,7 +63,7 @@ angular.module('app')
 			method: 'GET',
 			url: url
 		}).then(function (response) {
-			console.log(response);
+			//console.log(response);
             callback(response);
         });
 	}

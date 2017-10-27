@@ -243,6 +243,7 @@ angular.module('app')
     		homeFact.getUsers("7", function(response){
     			userApi = response.data.result;
     			// paid user Last 7 days
+                console.log(userApi);
     			var mypaidobj = {
     				"key" : "Paid",
                     // lineColor:"red",

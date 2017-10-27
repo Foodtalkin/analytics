@@ -1,0 +1,35 @@
+<div class="container-fluid container-fixed-lg" style="">
+   <div class="row">
+       <div class="col-sm-3" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px);">
+           <div class="p-t-30 p-b-10">
+               <button class="btn btn-primary btn-block" ui-sref="app.createxperience">Create New Experience</button>
+               <h5>Experience List</h5>
+               <div class="form-group">
+                   <input type="text" ng-model="searchTerm" class="form-control" placeholder="serach...">
+               </div>
+           </div>
+           <!-- Experience List -->
+           <div class="p-t-20 p-b-20 scrollable" style="height: calc(100% - 170px);">
+               <button class="btn btn-white btn-block text-left" ng-repeat="event in filtered = (EventList | filter:searchTerm | orderBy:'start_time')" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenEvent(event.id)">{{ event.title }}</button>
+               <h6 ng-click="nextListPage(nextPage)" class="text-center" style="cursor: pointer;"><i class="fa fa-chevron-down"></i></h6>
+           </div>
+       </div>
+       <div class="col-sm-9">
+          <div class="row" ng-show="showEvent">
+            <!-- action bar -->
+            <div class="col-sm-12">
+              <div class="btn-group m-t-20 pull-right">
+                  <button type="button" class="btn btn-success"><i class="fa fa-save"></i>
+                  </button>
+                  <button type="button" class="btn btn-success"><i class="fa fa-save"></i>
+                  </button>
+                  <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
+                  </button>
+                  <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
+                  </button>
+              </div>
+            </div>
+          </div>
+       </div>
+   </div>
+</div>

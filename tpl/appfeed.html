@@ -68,7 +68,7 @@
                             <div class="b-b b-transparent m-b-10" ng-repeat="signups in signups">
                                 <p class="fs-11 text-right hint-text bold">{{signups.signup_on}}</p>
                                 <p style="display: block;" class="fs-14">New User <strong>{{signups.name}}</strong>
-                                <br>Status: <strong class="{{signups.status == 'paid'? 'text-success' : 'text-warning'}}">{{signups.status}}</strong> <br>Email: <strong>{{signups.email}}</strong> <br>Phone: <strong>{{signups.phone}}</strong></p>
+                                <br>Status: <strong class="{{signups.status == 'paid'? 'text-success' : (signups.status == 'trial'? 'text-warning' : 'text-danger')}}">{{signups.status}}</strong> <br>Email: <strong>{{signups.email}}</strong> <br>Phone: <strong>{{signups.phone}}</strong></p>
                             </div>
                             <h6 ng-click="GetNextPage(signupFeedNextUrl, 'signup')" class="text-center" style="cursor: pointer;"><i class="fa fa-chevron-down"></i></h6>
                         </div>
