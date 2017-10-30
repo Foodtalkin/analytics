@@ -10,6 +10,7 @@ angular.module('app')
         $scope.users.all = 0;
         $scope.users.paid = 0;
         $scope.users.unpaid = 0;
+        $scope.users.trial = 0;
         $scope.getareaChats = function(){
             sortData.doSorting(function(response){
                 $scope.allData = response;
@@ -36,8 +37,9 @@ angular.module('app')
         $scope.getUsersStats();
         $scope.getUserChart = function(){
             homeFact.getUsers("30", function(response){
+                //console.log(response);
                 $scope.UserCounts = response.data.result.overall;
-                $scope.userpie = [getpercent(response.data.result.overall[1].count, response.data.result.overall[0].count), getpercent(response.data.result.overall[2].count, response.data.result.overall[0].count)];
+                $scope.userpie = [getpercent(response.data.result.overall[1].count, response.data.result.overall[0].count), getpercent(response.data.result.overall[3].count, response.data.result.overall[0].count), getpercent(response.data.result.overall[2].count, response.data.result.overall[0].count)];
                 //console.log($scope.userpie);
             });
         }
@@ -85,9 +87,9 @@ angular.module('app')
                     return d[1]
                 },
                 color: [
-                    '#259b24',
-                    '#e51c23',
-                    '#212121'//antarctica
+                    '#259b24 ',
+                        '#e51c23',
+                        '#ff9800'//antarctica
 
                 ],
                 useInteractiveGuideline: true,
@@ -145,10 +147,12 @@ angular.module('app')
                 tooltipValueLookups: {
                     'offset': {
                         0: 'Paid',
-                        1: 'Un Paid'
+                        1: 'UnPaid',
+                        2: 'trial'
                     }
                 },sliceColors: ['#259b24 ',
-                        '#e51c23']
+                        '#e51c23',
+                        '#ff9800']
             };
         });
             
@@ -243,7 +247,7 @@ angular.module('app')
     		homeFact.getUsers("7", function(response){
     			userApi = response.data.result;
     			// paid user Last 7 days
-                console.log(userApi);
+                //console.log(userApi);
     			var mypaidobj = {
     				"key" : "Paid",
                     // lineColor:"red",
@@ -254,6 +258,7 @@ angular.module('app')
 				  mypaidobj.values.push(temp);
 				});
 				allData.user7days.push(mypaidobj);
+                console.log(allData);
 
 				// unpaid user last 7 days
 				var myunpaidobj = {
@@ -266,6 +271,18 @@ angular.module('app')
 				  myunpaidobj.values.push(temp);
 				});
 				allData.user7days.push(myunpaidobj);
+
+                // unpaid user last 7 days
+                var mytrialobj = {
+                    "key" : "Trial",
+                    // lineColor:"red",
+                    "values" : []
+                }
+                angular.forEach(userApi.datewise.trial, function(value, key) {
+                  var temp = dateformat(value.date, value.count);
+                  mytrialobj.values.push(temp);
+                });
+                allData.user7days.push(mytrialobj);
 
     		});
     		
@@ -293,6 +310,17 @@ angular.module('app')
 				  myunpaidobj.values.push(temp);
 				});
 				allData.user30days.push(myunpaidobj);
+
+                var mytrialobj = {
+                    "key" : "Trial",
+                    // lineColor:"red",
+                    "values" : []
+                }
+                angular.forEach(userApi.datewise.trial, function(value, key) {
+                  var temp = dateformat(value.date, value.count);
+                  mytrialobj.values.push(temp);
+                });
+                allData.user30days.push(mytrialobj);
     		})
 
     		homeFact.getredemption("7", function(response){

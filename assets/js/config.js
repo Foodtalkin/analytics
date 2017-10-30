@@ -271,3 +271,25 @@ angular.module('app')
     };
     return sessionInjector;
 }]);
+
+
+    // experience directive
+    angular.module('app').directive('experienceData', function() {
+        return {
+            templateUrl: function(elem, attr) {
+                if(attr.dType == 'TEXT'){
+                    return 'tpl/directiveTemplates/text.html';
+                }else if(attr.dType == 'VIDEO'){
+                    return 'tpl/directiveTemplates/video.html';
+                }else if(attr.dType == 'URL'){
+                    return 'tpl/directiveTemplates/url.html';
+                }else if(attr.dType == 'IMAGE'){
+                    return 'tpl/directiveTemplates/image.html';
+                }else if(attr.dType == 'LIST1'){
+                    return 'tpl/directiveTemplates/list1.html';
+                }else if(attr.dType == 'LIST2'){
+                    return 'tpl/directiveTemplates/list2.html';
+                }
+            }
+        };
+    });
