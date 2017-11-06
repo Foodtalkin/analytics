@@ -58,8 +58,8 @@ angular.module('app')
         	})
         }
     }])
-    .factory('contactFact', ['$http', 
-    	function($http){
+    .factory('contactFact', ['$http','UrlFact', 
+    	function($http, UrlFact){
     	var contactFact = {};
     	contactFact.getList = function(url, callback){
     		$http({
