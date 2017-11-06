@@ -4,15 +4,15 @@
 
 angular.module('app', ['mgo-angular-wizard'])
 
-.controller('createxperienceCtrl', ['$scope', '$state', 'WizardHandler','createxperienceFact','$rootScope','$location','Upload', 'cloudinary',
- function($scope, $state, WizardHandler, createxperienceFact, $rootScope,$location, $upload, cloudinary) {	
+.controller('editExperienceCtrl', ['$scope', '$state', '$stateParams', 'WizardHandler','editexperienceFact','$rootScope','$location','Upload', 'cloudinary',
+ function($scope, $state, $stateParams, WizardHandler, editexperienceFact, $rootScope,$location, $upload, cloudinary) {	
 
-$scope.form1 = {};
-$scope.form2 = {};
-$scope.form3 = {};
-$scope.form4 = {};
-$scope.form5 = {};
-$scope.form6 = {};
+$scope.eventId = $stateParams.id;
+$scope.cover_image = "";
+$scope.card_image = "";
+editexperienceFact.getExprienceDetails($scope.eventId, function(response){
+	$scope.experience = response.data.result;
+});
 
 var d = new Date();
 $scope.title = "Image (" + d.getDate() + " - " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ")";
@@ -63,7 +63,7 @@ $scope.dragOverClass = function($event) {
 
 // wizard code
 $scope.finished = function() {
-    alert("Wizard finished :)");
+    $state.go('app.experience');
 }
 
 $scope.logStep = function() {
@@ -82,7 +82,7 @@ $scope.goToStep = function(step){
 }
 
 // main code
-$scope.experience = {};
+// for data forms showing message
 $scope.NoDataForm = true;
 $scope.uploadCard = function(files){
 	$scope.files = files;
@@ -104,8 +104,8 @@ $scope.uploadCard = function(files){
 	        $rootScope.photos = $rootScope.photos || [];
 	        data.context = {custom: {photo: $scope.title}};
 	        file.result = data;
-	        $scope.experience.card_image =  file.result.url;
-	        console.log($scope.experience.card_image);
+	        $scope.card_image =  file.result.url;
+	        //console.log($scope.card_image);
 	        $rootScope.photos.push(data);
 	      }).error(function (data, status, headers, config) {
 	        file.result = data;
@@ -133,13 +133,54 @@ $scope.uploadCover = function(files){
 	        $rootScope.photos = $rootScope.photos || [];
 	        data.context = {custom: {photo: $scope.title}};
 	        file.result = data;
-	        $scope.experience.cover_image = file.result.url;
+	        $scope.cover_image = file.result.url;
 	        $rootScope.photos.push(data);
 	      }).error(function (data, status, headers, config) {
 	        file.result = data;
 	      });
 	    }
 	  });
+}
+
+// edit Event
+$scope.editExperience = function(){
+	if($scope.card_image != ""){
+		$scope.experience.card_image = $scope.card_image;
+	}
+	if($scope.cover_image != ""){
+		$scope.experience.cover_image = $scope.cover_image;
+	}
+	var temp = {
+		"title":$scope.experience.title,
+		"cover_image":$scope.experience.cover_image,
+		"card_image":$scope.experience.card_image,
+		"address":$scope.experience.address,
+		"city_id":$scope.experience.city_id,
+		"start_time":$scope.experience.start_time,
+		"end_time":$scope.experience.end_time,
+		"cost":$scope.experience.cost,
+		"nonveg_preference":$scope.experience.nonveg_preference,
+		"taxes":$scope.experience.taxes,
+		"convenience_fee":$scope.experience.convenience_fee,
+		"total_seats":$scope.experience.total_seats,
+		"action_text":$scope.experience.action_text,
+		"tag":$scope.experience.tag
+	}
+	console.log(temp);
+	
+	editexperienceFact.editExperience($scope.eventId,temp, function(response){
+		console.log(response);
+	})
+}
+
+// delete data 
+$scope.deleteData = function(id){
+	editexperienceFact.deleteData(id, function(response){
+		console.log(response);
+		editexperienceFact.getExprienceDetails($scope.eventId, function(response){
+			$scope.experience = response.data.result;
+		});
+	})
 }
 
 // open data item forms
@@ -209,40 +250,12 @@ $scope.addItemToDTlist = function(){
 	}
 }
 
-// create event
-$scope.createExperience = function(){
-	console.log($scope.experience);
-	if($scope.experience.card_image && $scope.experience.card_image){
-		createxperienceFact.createExperience($scope.experience, function(response){
-			console.log(response);
-			if(response.data.code == "200"){
-				$scope.eventId = response.data.result.id;
-			}else{
-				alert("something went wrong please try again");
-			}
-		})
-	}else{
-		alert("no Images");
-	}
-}
-
 // add data
 $scope.addData = function(data){
-	createxperienceFact.addData($scope.eventId, data, function(response){
-		if(response.data.code == "200"){
-			createxperienceFact.getExprienceDetails($scope.eventId, function(response){
-				console.log(response);
-				if(response.data.code == "200"){
-					$scope.eventDetails = response.data.result;
-				}else{
-					alert("something went wrong please try again");
-				}
-				
-			});
-		}else{
-			alert("something went wrong please try again");
-		}
-			
+	editexperienceFact.addData($scope.eventId, data, function(response){
+		editexperienceFact.getExprienceDetails($scope.eventId, function(response){
+			$scope.experience = response.data.result;
+		})
 	})
 }
 $scope.dText = {};
@@ -253,12 +266,11 @@ $scope.saveText = function(){
 			"title": $scope.dText.title,
 			"content": $scope.dText.content
 		}
-		// console.log(data);
+		//console.log(data);
 		$scope.addData(data);
-
 		// empty the form after use
 		// $scope.dText = {};
-		// $scope.form1.$setPristine();
+		// $scope.TextDataForm.$setPristine();
 	}else{
 		alert("all fields are required");
 	}
@@ -275,12 +287,12 @@ $scope.saveImages = function(){
 			"title": $scope.dImage.title,
 			"content": temp
 		}
-		// console.log(data);
+		//console.log(data);
 		$scope.addData(data);
 
 		// empty the form after use
 		// $scope.dImage = {};
-		// $scope.form2.$setPristine();
+		// $scope.imageDataForm.$setPristine();
 	}else{
 		alert("all fields are required");
 	}
@@ -293,11 +305,11 @@ $scope.saveVideo = function(){
 			"title": $scope.dVideo.title,
 			"content": $scope.dVideo.content
 		}
-		// console.log(data);
+		//console.log(data);
 		$scope.addData(data);
 		// empty the form after use
 		// $scope.dVideo = {};
-		// $scope.form3.$setPristine();
+		// $scope.VideoDataForm.$setPristine();
 	}else{
 		alert("all fields are required");
 	}
@@ -310,12 +322,12 @@ $scope.saveUrl = function(){
 			"title": $scope.durl.title,
 			"content": $scope.durl.content
 		}
-		// console.log(data);
+		//console.log(data);
 		$scope.addData(data);
 
 		// empty the form after use
 		// $scope.durl = {};
-		// $scope.form4.$setPristine();
+		// $scope.urlDataForm.$setPristine();
 	}else{
 		alert("all fields are required");
 	}
@@ -328,12 +340,12 @@ $scope.saveList1 = function(){
 			"title": $scope.dList1.title,
 			"content": $scope.dList1.content.split(",")
 		}
-		// console.log(data);
+		//console.log(data);
 		$scope.addData(data);
 
 		// empty the form after use
 		// $scope.dList1 = {};
-		// $scope.form5.$setPristine();
+		// $scope.list1DataForm.$setPristine();
 	}else{
 		alert("all fields are required");
 	}
@@ -346,70 +358,37 @@ $scope.saveList2 = function(){
 			"title": $scope.dlist2.title,
 			"content": $scope.list2
 		}
-		// console.log(data);
+		//console.log(data);
 		$scope.addData(data);
 
 		// empty the form after use
 		// $scope.dlist2 = {};
-		// $scope.form6.$setPristine();
+		// $scope.list2DataForm.$setPristine();
 	}else{
 		alert("all fields are required");
 	}
 }
 
 // sort data
-// createxperienceFact.getExprienceDetails($scope.eventId, function(response){
-// 		$scope.eventDetails = response.data.result;
-// 	})
-$scope.checkOrder = function(){
-	var result = document.getElementsByClassName("sortedContainer");
-	var wrappedResult = angular.element(result);
-	//console.log(wrappedResult[0].childNodes);
-	$scope.ordertemp = [];
-	angular.forEach(wrappedResult[0].childNodes, function(value, key){
-		if(value.id){
-			$scope.ordertemp.push(value.id);
-		}
-	});
-	console.log($scope.ordertemp);
-	createxperienceFact.sortdata($scope.eventId, $scope.ordertemp, function(response){
-		if(response.data.code == "202"){
-			createxperienceFact.getExprienceDetails($scope.eventId, function(response){
-				console.log(response);
-				if(response.data.code == "200"){
-					$scope.eventDetails = response.data.result;
-				}else{
-					alert("something went wrong please try again");
-				}
-				
-			});
-		}else{
-			alert("somthing went wrong");
-		}
-		
-	})
-}
-
-
-
-// publish experience
-
-$scope.PublishExperience = function(){
-	createxperienceFact.PublishExperience($scope.eventId, function(response){
-		console.log(response);
-		if(response.data.code == "202"){
-			$state.go('app.experience');
-		}else{
-			alert("somthing went wrong");
-		}
-
-	})
-}
-
+	$scope.checkOrder = function(){
+		var result = document.getElementsByClassName("sortedContainer");
+		var wrappedResult = angular.element(result);
+		//console.log(wrappedResult[0].childNodes);
+		$scope.ordertemp = [];
+		angular.forEach(wrappedResult[0].childNodes, function(value, key){
+			if(value.id){
+				$scope.ordertemp.push(value.id);
+			}
+		});
+		console.log($scope.ordertemp);
+		editexperienceFact.sortdata($scope.eventId, $scope.ordertemp, function(response){
+			console.log(response);
+		})
+	}
 }])
-.factory('createxperienceFact', ['$http', 'UrlFact', function($http, UrlFact){
-	var createxperienceFact = {};
-	createxperienceFact.getExprienceDetails = function(id,callback){
+.factory('editexperienceFact', ['$http','UrlFact', function($http, UrlFact){
+	var editexperienceFact = {};
+	editexperienceFact.getExprienceDetails = function(id,callback){
 		$http({
 			method: 'GET',
 			url: UrlFact.experience.main+"/"+id
@@ -417,24 +396,24 @@ $scope.PublishExperience = function(){
             callback(response);
         });
 	}
-	createxperienceFact.PublishExperience = function(id,callback){
+	editexperienceFact.editExperience = function(id, data, callback){
 		$http({
 			method: 'PUT',
-			url: UrlFact.experience.main+"/"+id+"/acitvate"
-		}).then(function(response) {
-            callback(response);
-        });
-	}
-	createxperienceFact.createExperience = function(data, callback){
-		$http({
-			method: 'POST',
-			url: UrlFact.experience.main,
+			url: UrlFact.experience.main+"/"+id,
 			data: data
 		}).then(function(response) {
             callback(response);
         });
 	}
-	createxperienceFact.addData = function(id, data, callback){
+	editexperienceFact.deleteData = function(id, callback){
+		$http({
+			method: 'DELETE',
+			url: UrlFact.experience.data+"/"+id
+		}).then(function(response) {
+            callback(response);
+        });
+	}
+	editexperienceFact.addData = function(id, data, callback){
 		$http({
 			method: 'POST',
 			url: UrlFact.experience.data+"/"+id,
@@ -443,7 +422,7 @@ $scope.PublishExperience = function(){
             callback(response);
         });
 	}
-	createxperienceFact.sortdata = function(id, data, callback){
+	editexperienceFact.sortdata = function(id, data, callback){
 		$http({
 			method: 'PUT',
 			url: UrlFact.experience.sortdata+id,
@@ -452,5 +431,5 @@ $scope.PublishExperience = function(){
 			callback(response)
 		})
 	}
-	return createxperienceFact;
+	return editexperienceFact;
 }])

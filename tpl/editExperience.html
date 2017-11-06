@@ -5,14 +5,16 @@
             <a data-toggle="tab" ng-click="goToStep(1)"><i class="fa fa-calendar tab-icon"></i> <span>Step 1</span></a>
         </li>
         <li ng-class="{'active': getCurrentStep() == 2 }">
-            <a data-toggle="tab" ng-click="goToStep(2)"><i class="fa fa-info tab-icon"></i> <span>Step 2</span></a>
+            <a data-toggle="tab" ng-click="goToStep(2)"><i class="fa fa-trash tab-icon"></i> <span>Step 2</span></a>
         </li>
         <li ng-class="{'active': getCurrentStep() == 3 }">
-            <a data-toggle="tab" ng-click="goToStep(3)"><i class="fa fa-arrows tab-icon"></i> <span>Step 3</span></a>
+            <a data-toggle="tab" ng-click="goToStep(3)"><i class="fa fa-info tab-icon"></i> <span>Step 3</span></a>
         </li>
-        
         <li ng-class="{'active': getCurrentStep() == 4 }">
-            <a data-toggle="tab" ng-click="goToStep(4)"><i class="fa fa-check tab-icon"></i> <span>Step 4</span></a>
+            <a data-toggle="tab" ng-click="goToStep(4)"><i class="fa fa-arrows tab-icon"></i> <span>Step 4</span></a>
+        </li>
+        <li ng-class="{'active': getCurrentStep() == 5 }">
+            <a data-toggle="tab" ng-click="goToStep(5)"><i class="fa fa-check tab-icon"></i> <span>Step 5</span></a>
         </li>
     </ul>
     <wizard on-finish="finished()" class="bg-white" hide-indicators="true">
@@ -46,14 +48,14 @@
 					    	<div class="col-sm-4">
 					    		<div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.convenience_fee.$invalid && !StaticDataForm.convenience_fee.$pristine }">
 					                <label>Convenience fee</label>
-					                <input type="Text" class="form-control" name="convenience_fee" placeholder="1000" ng-model="experience.convenience_fee" required>
+					                <input type="Text" class="form-control" name="convenience_fee" placeholder="convenience_fee" ng-model="experience.convenience_fee" required>
 					            </div>
 					            <label class="error" for="convenience_fee" ng-show="StaticDataForm.convenience_fee.$invalid && !StaticDataForm.convenience_fee.$pristine">This field is required.</label>
 					    	</div>
 					    	<div class="col-sm-4">
 					    		<div pg-form-group class="form-group form-group-default input-group" ng-class="{ 'has-error' : StaticDataForm.taxes.$invalid && !StaticDataForm.taxes.$pristine }">
 					                <label>Taxes</label>
-					                <input type="Text" class="form-control" name="taxes" placeholder="18" ng-model="experience.taxes" required>
+					                <input type="Text" class="form-control" name="taxes" placeholder="taxes" ng-model="experience.taxes" required>
 					                <span class="input-group-addon">
                                                    %
                                                 </span>
@@ -65,7 +67,7 @@
 					        <div class="col-sm-8">
 					            <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.address.$invalid && !StaticDataForm.address.$pristine }">
 					                <label>address</label>
-					                <input type="text" class="form-control" name="address" placeholder="k-3 / 25 dlf phase 2" ng-model="experience.address" required>
+					                <input type="text" class="form-control" name="address" placeholder="Minimum of 4 characters." ng-model="experience.address" required>
 					            </div>
 					            <label class="error" for="address" ng-show="StaticDataForm.address.$invalid && !StaticDataForm.address.$pristine">This field is required.</label>
 					        </div>
@@ -85,21 +87,21 @@
 					        <div class="col-sm-4">
 					            <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.total_seats.$invalid && !StaticDataForm.total_seats.$pristine }">
 					                <label>Total Seats</label>
-					                <input type="text" class="form-control" name="total_seats" ng-model="experience.total_seats" placeholder="30" required>
+					                <input type="text" class="form-control" name="total_seats" ng-model="experience.total_seats" required>
 					            </div>
 					            <label class="error" for="total_seats" ng-show="StaticDataForm.total_seats.$invalid && !StaticDataForm.total_seats.$pristine">Enter a valid total seats.</label>
 					        </div>
 					        <div class="col-sm-4">
 					            <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.action_text.$invalid && !StaticDataForm.action_text.$pristine }">
 					                <label>Button Text</label>
-					                <input type="text" class="form-control" name="action_text" ng-model="experience.action_text" placeholder="Book Now" required>
+					                <input type="text" class="form-control" name="action_text" ng-model="experience.action_text" required>
 					            </div>
 					            <label class="error" for="action_text" ng-show="StaticDataForm.action_text.$invalid && !StaticDataForm.action_text.$pristine">Enter a valid Button Text.</label>
 					        </div>
 					        <div class="col-sm-4">
 					            <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.tag.$invalid && !StaticDataForm.tag.$pristine }">
 					                <label>Tag</label>
-					                <input type="text" class="form-control" name="tag" ng-model="experience.tag" placeholder="Workshop" required>
+					                <input type="text" class="form-control" name="tag" ng-model="experience.tag" required>
 					            </div>
 					            <label class="error" for="tag" ng-show="StaticDataForm.tag.$invalid && !StaticDataForm.tag.$pristine">Enter a valid total tag.</label>
 					        </div>
@@ -200,8 +202,7 @@
             <div class="padding-20 bg-white">
                 <ul class="pager wizard">
                     <li class="next">
-                        <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-info pull-right" ng-click="createExperience()" ng-disabled="(StaticDataForm.$invalid) || (!experience.cover_image) || (!experience.card_image)" wz-next>
-                        <!--   -->
+                        <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-trash pull-right" ng-click="editExperience()" wz-next>
                             <span>Next</span>
                         </button>
                     </li>
@@ -214,6 +215,52 @@
             </div>
         </wz-step>
         <wz-step title="Step 2">
+            <div class="row">
+				<div class="col-sm-12">
+					<h3>Delete Items you'd like to change</h3>
+				</div>
+                <div class="col-md-12 b-r b-dashed b-grey ">
+                	<div class="col-sm-4 m-t-20"  ng-repeat="item in experience.data" id="{{item.id}}">
+                		<div class="panel panel-default panel-condensed">
+				                        <div class="panel-heading">
+				                            <div class="panel-title">{{item.title}} ( {{item.type}} )
+				                            </div>
+				                            <div class="panel-controls">
+				                                <ul>
+				                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+				                                    </li>
+				                                    <li><a class="portlet-close" href="" ng-click="deleteData(item.id)"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    				</li>
+				                                </ul>
+				                            </div>
+				                        </div>
+				                        <div class="panel-body">
+				                        	<experience-data class="col-sm-12" type="{{item.type}}" item="item"></experience-data>
+				                            <!-- <p class="text-white">{{item.content}}</p> -->
+				                        </div>
+				                    </div>
+                	</div>
+                </div>
+                <!-- <div class="col-md-2">
+                	<button class="btn btn-success" >Try</button>
+                </div> -->
+            </div>
+            <div class="padding-20 bg-white">
+                <ul class="pager wizard">
+                    <li class="next">
+                        <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-info pull-right" wz-next>
+                            <span>Next</span>
+                        </button>
+                    </li>
+                    <li class="previous">
+                        <button type="button" class="btn btn-default btn-cons pull-right" wz-previous>
+                            <span>Previous</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </wz-step>
+        <wz-step title="Step 3">
             <div class="row row-same-height" ng-show="eventId">
                 <div class="col-md-7 b-r b-dashed b-grey "> 
                 	<div class="col-sm-2 b-r b-grey no-padding">
@@ -476,7 +523,7 @@
                 	</div>
                 </div>
                 <div class="col-md-5">
-                	<div class="col-sm-12 p-t-20" ng-repeat="data in eventDetails.data">
+                	<div class="col-sm-12 p-t-20" ng-repeat="data in experience.data">
 	                	<div class="col-sm-4">
 	                		<p class="hint-text m-t-0 m-b-5 semi-bold fs-15">{{data.type}}</p>
 	                	</div>
@@ -501,7 +548,7 @@
                 </ul>
             </div>
         </wz-step>
-        <wz-step title="Step 3">
+        <wz-step title="Step 4">
             <div class="row row-same-height">
                 <div class="col-md-12 b-r b-dashed b-grey ">
                 	<div class="panel panel-transparent">
@@ -514,7 +561,7 @@
 				                <div class="col-md-6 sortable-column" ui-jq="sortable" ui-options='{connectWith: ".sortable .row .col-md-6",handle: ".panel-heading",
 				        		cancel: ".portlet-close", placeholder: "sortable-box-placeholder round-all", forcePlaceholderSize: true, tolerance: "pointer",	        forceHelperSize: true, revert: true, helper: "original",opacity: 0.8,
 				        		iframeFix: false}'>
-				                    <div class="panel panel-default panel-condensed bg-info" ng-repeat="item in eventDetails.data" id="{{item.id}}" pg-portlet>
+				                    <div class="panel panel-default panel-condensed bg-info" ng-repeat="item in experience.data" id="{{item.id}}" pg-portlet>
 				                        <div class="panel-heading">
 				                            <div class="panel-title text-white">{{item.title}} ( {{item.type}} )
 				                            </div>
@@ -522,11 +569,14 @@
 				                                <ul>
 				                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="text-white portlet-icon portlet-icon-collapse"></i></a>
 				                                    </li>
+				                                    <li><a class="portlet-close" href="" ng-click="deleteData(item.id)" data-toggle="close"><i class="text-white portlet-icon portlet-icon-close"></i></a>
+                                    				</li>
 				                                </ul>
 				                            </div>
 				                        </div>
 				                        <div class="panel-body">
 				                            <!-- <p class="text-white">{{item.content}}</p> -->
+				                            <!-- {{item}} -->
 				                        </div>
 				                    </div>
 				                </div>
@@ -556,8 +606,7 @@
                 </ul>
             </div>
         </wz-step>
-        
-        <wz-step title="Step 4">
+        <wz-step title="Step 5">
             <div class="padding-30">
                 <div class="row row-same-height">
                 	<div class="col-sm-4">
@@ -627,19 +676,14 @@
                 <ul class="pager wizard">
                     <li class="next">
                         <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" ng-click="finish()" wz-finish>
-                            <span>I'll Do It Later</span>
+                            <span>Finish</span>
                         </button>
                     </li>
-                    <li class="next">
-                        <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" ng-click="PublishExperience()" wz-finish>
-                            <span>Make Event Live</span>
-                        </button>
-                    </li>
-                    <!-- <li class="previous">
+                    <li class="previous">
                         <button type="button" class="btn btn-default btn-cons pull-right" wz-previous>
                             <span>Previous</span>
                         </button>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
         </wz-step>

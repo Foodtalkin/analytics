@@ -2,20 +2,21 @@
 
 /* Controllers */
 
-angular.module('app').controller('usersCtrl', ['$scope','userFact', function($scope, userFact){
+angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
+ function($scope, userFact, UrlFact){
 	$scope.showDetails = false;
-	$scope.mainpage = "http://api.foodtalk.in/privilege/user";
+	$scope.mainpage = UrlFact.user;
     $scope.getList = function(url){
     	userFact.getList(url,function(response){
     		$scope.usersList = response.data.result.data;
-    		//console.log(response.data.result);
+    		console.log(response.data.result);
         	$scope.NextUrl = response.data.result.next_page_url;
         })
     }
 
     $scope.searchUser = function(){
         if($scope.searchTerm.length >= 3){
-            var base = "http://api.foodtalk.in/privilege/user?search="+encodeURI($scope.searchTerm);
+            var base = UrlFact.user+"?search="+encodeURI($scope.searchTerm);
             $scope.getList(base);
         }else if($scope.searchTerm.length == 0){
             $scope.getList($scope.mainpage);
@@ -64,7 +65,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact', function($sc
         })
      }
 }])
-.factory('userFact', ['$http', function($http){
+.factory('userFact', ['$http','UrlFact', function($http, UrlFact){
 	var userFact = {}
 	userFact.getList = function(url, callback){
     		$http({
@@ -77,7 +78,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact', function($sc
     	userFact.getredemption = function(id, callback){
     		$http({
 				method: 'GET',
-				url: "http://api.foodtalk.in/privilege/user/"+id
+				url: UrlFact.user+"/"+id
 			}).then(function(response) {
 	            callback(response);
 	        });
@@ -85,7 +86,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact', function($sc
         userFact.saveNotes = function(id, notes, callback){
             $http({
               method: 'PuT',
-              url: ' http://api.foodtalk.in/privilege/user/'+id,
+              url: UrlFact.user+'/'+id,
               data : {
                 "notes":notes
               }

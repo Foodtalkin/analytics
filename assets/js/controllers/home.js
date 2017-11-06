@@ -184,12 +184,12 @@ angular.module('app')
             
 
     }])
-    .factory('homeFact', ['$http', function($http){
+    .factory('homeFact', ['$http', 'UrlFact', function($http, UrlFact){
     	var homeFact = {};
     	homeFact.getUsers = function(days, callback){
     		$http({
 				method: 'GET',
-				url: 'http://api.foodtalk.in/privilege/analytics/user/'+days
+				url: UrlFact.home.user +days
 			}).then(function (response) {
                 console.log(response);
 	            callback(response);
@@ -199,7 +199,7 @@ angular.module('app')
     	homeFact.getredemption = function(days, callback){
     		$http({
 				method: 'GET',
-				url: 'http://api.foodtalk.in/privilege/analytics/redemption/'+days
+				url: UrlFact.home.redemption+days
 			}).then(function (response) {
 	            callback(response);
 	        });
@@ -208,7 +208,7 @@ angular.module('app')
     	homeFact.getRestaurant = function(days,top, callback){
     		$http({
 				method: 'GET',
-				url: 'http://api.foodtalk.in/privilege/analytics/restaurants/'+days+'/'+top
+				url: UrlFact.home.restaurants+days+'/'+top
 			}).then(function (response) {
 	            callback(response);
 	        });
@@ -217,7 +217,7 @@ angular.module('app')
         homeFact.getTopUsers = function(days,top, callback){
             $http({
                 method: 'GET',
-                url: 'http://api.foodtalk.in/privilege/analytics/topuser/'+days+'/'+top
+                url: UrlFact.home.topuser+days+'/'+top
             }).then(function (response) {
                 callback(response);
             });

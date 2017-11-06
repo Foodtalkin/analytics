@@ -3,13 +3,13 @@
 /* Controllers */
 
 angular.module('app')
-    .factory('LoginFact', ['$http','$cookies', '$location', 
-    	function($http, $cookies,$location){
+    .factory('LoginFact', ['$http','$cookies', '$location', 'UrlFact',
+    	function($http, $cookies,$location,UrlFact){
     	var LoginFact = {};
     	LoginFact.doLogin = function(email, loginkey, callback){
     		$http({
 				method: 'POST',
-				url: "http://api.foodtalk.in/login",
+				url: UrlFact.login,
 				data: {email:email, password:loginkey}
 			}).then(function (response) {
                 console.log(response);
@@ -49,11 +49,4 @@ angular.module('app')
     }])
 
 
-angular.module('app')
-    .factory('UrlFact', ['', function(){
-    	var UrlFact = {}
-    	var baseurl = "";
-    	UrlFact.login= baseurl+"login";
-    	UrlFact.privilege= baseurl+"privilege";
-    	return UrlFact;
-    }])
+

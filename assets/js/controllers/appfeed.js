@@ -4,11 +4,11 @@
 
 angular.module('app')
 
-.controller('appfeedCtrl', ['$scope','appfeedFact', function($scope, appfeedFact) {
+.controller('appfeedCtrl', ['$scope','appfeedFact','UrlFact', function($scope, appfeedFact, UrlFact) {
 	// varibles declartion
-    $scope.redeemFeedUrl = "http://api.foodtalk.in/privilege/feeds/redeemptions";
-    $scope.purchaseFeedUrl = "http://api.foodtalk.in/privilege/feeds/purchases";
-    $scope.signupFeedUrl = "http://api.foodtalk.in/privilege/feeds/signups";
+    $scope.redeemFeedUrl = UrlFact.appfeed.redmption;
+    $scope.purchaseFeedUrl = UrlFact.appfeed.purchase;
+    $scope.signupFeedUrl = UrlFact.appfeed.signup;
     $scope.redeemptions =  {};
     $scope.purchases = {};
     $scope.signups = {};

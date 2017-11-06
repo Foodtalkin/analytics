@@ -23,4 +23,18 @@
       .Experincedatapoints:hover, .Experincedatapoints:active{
         color: #6d5cae;
       }
+      .card{
+        width: 100%;
+      }
       
+
+      .flex-box{
+        display: flex;
+  align-items: center;
+  justify-content: center;
+      }
+
+      .flex-content{
+        display: flex;
+  justify-content: center;
+      }

@@ -3,9 +3,10 @@
 /* Controllers */
 
 angular.module('app')
-    .controller('contactCtrl', ['$scope','$location','contactFact', function($scope,$location,contactFact) {
+    .controller('contactCtrl', ['$scope','$location','contactFact','UrlFact',
+     function($scope,$location,contactFact, UrlFact) {
 	    $scope.showDetails = false;
-	    $scope.mainpage = "http://api.foodtalk.in/contact";
+	    $scope.mainpage = UrlFact.contact;
 	    $scope.getList = function(url){
 	    	contactFact.getList(url,function(response){
 	    		$scope.contactData = response.data.result.data;
@@ -72,7 +73,7 @@ angular.module('app')
 		    console.log(active);
 		      $http({
 		          method: 'PUT',
-		          url: 'http://api.foodtalk.in/contact/'+id,
+		          url: UrlFact.contact+'/'+id,
 		          data : {status:active}
 		        }).then(function (response) {
 		            if(response.data.message === "Success"){

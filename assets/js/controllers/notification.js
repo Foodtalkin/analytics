@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('app')
-.controller('notificationCtrl', ['$scope','notificationFact', function($scope, notificationFact){
+.controller('notificationCtrl', ['$scope','notificationFact', 'UrlFact', function($scope, notificationFact, UrlFact){
 	$scope.Notification = {};
 	$scope.notificationDetails = {};
 	$scope.getallList = function(){
@@ -72,7 +72,7 @@ angular.module('app')
 		}
 		
 		console.log(data);
-		notificationFact.sendNotification('http://api.foodtalk.in/privilege/push', 'POST', data, function(response){
+		notificationFact.sendNotification(UrlFact.notification, 'POST', data, function(response){
 			console.log(response);
 			if(response.data.code == "200"){
 				$scope.Notification = {};
@@ -161,7 +161,7 @@ angular.module('app')
 			delete data.push.where.city_id;
 		}
 		console.log(data);
-		notificationFact.sendNotification('http://api.foodtalk.in/privilege/push/'+id, 'PUT', data, function(response){
+		notificationFact.sendNotification(UrlFact.notification+'/'+id, 'PUT', data, function(response){
 			if(response.data.code == "200"){
                     $scope.getallList();
                     $scope.editDetails = false;
@@ -213,12 +213,12 @@ angular.module('app')
                 }
 		})
 	}
-}]).factory('notificationFact', ['$http', function($http){
+}]).factory('notificationFact', ['$http', 'UrlFact', function($http, UrlFact){
 	var notificationFact = {};
 	notificationFact.getList = function(callback){
 		$http({
 			method: 'GET',
-			url: 'http://api.foodtalk.in/privilege/push'
+			url: UrlFact.notification
 		}).then(function (response) {
 			//console.log(response);
             callback(response);
@@ -227,7 +227,7 @@ angular.module('app')
 	notificationFact.deleteNotification = function(id, callback){
 		$http({
 			method: 'DELETE',
-			url: 'http://api.foodtalk.in/privilege/push/'+id
+			url: UrlFact.notification+'/'+id
 		}).then(function (response) {
 			//console.log(response);
             callback(response);
@@ -236,7 +236,7 @@ angular.module('app')
 	notificationFact.getNotificationDetails = function(id, callback){
 		$http({
 			method: 'GET',
-			url: 'http://api.foodtalk.in/privilege/push/'+id
+			url: UrlFact.notification+'/'+id
 		}).then(function (response) {
 			//console.log(response);
             callback(response);

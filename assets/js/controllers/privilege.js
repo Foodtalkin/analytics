@@ -175,12 +175,12 @@ angular.module('app')
 	    };
 
     }])
-    .factory('privilegeFact', ['$http', function($http){
+    .factory('privilegeFact', ['$http','UrlFact', function($http, UrlFact){
     	var privilegeFact = {};
     	privilegeFact.getRestroList = function(callback){
     		$http({
 				method: 'GET',
-				url: 'http://stg-api.foodtalk.in/privilege/restaurant'
+				url: UrlFact.privilege.restaurant
 			}).then(function (response) {
 	            callback(response);
 	        });
@@ -188,7 +188,7 @@ angular.module('app')
     	privilegeFact.createRestro = function(name, one_liner, cost, card_image, callback){
 		    $http({
 		      method: 'POST',
-		      url: 'http://stg-api.foodtalk.in/privilege/restaurant',
+		      url: UrlFact.privilege.restaurant,
 		      data : {
 		        'name' : name,
 		        'one_liner' : one_liner,
@@ -211,7 +211,7 @@ angular.module('app')
 		privilegeFact.getrestrodata = function(id,callback){
 			$http({
 				method: 'GET',
-				url: 'http://stg-api.foodtalk.in/privilege/restaurant/'+id
+				url: UrlFact.privilege.restaurant+'/'+id
 			}).then(function (response) {
 	            callback(response);
 	        });
@@ -219,7 +219,7 @@ angular.module('app')
 		privilegeFact.getOutletOffers = function(id, callback){
 			$http({
 				method: 'GET',
-				url: 'http://api.foodtalk.in/privilege/outlet/'+id
+				url: UrlFact.privilege.outlet+'/'+id
 			}).then(function(response){
 				callback(response);
 			})
@@ -227,7 +227,7 @@ angular.module('app')
 		privilegeFact.getOutletImages = function(id, callback){
 			$http({
 				method: 'GET',
-				url: ' http://stg-api.foodtalk.in/privilege/outlet/'+id+'/image'
+				url: UrlFact.privilege.outlet+'/'+id+'/image'
 			}).then(function(response){
 				callback(response);
 			})

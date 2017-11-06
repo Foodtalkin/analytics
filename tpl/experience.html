@@ -15,19 +15,111 @@
            </div>
        </div>
        <div class="col-sm-9">
+          <div class="row" ng-hide="showEvent">
+            <div class="col-sm-12">
+              <div style="height: calc(100vh - 170px); position: relative;">
+                <div style="position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);">
+                  <h3 class="text-center">Click On Event to see details</h3>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row" ng-show="showEvent">
             <!-- action bar -->
             <div class="col-sm-12">
               <div class="btn-group m-t-20 pull-right">
-                  <button type="button" class="btn btn-success"><i class="fa fa-save"></i>
+                  <button type="button" class="btn btn-success"><i class="fa fa-download"></i>
                   </button>
-                  <button type="button" class="btn btn-success"><i class="fa fa-save"></i>
+                  <button type="button" class="btn {{experience.is_active == '1' ?  'btn-danger' : 'btn-success'}}" title="{{experience.is_active == '1' ?  'Hide Event' : 'Show event'}}" ng-click="showHideExperience(experience.id, experience.is_active)"><i class="fa fa-power-off"></i>
                   </button>
-                  <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
+                  <button type="button" class="btn btn-success" ng-click="editOpen()"><i class="fa fa-pencil"></i>
                   </button>
-                  <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
+                  <button type="button" class="btn btn-success" ng-click="deleteExperience(experience.id)"><i class="fa fa-trash-o"></i>
                   </button>
               </div>
+            </div>
+            <div class="col-sm-12">
+              <h5>{{experience.title}} is currently <strong>{{experience.is_active == '1' ?  'Live' : 'Hidden'}}</strong> on App</h5>
+            </div>
+            <div class="col-sm-5">
+              <div class="col-sm-12">
+                <h5>Card</h5>
+                <div class="card share share-other col no-t-b-border" data-social="item">
+                  <div class="card-content">
+                    <button class="btn btn-danger pull-right top-right m-r-10 m-t-10 btn-sm">{{experience.tag}}</button>
+                    <img alt="Card Image" ng-src="{{experience.card_image}}" class="border-t-radius">
+                    <div class="card-description">
+                      <h5 class="bold">{{experience.title}}</h5>
+                    </div>
+                  </div>
+                  <div class="card-footer clearfix">
+                    <div class="fs-12 semi-bold m-t-5"><i class="fa fa-clock-o m-r-5" aria-hidden="true"></i> {{experience.start_time}} to {{experience.end_time}}</div>
+                    <div class="fs-12 semi-bold m-t-5"><i class="fa fa-map-marker m-r-5" aria-hidden="true"></i> {{experience.address}}</div>
+                    <div class="fs-13 bold m-t-5"><i class="fa fa-inr m-r-5" aria-hidden="true"></i>  {{experience.cost}}</div>
+                    
+                  </div>
+                  <a class="btn btn-block btn-success btn-lg" style="border-radius: 0 0 2px 2px;">View Details</a>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <h5>Open Details</h5>
+                <div class="card share share-other col no-t-b-border" data-social="item">
+                  <div class="card-content">
+                    <button class="btn btn-danger pull-right top-right m-r-10 m-t-10 btn-sm">{{experience.tag}}</button>
+                    <img alt="Card Image" ng-src="{{experience.cover_image}}" class="border-t-radius">
+                    <div class="card-description bg-master-dark text-white p-b-10">
+                      <h5 class="bold text-white">{{experience.title}}</h5>
+                      <div class="fs-12 semi-bold m-t-5"><i class="fa fa-clock-o m-r-5" aria-hidden="true"></i> {{experience.start_time}} to {{experience.end_time}}</div>
+                      <div class="fs-12 semi-bold m-t-5"><i class="fa fa-map-marker m-r-5" aria-hidden="true"></i> {{experience.address}}</div>
+                      <div class="fs-13 bold m-t-5"><i class="fa fa-inr m-r-5" aria-hidden="true"></i>  {{experience.cost}}</div>
+                    </div>
+                  </div>
+                  <div class="card-footer clearfix no-padding">
+                    <div class="col-sm-12 no-padding" ng-repeat="item in experience.data">
+                      <experience-data class="col-sm-12" type="{{item.type}}" item="item"></experience-data>
+                    </div>
+                    
+                  </div>
+                  <a class="btn btn-block btn-success btn-lg" ui-sref="open({id : experience.id, sessionid : sessionid})" style="border-radius: 0 0 2px 2px;">View Details</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover demo-table-dynamic">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Tickets</th>
+                                <th>Non-vegetarian</th>
+                                <th>Transection Id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="guest in guestList">
+                                <td class="v-align-middle">
+                                    <p>{{guest.name}}</p>
+                                </td>
+                                <td class="v-align-middle">
+                                    <p>{{guest.total_tickets}}</p>
+                                </td>
+                                <td class="v-align-middle">
+                                    <p>{{guest.non_veg}}</p>
+                                </td>
+                                <td class="v-align-middle">
+                                    <p>{{guest.txn_id}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             </div>
           </div>
        </div>

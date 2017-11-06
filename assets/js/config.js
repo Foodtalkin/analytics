@@ -118,11 +118,7 @@ angular.module('app')
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                    /* 
-                                        Load any ocLazyLoad module here
-                                        ex: 'wysihtml5'
-                                        Open config.lazyload.js for available modules
-                                    */
+                                    'dataTables'
                                 ], {
                                     insertBefore: '#lazyload_placeholder'
                                 })
@@ -149,6 +145,26 @@ angular.module('app')
                                 .then(function() {
                                     return $ocLazyLoad.load([
                                         'assets/js/controllers/createxperience.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
+                .state('app.editExperience', {
+                    url: "/experience/edit/:id",
+                    templateUrl: "tpl/editExperience.html",
+                    controller: 'editExperienceCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'wizard',
+                                    'inputMask'
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/editExperience.js'
                                     ]);
                                 });
                         }]
@@ -276,20 +292,58 @@ angular.module('app')
     // experience directive
     angular.module('app').directive('experienceData', function() {
         return {
-            templateUrl: function(elem, attr) {
-                if(attr.dType == 'TEXT'){
-                    return 'tpl/directiveTemplates/text.html';
-                }else if(attr.dType == 'VIDEO'){
-                    return 'tpl/directiveTemplates/video.html';
-                }else if(attr.dType == 'URL'){
-                    return 'tpl/directiveTemplates/url.html';
-                }else if(attr.dType == 'IMAGE'){
-                    return 'tpl/directiveTemplates/image.html';
-                }else if(attr.dType == 'LIST1'){
-                    return 'tpl/directiveTemplates/list1.html';
-                }else if(attr.dType == 'LIST2'){
-                    return 'tpl/directiveTemplates/list2.html';
-                }
-            }
+            restrict: 'EA',
+            scope: {
+                item : "="
+            },
+            replace: true,
+            link: function(scope, element, attrs) {
+                   scope.contentUrl = 'tpl/directiveTemplates/' + attrs.type + '.html';
+                   attrs.$observe("type",function(v){
+                       scope.contentUrl = 'tpl/directiveTemplates/' + v + '.html';
+                   });
+               },
+            template: '<div ng-include="contentUrl"></div>'
         };
     });
+
+
+    angular.module('app')
+    .factory('UrlFact', function(){
+        var UrlFact = {}
+        var stg = "http://stg-api.foodtalk.in/";
+        var live = "http://api.foodtalk.in/";
+
+        // change before pushing online
+        var baseurl = live;
+
+        UrlFact.appfeed = {};
+        UrlFact.appfeed.redmption = baseurl + "privilege/feeds/redeemptions";
+        UrlFact.appfeed.purchase = baseurl + "privilege/feeds/purchases";
+        UrlFact.appfeed.signup = baseurl + "privilege/feeds/signups";
+
+        UrlFact.contact = baseurl + "contact";
+
+        UrlFact.experience = {};
+        UrlFact.experience.main = baseurl + "privilege/experiences";
+        UrlFact.experience.data = baseurl + "privilege/experiences/data";
+        UrlFact.experience.sortdata = baseurl + "privilege/experiences/sort_data/";
+
+        UrlFact.home = {};
+        UrlFact.home.user = baseurl + "/privilege/analytics/user/";
+        UrlFact.home.redemption = baseurl + "/privilege/analytics/redemption/";
+        UrlFact.home.restaurants = baseurl + "/privilege/analytics/restaurants/";
+        UrlFact.home.topuser = baseurl + "/privilege/analytics/topuser/";
+
+        UrlFact.login = baseurl + "login";
+
+        UrlFact.notification = baseurl + "privilege/push";
+
+        UrlFact.privilege = {};
+        UrlFact.privilege.restaurant = baseurl + "privilege/restaurant";
+        UrlFact.privilege.outlet = baseurl + "privilege/outlet";
+
+        UrlFact.user = baseurl + "privilege/user";
+
+        return UrlFact;
+    })
