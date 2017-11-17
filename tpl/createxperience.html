@@ -2,17 +2,17 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
         <li ng-class="{'active': getCurrentStep() == 1 }">
-            <a data-toggle="tab" ng-click="goToStep(1)"><i class="fa fa-calendar tab-icon"></i> <span>Step 1</span></a>
+            <a data-toggle="tab" style="pointer-events: none;" ng-click="goToStep(1)"><i class="fa fa-calendar tab-icon"></i> <span>Step 1</span></a>
         </li>
         <li ng-class="{'active': getCurrentStep() == 2 }">
-            <a data-toggle="tab" ng-click="goToStep(2)"><i class="fa fa-info tab-icon"></i> <span>Step 2</span></a>
+            <a data-toggle="tab" style="pointer-events: none;" ng-click="goToStep(2)"><i class="fa fa-info tab-icon"></i> <span>Step 2</span></a>
         </li>
         <li ng-class="{'active': getCurrentStep() == 3 }">
-            <a data-toggle="tab" ng-click="goToStep(3)"><i class="fa fa-arrows tab-icon"></i> <span>Step 3</span></a>
+            <a data-toggle="tab" style="pointer-events: none;" ng-click="goToStep(3)"><i class="fa fa-arrows tab-icon"></i> <span>Step 3</span></a>
         </li>
         
         <li ng-class="{'active': getCurrentStep() == 4 }">
-            <a data-toggle="tab" ng-click="goToStep(4)"><i class="fa fa-check tab-icon"></i> <span>Step 4</span></a>
+            <a data-toggle="tab" style="pointer-events: none;" ng-click="goToStep(4)"><i class="fa fa-check tab-icon"></i> <span>Step 4</span></a>
         </li>
     </ul>
     <wizard on-finish="finished()" class="bg-white" hide-indicators="true">

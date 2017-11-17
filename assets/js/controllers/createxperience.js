@@ -83,6 +83,7 @@ $scope.goToStep = function(step){
 
 // main code
 $scope.experience = {};
+$scope.experience.action_text = "Book Now";
 $scope.NoDataForm = true;
 $scope.uploadCover = function(files){
 	$scope.files = files;
