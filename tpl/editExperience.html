@@ -126,31 +126,23 @@
 					    </div>
 					    <div class="row">
 					    	<div class="col-sm-6">
-					    		<div id="direct_upload" 
-	                            ngf-drop="uploadFiles($files)"
-	                            ngf-drag-over-class="dragOverClass($event)"
-	                            ng-model="files"
-	                            ng-multiple="fasle">
-		                            <div class="col-md-12 no-padding">
-		                              <form>  
-		                                <div class="form_line">
-		                                    <!-- <label>Image:</label> -->
-		                                    <div class="form_controls">
-		                                        <div class="upload_button_holder" style="text-align: center; border: 1px dotted #9e9e9e;padding: 20px;width: 100%;">
-		                                            <div href="#" class="upload_button btn btn-fw {{cover == '' ? 'btn-primary' : 'btn-success'}}" ngf-select="uploadCard($files)" title="upload" resetOnClick="true">Upload Card</div>
-		                                        </div>
-		                                    </div>
-		                                    <div ng-repeat="file in files">
-		                                    	<div class="progress">
-					                                <div class="progress-bar" style="width:{{file.status}}"></div>
-					                            </div>
-		                                    </div>
-		                                </div>
-		                              </form>
-		                            </div>
-		                        </div>
+					    		<div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.latitude.$invalid && !StaticDataForm.latitude.$pristine }">
+					                <label>latitude</label>
+					                <input type="text" class="form-control" name="latitude" ng-model="experience.latitude" placeholder="Workshop" required>
+					            </div>
+					            <label class="error" for="latitude" ng-show="StaticDataForm.latitude.$invalid && !StaticDataForm.latitude.$pristine">Enter a valid total latitude.</label>
 					    	</div>
 					    	<div class="col-sm-6">
+					    		<div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.longitude.$invalid && !StaticDataForm.longitude.$pristine }">
+					                <label>longitude</label>
+					                <input type="text" class="form-control" name="longitude" ng-model="experience.longitude" placeholder="Workshop" required>
+					            </div>
+					            <label class="error" for="longitude" ng-show="StaticDataForm.longitude.$invalid && !StaticDataForm.longitude.$pristine">Enter a valid total longitude.</label>
+					    	</div>
+					    </div>
+					    <div class="row">
+					    	
+					    	<div class="col-sm-12">
 					    		<div id="direct_upload" 
 	                            ngf-drop="uploadFiles($files)"
 	                            ngf-drag-over-class="dragOverClass($event)"
@@ -179,11 +171,11 @@
 					</form>              
                 </div>
                 <div class="col-md-5">
-                	<div class="col-sm-7 col-sm-offset-2">
+                	<div class="col-sm-12">
                 		<div class="card share share-other col no-t-b-border" data-social="item">
 				            <div class="card-content">
 				              <button class="btn btn-danger pull-right top-right m-r-10 m-t-10 btn-sm">{{experience.tag}}</button>
-				              <img alt="Card Image" ng-src="{{experience.card_image}}" class="border-t-radius">
+				              <img alt="Card Image" ng-src="{{experience.cover_image}}" class="border-t-radius">
 				              <div class="card-description1">
 				                <p class="bold">{{experience.title}}</p>
 				              </div>
@@ -495,19 +487,19 @@
 			                        </div>
 				                    <div class="col-sm-12">
 				                    	<div class="row">
-				                        	<div class="col-sm-3">
+				                        	<div class="col-sm-12">
 				                        		<div pg-form-group class="form-group form-group-default">
 				                                    <label>Title</label>
 				                                    <input type="text" class="form-control" ng-model="detailsList.title">
 				                                </div>
 				                        	</div>
-				                            <div class="col-sm-7">
+				                            <div class="col-sm-12">
 				                                <div pg-form-group class="form-group form-group-default">
 				                                    <label>Content</label>
-				                                    <input type="text" class="form-control" ng-model="detailsList.data">
+				                                    <textarea class="form-control" ng-model="detailsList.data" rows="3" style="height: 70px;"></textarea>
 				                                </div>
 				                            </div>
-				                            <div class="col-sm-2">
+				                            <div class="col-sm-12">
 				                            	<button class="btn btn-success" ng-click="addItemToDTlist()">add</button>
 				                            </div>
 				                        </div>
@@ -555,6 +547,14 @@
 				        <div class="panel-heading">
 				            <div class="panel-title">Arrange Order Of Data
 				            </div>
+				        </div>
+				        <div class="row">
+				        	<div class="col-sm-6">
+				        		<h4 class="text-center">Pick Data item From here</h4>
+				        	</div>
+				        	<div class="col-sm-6">
+				        		<h4 class="text-center">Put The data Items here in Order you want to arange it</h4>
+				        	</div>
 				        </div>
 				        <div class="panel-body sortable">
 				            <div class="row">
@@ -613,7 +613,7 @@
                 		<div class="card share share-other col no-t-b-border" data-social="item">
 				            <div class="card-content">
 				              <button class="btn btn-danger pull-right top-right m-r-10 m-t-10 btn-sm">{{experience.tag}}</button>
-				              <img alt="Card Image" ng-src="{{experience.card_image}}" class="border-t-radius">
+				              <img alt="Card Image" ng-src="{{experience.cover_image}}" class="border-t-radius">
 				              <div class="card-description1">
 				                <p class="bold">{{experience.title}}</p>
 				              </div>

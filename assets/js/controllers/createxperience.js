@@ -84,35 +84,6 @@ $scope.goToStep = function(step){
 // main code
 $scope.experience = {};
 $scope.NoDataForm = true;
-$scope.uploadCard = function(files){
-	$scope.files = files;
-	  if (!$scope.files) return;
-	  angular.forEach(files, function(file){
-	    if (file && !file.$error) {
-	      file.upload = $upload.upload({
-	        url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
-	        data: {
-	          upload_preset: cloudinary.config().upload_preset,
-	          tags: 'myphotoalbum',
-	          context: 'photo=' + $scope.title,
-	          file: file
-	        }
-	      }).progress(function (e) {
-	        file.progress = Math.round((e.loaded * 100.0) / e.total);
-	        file.status = file.progress + "%";
-	      }).success(function (data, status, headers, config) {
-	        $rootScope.photos = $rootScope.photos || [];
-	        data.context = {custom: {photo: $scope.title}};
-	        file.result = data;
-	        $scope.experience.card_image =  file.result.url;
-	        console.log($scope.experience.card_image);
-	        $rootScope.photos.push(data);
-	      }).error(function (data, status, headers, config) {
-	        file.result = data;
-	      });
-	    }
-	  });
-}
 $scope.uploadCover = function(files){
 	$scope.files = files;
 	  if (!$scope.files) return;
@@ -212,7 +183,7 @@ $scope.addItemToDTlist = function(){
 // create event
 $scope.createExperience = function(){
 	console.log($scope.experience);
-	if($scope.experience.card_image && $scope.experience.card_image){
+	if($scope.experience.cover_image){
 		createxperienceFact.createExperience($scope.experience, function(response){
 			console.log(response);
 			if(response.data.code == "200"){

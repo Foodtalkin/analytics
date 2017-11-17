@@ -61,7 +61,15 @@ angular.module('app')
          experienceFact.getUserlist(id, function(response){
             $scope.guestList = response.data.result;
             console.log($scope.guestList);
+            $scope.createDownloadList();
          })
+    }
+    $scope.usercsv = [];
+    $scope.createDownloadList = function(){
+        $scope.usercsv.push({a:'Guest Name',b:'Total Tickets',c:'Non Vegetarian'})
+        angular.forEach($scope.guestList, function(item){
+          $scope.usercsv.push({a:item.name,b:item.total_tickets,c:item.non_veg});
+        });
     }
 
 }])

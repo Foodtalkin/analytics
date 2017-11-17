@@ -1,6 +1,6 @@
 <div class="container-fluid container-fixed-lg" style="">
    <div class="row">
-       <div class="col-sm-3" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px);">
+       <div class="col-sm-3" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px); position: sticky; top: 64px;">
            <div class="p-t-30 p-b-10">
                <button class="btn btn-primary btn-block" ui-sref="app.createxperience">Create New Experience</button>
                <h5>Experience List</h5>
@@ -28,7 +28,7 @@
             <!-- action bar -->
             <div class="col-sm-12">
               <div class="btn-group m-t-20 pull-right">
-                  <button type="button" class="btn btn-success"><i class="fa fa-download"></i>
+                  <button type="button" class="btn btn-success" ng-csv="usercsv" filename="{{experience.title}}-GuestList.csv" field-separator="," decimal-separator="." title="download csv"><i class="fa fa-download"></i>
                   </button>
                   <button type="button" class="btn {{experience.is_active == '1' ?  'btn-danger' : 'btn-success'}}" title="{{experience.is_active == '1' ?  'Hide Event' : 'Show event'}}" ng-click="showHideExperience(experience.id, experience.is_active)"><i class="fa fa-power-off"></i>
                   </button>
@@ -47,7 +47,7 @@
                 <div class="card share share-other col no-t-b-border" data-social="item">
                   <div class="card-content">
                     <button class="btn btn-danger pull-right top-right m-r-10 m-t-10 btn-sm">{{experience.tag}}</button>
-                    <img alt="Card Image" ng-src="{{experience.card_image}}" class="border-t-radius">
+                    <img alt="Card Image" ng-src="{{experience.cover_image}}" class="border-t-radius">
                     <div class="card-description">
                       <h5 class="bold">{{experience.title}}</h5>
                     </div>

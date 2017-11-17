@@ -13,7 +13,9 @@ angular.module('app', [
     'cloudinary', 
     'ngFileUpload',
     'ngCookies',
-    'ngIdle'
+    'ngIdle',
+    'ngCsv',
+    'ngSanitize'
 ]);
  
 

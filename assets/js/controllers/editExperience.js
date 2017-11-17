@@ -84,35 +84,6 @@ $scope.goToStep = function(step){
 // main code
 // for data forms showing message
 $scope.NoDataForm = true;
-$scope.uploadCard = function(files){
-	$scope.files = files;
-	  if (!$scope.files) return;
-	  angular.forEach(files, function(file){
-	    if (file && !file.$error) {
-	      file.upload = $upload.upload({
-	        url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
-	        data: {
-	          upload_preset: cloudinary.config().upload_preset,
-	          tags: 'myphotoalbum',
-	          context: 'photo=' + $scope.title,
-	          file: file
-	        }
-	      }).progress(function (e) {
-	        file.progress = Math.round((e.loaded * 100.0) / e.total);
-	        file.status = file.progress + "%";
-	      }).success(function (data, status, headers, config) {
-	        $rootScope.photos = $rootScope.photos || [];
-	        data.context = {custom: {photo: $scope.title}};
-	        file.result = data;
-	        $scope.card_image =  file.result.url;
-	        //console.log($scope.card_image);
-	        $rootScope.photos.push(data);
-	      }).error(function (data, status, headers, config) {
-	        file.result = data;
-	      });
-	    }
-	  });
-}
 $scope.uploadCover = function(files){
 	$scope.files = files;
 	  if (!$scope.files) return;
@@ -144,16 +115,13 @@ $scope.uploadCover = function(files){
 
 // edit Event
 $scope.editExperience = function(){
-	if($scope.card_image != ""){
-		$scope.experience.card_image = $scope.card_image;
-	}
+	
 	if($scope.cover_image != ""){
 		$scope.experience.cover_image = $scope.cover_image;
 	}
 	var temp = {
 		"title":$scope.experience.title,
 		"cover_image":$scope.experience.cover_image,
-		"card_image":$scope.experience.card_image,
 		"address":$scope.experience.address,
 		"city_id":$scope.experience.city_id,
 		"start_time":$scope.experience.start_time,
@@ -164,7 +132,9 @@ $scope.editExperience = function(){
 		"convenience_fee":$scope.experience.convenience_fee,
 		"total_seats":$scope.experience.total_seats,
 		"action_text":$scope.experience.action_text,
-		"tag":$scope.experience.tag
+		"tag":$scope.experience.tag,
+		"latitude": $scope.experience.latitude,
+		"longitude": $scope.experience.longitude
 	}
 	console.log(temp);
 	
