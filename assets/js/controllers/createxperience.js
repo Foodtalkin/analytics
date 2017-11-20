@@ -63,7 +63,7 @@ $scope.dragOverClass = function($event) {
 
 // wizard code
 $scope.finished = function() {
-    alert("Wizard finished :)");
+    $state.go('app.experience');
 }
 
 $scope.logStep = function() {

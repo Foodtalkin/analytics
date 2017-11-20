@@ -316,7 +316,7 @@ angular.module('app')
                     // lineColor:"red",
                     "values" : []
                 }
-                angular.forEach(userApi.datewise.trial, function(value, key) {
+                angular.forEach(userApi30.datewise.trial, function(value, key) {
                   var temp = dateformat(value.date, value.count);
                   mytrialobj.values.push(temp);
                 });
