@@ -105,10 +105,45 @@ angular.module('app')
             }
         }
 
-        $scope.offer_line_options = {
+        // $scope.offer_line_options = {
+        //     chart: {
+        //         type: 'lineChart',
+        //         height: 400,
+        //         x: function(d) {
+        //             return d[0]
+        //         },
+        //         y: function(d) {
+        //             return d[1]
+        //         },
+        //         color: [
+        //             '#601adc',
+        //             '#e91e63',
+        //             '#ff9800',
+        //             '#742282',
+        //             '#3fb55f', 
+        //             '#07e2ff'
+
+        //         ],
+        //         useInteractiveGuideline: true,
+        //         transitionDuration: 500,
+        //         xAxis: {
+        //             tickFormat: function(d) {
+        //                 return d3.time.format('%d/%m/%Y')(new Date(d))
+        //             }
+        //         },
+        //         yAxis: {
+        //             tickFormat: d3.format("")
+        //         }
+        //     }
+        // }
+
+        $scope.nvd3_area_options = {
             chart: {
-                type: 'lineChart',
+                type: 'stackedAreaChart',
                 height: 400,
+                margin: {
+                    left: 15
+                },
                 x: function(d) {
                     return d[0]
                 },
@@ -116,23 +151,31 @@ angular.module('app')
                     return d[1]
                 },
                 color: [
-                    '#673ab7',
+                   '#601adc',
                     '#e91e63',
                     '#ff9800',
-                    '#9c27b0',
-                    '#3f51b5', 
-                    '#ffc107'
+                    '#742282',
+                    '#3fb55f', 
+                    '#07e2ff'
 
                 ],
                 useInteractiveGuideline: true,
+                rightAlignYAxis: false,
                 transitionDuration: 500,
+                showControls: false,
+                clipEdge: true,
                 xAxis: {
                     tickFormat: function(d) {
                         return d3.time.format('%d/%m/%Y')(new Date(d))
                     }
                 },
                 yAxis: {
-                    tickFormat: d3.format("")
+                    tickFormat: d3.format('d')
+                },
+                legend: {
+                    margin: {
+                        top: 5
+                    }
                 }
             }
         }
@@ -172,12 +215,12 @@ angular.module('app')
                         4: '20% off on Food only ',
                         5: '1+1 on Buffet '
                     }
-                },sliceColors: ['#673ab7',
-                        '#e91e63',
-                        '#ff9800',
-                        '#9c27b0',
-                        '#3f51b5', 
-                        '#ffc107']
+                },sliceColors: ['#601adc',
+                    '#e91e63',
+                    '#ff9800',
+                    '#742282',
+                    '#3fb55f', 
+                    '#07e2ff']
 
             };
         })
