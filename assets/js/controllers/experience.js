@@ -66,9 +66,9 @@ angular.module('app')
     }
     $scope.usercsv = [];
     $scope.createDownloadList = function(){
-        $scope.usercsv.push({a:'Guest Name',b:'Total Tickets',c:'Non Vegetarian'})
+        $scope.usercsv.push({a:'Guest Name',b:'Total Tickets',c:'Non Vegetarian' ,d:'Txn ID'})
         angular.forEach($scope.guestList, function(item){
-          $scope.usercsv.push({a:item.name,b:item.total_tickets,c:item.non_veg});
+          $scope.usercsv.push({a:item.name,b:item.total_tickets,c:item.non_veg,d:item.txn_id});
         });
     }
 
