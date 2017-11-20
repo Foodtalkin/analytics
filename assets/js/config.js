@@ -298,9 +298,9 @@ angular.module('app')
             },
             replace: true,
             link: function(scope, element, attrs) {
-                   scope.contentUrl = 'tpl/directiveTemplates/' + attrs.type + '.html';
+                   scope.contentUrl = 'assets/js/directiveTemplates/' + attrs.type + '.html';
                    attrs.$observe("type",function(v){
-                       scope.contentUrl = 'tpl/directiveTemplates/' + v + '.html';
+                       scope.contentUrl = 'assets/js/directiveTemplates/' + v + '.html';
                    });
                },
             template: '<div ng-include="contentUrl"></div>'
