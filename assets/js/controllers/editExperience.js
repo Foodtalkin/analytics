@@ -214,6 +214,15 @@ $scope.openList2Form =function(){
 	$scope.list1Data = false;
 	$scope.list2Data = true;	
 }
+$scope.hidealldataForm =function(){
+	$scope.NoDataForm = true;
+	$scope.textData = false;
+	$scope.imageData = false;
+	$scope.videoData = false;
+	$scope.urlData = false;
+	$scope.list1Data = false;
+	$scope.list2Data = false;	
+}
 
 // dynamic elements add to detailed list
 $scope.list2= [];
@@ -245,7 +254,8 @@ $scope.saveText = function(){
 		//console.log(data);
 		$scope.addData(data);
 		// empty the form after use
-		// $scope.dText = {};
+		$scope.dText = {};
+		$scope.hidealldataForm();
 		// $scope.TextDataForm.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -267,7 +277,8 @@ $scope.saveImages = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.dImage = {};
+		$scope.dImage = {};
+		$scope.hidealldataForm();
 		// $scope.imageDataForm.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -284,7 +295,8 @@ $scope.saveVideo = function(){
 		//console.log(data);
 		$scope.addData(data);
 		// empty the form after use
-		// $scope.dVideo = {};
+		$scope.dVideo = {};
+		$scope.hidealldataForm();
 		// $scope.VideoDataForm.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -302,7 +314,8 @@ $scope.saveUrl = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.durl = {};
+		$scope.durl = {};
+		$scope.hidealldataForm();
 		// $scope.urlDataForm.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -320,7 +333,8 @@ $scope.saveList1 = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.dList1 = {};
+		$scope.dList1 = {};
+		$scope.hidealldataForm();
 		// $scope.list1DataForm.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -338,7 +352,8 @@ $scope.saveList2 = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.dlist2 = {};
+		$scope.dlist2 = {};
+		$scope.hidealldataForm();
 		// $scope.list2DataForm.$setPristine();
 	}else{
 		alert("all fields are required");

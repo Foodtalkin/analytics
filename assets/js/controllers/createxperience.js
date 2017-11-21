@@ -169,6 +169,15 @@ $scope.openList2Form =function(){
 	$scope.list1Data = false;
 	$scope.list2Data = true;	
 }
+$scope.hidealldataForm =function(){
+	$scope.NoDataForm = true;
+	$scope.textData = false;
+	$scope.imageData = false;
+	$scope.videoData = false;
+	$scope.urlData = false;
+	$scope.list1Data = false;
+	$scope.list2Data = false;	
+}
 
 // dynamic elements add to detailed list
 $scope.list2= [];
@@ -229,7 +238,8 @@ $scope.saveText = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.dText = {};
+		 $scope.dText = {};
+		 $scope.hidealldataForm();
 		// $scope.form1.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -251,7 +261,8 @@ $scope.saveImages = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.dImage = {};
+		$scope.dImage = {};
+		$scope.hidealldataForm();
 		// $scope.form2.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -268,7 +279,8 @@ $scope.saveVideo = function(){
 		// console.log(data);
 		$scope.addData(data);
 		// empty the form after use
-		// $scope.dVideo = {};
+		$scope.dVideo = {};
+		$scope.hidealldataForm();
 		// $scope.form3.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -286,7 +298,8 @@ $scope.saveUrl = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.durl = {};
+		$scope.durl = {};
+		$scope.hidealldataForm();
 		// $scope.form4.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -304,7 +317,8 @@ $scope.saveList1 = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.dList1 = {};
+		$scope.dList1 = {};
+		$scope.hidealldataForm();
 		// $scope.form5.$setPristine();
 	}else{
 		alert("all fields are required");
@@ -312,7 +326,7 @@ $scope.saveList1 = function(){
 }
 $scope.dlist2 = {};
 $scope.saveList2 = function(){
-	if($scope.dlist2.title){
+	if($scope.dlist2.title && $scope.list2.length != 0){
 		var data = {
 			"type":"LIST2",
 			"title": $scope.dlist2.title,
@@ -322,7 +336,8 @@ $scope.saveList2 = function(){
 		$scope.addData(data);
 
 		// empty the form after use
-		// $scope.dlist2 = {};
+		$scope.dlist2 = {};
+		$scope.hidealldataForm();
 		// $scope.form6.$setPristine();
 	}else{
 		alert("all fields are required");
