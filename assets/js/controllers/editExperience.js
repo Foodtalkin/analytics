@@ -144,13 +144,19 @@ $scope.editExperience = function(){
 }
 
 // delete data 
-$scope.deleteData = function(id){
-	editexperienceFact.deleteData(id, function(response){
-		console.log(response);
-		editexperienceFact.getExprienceDetails($scope.eventId, function(response){
-			$scope.experience = response.data.result;
-		});
-	})
+$scope.deleteData = function(id){	
+	var retVal = confirm("Do you want to delete this item ?");
+	if( retVal == true ){
+		editexperienceFact.deleteData(id, function(response){
+			console.log(response);
+			editexperienceFact.getExprienceDetails($scope.eventId, function(response){
+				$scope.experience = response.data.result;
+			});
+		})
+	}
+	else{
+	  	return false;
+	}
 }
 
 // open data item forms

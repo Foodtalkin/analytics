@@ -50,11 +50,18 @@ angular.module('app')
     }
 
     $scope.deleteExperience = function(id){
-    	experienceFact.deleteExprience(id, function(response){
-    		if(response.data.result){
-    			$scope.getList(mainurl);
-    		}
-    	})
+        var retVal = confirm("Do you want to delete this item ?");
+           if( retVal == true ){
+             experienceFact.deleteExprience(id, function(response){
+                if(response.data.result){
+                    $scope.getList(mainurl);
+                }
+            });
+           }
+           else{
+              return false;
+           }
+    	
     }
 
     $scope.getUserlist = function(id){

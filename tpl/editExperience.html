@@ -87,7 +87,7 @@
 					        <div class="col-sm-4">
 					            <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.total_seats.$invalid && !StaticDataForm.total_seats.$pristine }">
 					                <label>Total Seats</label>
-					                <input type="text" class="form-control" name="total_seats" ng-model="experience.total_seats" required>
+					                <input type="text" class="form-control" name="total_seats" ng-model="experience.total_seats" disabled required>
 					            </div>
 					            <label class="error" for="total_seats" ng-show="StaticDataForm.total_seats.$invalid && !StaticDataForm.total_seats.$pristine">Enter a valid total seats.</label>
 					        </div>
