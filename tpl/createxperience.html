@@ -24,9 +24,9 @@
 					        <div class="col-sm-7">
 					            <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.title.$invalid && !StaticDataForm.title.$pristine }">
 					                <label>Title</label>
-					                <input type="text" class="form-control" name="title" placeholder="title" ng-model="experience.title" required>
+					                <input type="text" class="form-control" name="title" placeholder="title" ng-model="experience.title" maxlength="32" required>
 					            </div>
-					            <label class="error" for="title" ng-show="StaticDataForm.title.$invalid && !StaticDataForm.title.$pristine">This field is required.</label>
+					            <label class="error" for="title" ng-show="StaticDataForm.title.$invalid && !StaticDataForm.title.$pristine" >This field is required.</label>
 					        </div>
 					        <div class="col-sm-5">
 					        	<div class="checkbox check-primary checkbox-circle">
@@ -283,7 +283,7 @@
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : TextDataForm.title.$invalid && !TextDataForm.title.$pristine }">
 			                                    <label>Title</label>
-			                                    <input type="text" class="form-control" name="title" ng-model="dText.title">
+			                                    <input type="text" class="form-control" name="title" ng-model="dText.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="TextDataForm.title.$invalid && !TextDataForm.title.$pristine">This field is required.</label>
 			                            </div>
@@ -292,7 +292,7 @@
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : TextDataForm.content.$invalid && !TextDataForm.content.$pristine }">
 			                                    <label>Content</label>
-			                                    <textarea type="text" class="form-control" name="content" ng-model="dText.content" rows="10" style="height: 70px;"></textarea>
+			                                    <textarea type="text" class="form-control" name="content" ng-model="dText.content" maxlength="1024" rows="10" style="height: 70px;"></textarea>
 			                                </div>
 			                                <label class="error" for="content" ng-show="TextDataForm.content.$invalid && !TextDataForm.content.$pristine">This field is required.</label>
 			                            </div>
@@ -309,7 +309,7 @@
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : imageDataForm.title.$invalid && !imageDataForm.title.$pristine }">
 			                                    <label>Title</label>
-			                                    <input type="text" class="form-control" name="title" ng-model="dImage.title">
+			                                    <input type="text" class="form-control" name="title" ng-model="dImage.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="imageDataForm.title.$invalid && !imageDataForm.title.$pristine">This field is required.</label>
 			                            </div>
@@ -353,7 +353,7 @@
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : VideoDataForm.title.$invalid && !VideoDataForm.title.$pristine }">
 			                                    <label>Title</label>
-			                                    <input type="text" class="form-control" name="title" ng-model="dVideo.title">
+			                                    <input type="text" class="form-control" name="title" ng-model="dVideo.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="VideoDataForm.title.$invalid && !VideoDataForm.title.$pristine">This field is required.</label>
 			                            </div>
@@ -379,7 +379,7 @@
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : urlDataForm.title.$invalid && !urlDataForm.title.$pristine }">
 			                                    <label>Title</label>
-			                                    <input type="text" class="form-control" name="title" ng-model="durl.title">
+			                                    <input type="text" class="form-control" name="title" ng-model="durl.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="urlDataForm.title.$invalid && !urlDataForm.title.$pristine">This field is required.</label>
 			                            </div>
@@ -405,7 +405,7 @@
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : list1DataForm.title.$invalid && !list1DataForm.title.$pristine }">
 			                                    <label>Title</label>
-			                                    <input type="text" class="form-control" name="title" ng-model="dList1.title" >
+			                                    <input type="text" class="form-control" name="title" ng-model="dList1.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="list1DataForm.title.$invalid && !list1DataForm.title.$pristine">This field is required.</label>
 			                            </div>
@@ -432,7 +432,7 @@
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : list2DataForm.title.$invalid && !list2DataForm.title.$pristine }">
 			                                    <label>Title</label>
-			                                    <input type="text" class="form-control" name="title" ng-model="dlist2.title">
+			                                    <input type="text" class="form-control" name="title" ng-model="dlist2.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="list2DataForm.title.$invalid && !list2DataForm.title.$pristine">This field is required.</label>
 			                            </div>
@@ -442,13 +442,13 @@
 				                        	<div class="col-sm-12">
 				                        		<div pg-form-group class="form-group form-group-default">
 				                                    <label>Title</label>
-				                                    <input type="text" class="form-control" ng-model="detailsList.title">
+				                                    <input type="text" class="form-control" ng-model="detailsList.title" maxlength="32">
 				                                </div>
 				                        	</div>
 				                            <div class="col-sm-12">
 				                                <div pg-form-group class="form-group form-group-default">
 				                                    <label>Content</label>
-				                                    <textarea class="form-control" ng-model="detailsList.data" rows="3" style="height: 70px;"></textarea>
+				                                    <textarea class="form-control" ng-model="detailsList.data" rows="3" maxlength="140" style="height: 70px;"></textarea>
 				                                </div>
 				                            </div>
 				                            <div class="col-sm-12">
