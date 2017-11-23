@@ -332,7 +332,7 @@ angular.module('app')
         var live = "http://api.foodtalk.in/";
 
         // change before pushing online
-        var baseurl = stg;
+        var baseurl = live;
 
         UrlFact.appfeed = {};
         UrlFact.appfeed.redmption = baseurl + "privilege/feeds/redeemptions";
