@@ -148,7 +148,7 @@
 	                            ng-model="files"
 	                            ng-multiple="fasle" ngf-dimensions="$width == 851 || $height == 315" ngf-validate-force="true">
 	                            <div class="col-md-12 no-padding">
-	                              <form>  
+	                              <form name="myform">  
 	                                <div class="form_line">
 	                                    <!-- <label>Image:</label> -->
 	                                    <div class="form_controls">
@@ -161,6 +161,8 @@
 				                                <div class="progress-bar" style="width:{{file.status}}"></div>
 				                            </div>
 	                                    </div>
+	                                   
+	                                    <p class="bold text-danger fs-15">{{myerrorcover}}</p>
 	                                </div>
 	                              </form>
 	                            </div>

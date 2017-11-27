@@ -94,6 +94,11 @@ $scope.goToStep = function(step){
 $scope.NoDataForm = true;
 $scope.uploadCover = function(files){
 	$scope.files = files;
+	if(files.length == 0){
+		$scope.myerrorcover = "Wrong image Size";
+	}else{
+		$scope.myerrorcover = "";
+	}
 	  if (!$scope.files) return;
 	  angular.forEach(files, function(file){
 	    if (file && !file.$error) {
