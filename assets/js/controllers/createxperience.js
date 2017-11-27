@@ -63,6 +63,14 @@ $scope.dragOverClass = function($event) {
 
 // wizard code
 $scope.finished = function() {
+	var message ="Hurray! New Notification is created"
+                        $('body').pgNotification({
+                            style: 'bar',
+                            message: message,
+                            position: 'top',
+                            timeout: 5000,
+                            type: 'success'
+                        }).show();
     $state.go('app.experience');
 }
 

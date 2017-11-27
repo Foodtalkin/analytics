@@ -63,6 +63,14 @@ $scope.dragOverClass = function($event) {
 
 // wizard code
 $scope.finished = function() {
+	var message ="Hurray! New Notification is created"
+                        $('body').pgNotification({
+                            style: 'bar',
+                            message: message,
+                            position: 'top',
+                            timeout: 5000,
+                            type: 'success'
+                        }).show();
     $state.go('app.experience');
 }
 
@@ -136,10 +144,20 @@ $scope.editExperience = function(){
 		"latitude": $scope.experience.latitude,
 		"longitude": $scope.experience.longitude
 	}
-	console.log(temp);
+	//console.log(temp);
 	
 	editexperienceFact.editExperience($scope.eventId,temp, function(response){
 		console.log(response);
+		if(response.data.code != '200'){
+			var message ="Oops! somthing went wrong. Please try again"
+                        $('body').pgNotification({
+                            style: 'bar',
+                            message: message,
+                            position: top,
+                            timeout: 5000,
+                            type: 'error'
+                        }).show();
+		}
 	})
 }
 
