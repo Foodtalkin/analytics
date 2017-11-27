@@ -41,7 +41,7 @@
             <div class="col-sm-12">
               <h5>{{experience.title}} is currently <strong>{{experience.is_active == '1' ?  'Live' : 'Hidden'}}</strong> on App</h5>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <div class="col-sm-12">
                 <h5>Card</h5>
                 <div class="card share share-other col no-t-b-border" data-social="item">
@@ -84,7 +84,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-8">
               <div class="panel panel-transparent">
                 <div class="panel-heading">
                     <div class="panel-title">
@@ -97,8 +97,10 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Tickets</th>
-                                <th>Non-vegetarian</th>
+                                <th>Non-veg</th>
                                 <th>Transection Id</th>
+                                <th>Email</th>
+                                <th>Phone</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,6 +116,12 @@
                                 </td>
                                 <td class="v-align-middle">
                                     <p>{{guest.txn_id}}</p>
+                                </td>
+                                <td class="v-align-middle">
+                                    <p>{{guest.email}}</p>
+                                </td>
+                                <td class="v-align-middle">
+                                    <p>{{guest.phone}}</p>
                                 </td>
                             </tr>
                         </tbody>
