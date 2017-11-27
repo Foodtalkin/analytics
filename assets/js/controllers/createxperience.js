@@ -63,7 +63,7 @@ $scope.dragOverClass = function($event) {
 
 // wizard code
 $scope.finished = function() {
-	var message ="Hurray! New Notification is created"
+	var message ="New Experience is created"
                         $('body').pgNotification({
                             style: 'bar',
                             message: message,
@@ -71,7 +71,7 @@ $scope.finished = function() {
                             timeout: 5000,
                             type: 'success'
                         }).show();
-    $state.go('app.experience');
+    //$state.go('app.experience');
 }
 
 $scope.logStep = function() {
@@ -390,6 +390,7 @@ $scope.checkOrder = function(){
 // publish experience
 
 $scope.PublishExperience = function(){
+	console.log($scope.eventId);
 	createxperienceFact.PublishExperience($scope.eventId, function(response){
 		console.log(response);
 		if(response.data.code == "202"){

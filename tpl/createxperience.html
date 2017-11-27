@@ -23,7 +23,7 @@
 					    <div class="row">
 					        <div class="col-sm-7">
 					            <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.title.$invalid && !StaticDataForm.title.$pristine }">
-					                <label>Title</label>
+					                <label>Title <span class="hint-text">(Max Length 32)</span></label>
 					                <input type="text" class="form-control" name="title" placeholder="title" ng-model="experience.title" maxlength="32" required>
 					            </div>
 					            <label class="error" for="title" ng-show="StaticDataForm.title.$invalid && !StaticDataForm.title.$pristine" >This field is required.</label>
@@ -141,27 +141,26 @@
 					    <div class="row">
 
 					    	<div class="col-sm-12">
-					    		<label for="">Cover Image <span class="fs-13 hint-text">(1773 X 656 or Aspect Ratio 2.70 : 1)</span> </label>
+					    		<label for="">Cover Image <span class="fs-13 hint-text">(851 X 315)</span> </label>
 					    		<div id="direct_upload" 
 	                            ngf-drop="uploadFiles($files)"
 	                            ngf-drag-over-class="dragOverClass($event)"
 	                            ng-model="files"
-	                            ng-multiple="fasle" ngf-ratio="2.70:1" ngf-validate-force="true">
+	                            ng-multiple="fasle" ngf-dimensions="$width == 851 || $height == 315" ngf-validate-force="true">
 	                            <div class="col-md-12 no-padding">
 	                              <form>  
 	                                <div class="form_line">
 	                                    <!-- <label>Image:</label> -->
 	                                    <div class="form_controls">
 	                                        <div class="upload_button_holder" style="text-align: center; border: 1px dotted #9e9e9e;padding: 20px;width: 100%;">
-	                                            <div href="#" class="upload_button btn btn-fw {{cover == '' ? 'btn-primary' : 'btn-success'}}" ngf-select="uploadCover($files)" title="upload" resetOnClick="true" ngf-ratio="2.70:1" ngf-validate-force="true">Upload Cover</div>
+	                                            <div href="#" class="upload_button btn btn-fw {{cover == '' ? 'btn-primary' : 'btn-success'}}" ngf-select="uploadCover($files)" title="upload" resetOnClick="true" ngf-dimensions="$width == 851 || $height == 315" ngf-validate-force="true">Upload Cover</div>
 	                                        </div>
 	                                    </div>
 	                                    <div ng-repeat="file in files">
 	                                    	<div class="progress">
-				                                <div class="progress-bar" style="width:{{file}}"></div>
+				                                <div class="progress-bar" style="width:{{file.status}}"></div>
 				                            </div>
 	                                    </div>
-	                                    <div class="fs-13 danger" style="">{{file.$error}}</div>
 	                                </div>
 	                              </form>
 	                            </div>
@@ -285,7 +284,7 @@
 			                        <div class="row clearfix">
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : TextDataForm.title.$invalid && !TextDataForm.title.$pristine }">
-			                                    <label>Title</label>
+			                                    <label>Title <span class="hint-text">(Max Length 32)</span></label>
 			                                    <input type="text" class="form-control" name="title" ng-model="dText.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="TextDataForm.title.$invalid && !TextDataForm.title.$pristine">This field is required.</label>
@@ -294,7 +293,7 @@
 			                        <div class="row">
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : TextDataForm.content.$invalid && !TextDataForm.content.$pristine }">
-			                                    <label>Content</label>
+			                                    <label>Content <span class="hint-text">(Max Length 1024)</span></label>
 			                                    <textarea type="text" class="form-control" name="content" ng-model="dText.content" maxlength="1024" rows="10" style="height: 70px;"></textarea>
 			                                </div>
 			                                <label class="error" for="content" ng-show="TextDataForm.content.$invalid && !TextDataForm.content.$pristine">This field is required.</label>
@@ -311,7 +310,7 @@
 			                        <div class="row clearfix">
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : imageDataForm.title.$invalid && !imageDataForm.title.$pristine }">
-			                                    <label>Title</label>
+			                                    <label>Title <span class="hint-text">(Max Length 32)</span></label>
 			                                    <input type="text" class="form-control" name="title" ng-model="dImage.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="imageDataForm.title.$invalid && !imageDataForm.title.$pristine">This field is required.</label>
@@ -355,7 +354,7 @@
 			                        <div class="row clearfix">
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : VideoDataForm.title.$invalid && !VideoDataForm.title.$pristine }">
-			                                    <label>Title</label>
+			                                    <label>Title <span class="hint-text">(Max Length 32)</span></label>
 			                                    <input type="text" class="form-control" name="title" ng-model="dVideo.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="VideoDataForm.title.$invalid && !VideoDataForm.title.$pristine">This field is required.</label>
@@ -381,7 +380,7 @@
 			                        <div class="row clearfix">
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : urlDataForm.title.$invalid && !urlDataForm.title.$pristine }">
-			                                    <label>Title</label>
+			                                    <label>Title <span class="hint-text">(Max Length 32)</span></label>
 			                                    <input type="text" class="form-control" name="title" ng-model="durl.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="urlDataForm.title.$invalid && !urlDataForm.title.$pristine">This field is required.</label>
@@ -407,7 +406,7 @@
 			                        <div class="row clearfix">
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : list1DataForm.title.$invalid && !list1DataForm.title.$pristine }">
-			                                    <label>Title</label>
+			                                    <label>Title <span class="hint-text">(Max Length 32)</span></label>
 			                                    <input type="text" class="form-control" name="title" ng-model="dList1.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="list1DataForm.title.$invalid && !list1DataForm.title.$pristine">This field is required.</label>
@@ -434,7 +433,7 @@
 			                        <div class="row clearfix">
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : list2DataForm.title.$invalid && !list2DataForm.title.$pristine }">
-			                                    <label>Title</label>
+			                                    <label>Title <span class="hint-text">(Max Length 32)</span></label>
 			                                    <input type="text" class="form-control" name="title" ng-model="dlist2.title" maxlength="32">
 			                                </div>
 			                                <label class="error" for="title" ng-show="list2DataForm.title.$invalid && !list2DataForm.title.$pristine">This field is required.</label>
@@ -444,13 +443,13 @@
 				                    	<div class="row">
 				                        	<div class="col-sm-12">
 				                        		<div pg-form-group class="form-group form-group-default">
-				                                    <label>Title</label>
+				                                    <label>Title <span class="hint-text">(Max Length 32)</span></label>
 				                                    <input type="text" class="form-control" ng-model="detailsList.title" maxlength="32">
 				                                </div>
 				                        	</div>
 				                            <div class="col-sm-12">
 				                                <div pg-form-group class="form-group form-group-default">
-				                                    <label>Content</label>
+				                                    <label>Content <span class="hint-text">(Max Length 140)</span></label>
 				                                    <textarea class="form-control" ng-model="detailsList.data" rows="3" maxlength="140" style="height: 70px;"></textarea>
 				                                </div>
 				                            </div>
