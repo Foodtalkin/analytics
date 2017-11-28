@@ -319,12 +319,20 @@ $scope.saveUrl = function(){
 	}
 }
 $scope.dList1 = {};
+$scope.dList1.content = [];
+$scope.dList1.list1item = "";
+$scope.addItemtolist1 = function(){
+	//console.log($scope.dList1.list1item);
+	$scope.dList1.content.push($scope.dList1.list1item);
+	//console.log($scope.dList1.content);
+	$scope.dList1.list1item = "";
+}
 $scope.saveList1 = function(){
-	if($scope.dList1.title && $scope.dList1.content){
+	if($scope.dList1.title && $scope.dList1.content.length != 0){
 		var data = {
 			"type":"LIST1",
 			"title": $scope.dList1.title,
-			"content": $scope.dList1.content.split(",")
+			"content": $scope.dList1.content
 		}
 		// console.log(data);
 		$scope.addData(data);

@@ -463,13 +463,19 @@
 			                        <div class="row">
 			                            <div class="col-sm-12">
 			                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : list1DataForm.content.$invalid && !list1DataForm.content.$pristine }">
-			                                    <label>Content</label>
-			                                    <span class="help">Sprate each item with comma (,)</span>
-			                                    <textarea type="text" class="form-control" name="content" ng-model="dList1.content" rows="10" style="height: 70px;"></textarea>
+			                                    <label>Content (max length 46)</label>
+			                                    <input type="text" class="form-control" name="content" ng-model="dList1.list1item" maxlength="46">
 			                                </div>
 			                                <label class="error" for="content" ng-show="list1DataForm.content.$invalid && !list1DataForm.content.$pristine">This field is required.</label>
 			                            </div>
+			                            <div class="col-sm-12">
+			                            	<button class="btn btn-success" ng-click="addItemtolist1()">add</button>
+			                            </div>
+			                            <div class="col-sm-12" ng-repeat="item in dList1.content">
+				                        	<p><strong>{{item}}</strong></p>
+				                        </div>
 			                        </div>
+
 			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="list1DataForm.$invalid" ng-click="saveList1()">Save</button>
 			                    </form>
 	                		</div>
