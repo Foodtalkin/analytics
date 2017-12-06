@@ -37,12 +37,14 @@ angular.module('app')
     }
 
     $scope.showHideExperience = function(id, val){
+        $scope.isDisabled = true;
     	if(val == '1'){
     		var state = "/deacitvate";
     	}else{
     		var state = "/acitvate";
     	}
     	experienceFact.changeExprienceState(id, state, function(response){
+            $scope.isDisabled = false;
     		if(response.data.result){
     			$scope.OpenEvent(id);
     		}
@@ -74,10 +76,54 @@ angular.module('app')
     $scope.usercsv = [];
     $scope.createDownloadList = function(){
         $scope.usercsv = [];
-        $scope.usercsv.push({a:'Guest Name',b:'Total Tickets',c:'Non Vegetarian' ,d:'Txn ID', e:'Email', f:'Phone'})
+        $scope.usercsv.push({a:'Guest Name',b:'Total Tickets',c:'Non Vegetarian' , d:'Vegetarian', e:'Txn ID', f:'Email', g:'Phone'})
         angular.forEach($scope.guestList, function(item){
-          $scope.usercsv.push({a:item.name,b:item.total_tickets,c:item.non_veg,d:item.txn_id, e:item.email, f:item.phone});
+            if(item.refunded == '0'){
+                var temp = item.total_tickets - item.non_veg;
+                $scope.usercsv.push({a:item.name,b:item.total_tickets,c:item.non_veg,d:temp,e:item.txn_id, f:item.email, g:item.phone});
+            }
         });
+    }
+
+    $scope.initiateRefund = function(txn_id){
+         var retVal = confirm("Do you want to Initiate this Refund ?");
+           if( retVal == true ){
+            experienceFact.initiateRefund(txn_id, function(response){
+                console.log(response);
+                if(response.data.result.STATUS == "TXN_SUCCESS"){
+                    var message = response.data.result.RESPMSG
+                        $('body').pgNotification({
+                            style: 'bar',
+                            message: message,
+                            position: 'top',
+                            timeout: 5000,
+                            type: 'success'
+                        }).show();
+                }else{
+                    var message = response.data.result.RESPMSG
+                        $('body').pgNotification({
+                            style: 'bar',
+                            message: message,
+                            position: 'top',
+                            timeout: 5000,
+                            type: 'danger'
+                        }).show();
+                }
+            });
+           }
+           else{
+              return false;
+           }
+            
+    }
+
+    $scope.refundStatus = function(txn_id){
+        
+        experienceFact.refundStatus(txn_id, function(response){
+            console.log(response);
+            $('#modalSlideUpSmall').modal('show');
+            $scope.refundDetails = response.data.result.REFUND_LIST[0];
+        })
     }
 
 }])
@@ -124,6 +170,24 @@ angular.module('app')
             callback(response);
         });
 	}
+
+    experienceFact.initiateRefund = function(txn_id, callback){
+        $http({
+            method: 'GET',
+            url: UrlFact.experience.refund+txn_id
+        }).then(function(response) {
+            callback(response);
+        });
+    }
+
+    experienceFact.refundStatus = function(txn_id, callback){
+        $http({
+            method: 'GET',
+            url: UrlFact.experience.refund+txn_id+"/status"
+        }).then(function(response) {
+            callback(response);
+        });
+    }
 	return experienceFact;
 }]);
 

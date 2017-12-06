@@ -40,7 +40,9 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
      }
 
      $scope.saveNotes = function(id){
+        $scope.isDisabled = true;
         userFact.saveNotes(id, $scope.currentUser.notes, function(response){
+            $scope.isDisabled = false;
             if(response){
                     $scope.showDetails = false;
                     $scope.getList($scope.mainpage);

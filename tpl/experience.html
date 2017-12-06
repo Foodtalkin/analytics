@@ -30,7 +30,7 @@
               <div class="btn-group m-t-20 pull-right">
                   <button type="button" class="btn btn-success" ng-csv="usercsv" filename="{{experience.title}}-GuestList.csv" field-separator="," decimal-separator="." title="download csv"><i class="fa fa-download"></i>
                   </button>
-                  <button type="button" class="btn {{experience.is_active == '1' ?  'btn-danger' : 'btn-success'}}" title="{{experience.is_active == '1' ?  'Hide Event' : 'Show event'}}" ng-click="showHideExperience(experience.id, experience.is_active)"><i class="fa fa-power-off"></i>
+                  <button type="button" class="btn {{experience.is_active == '1' ?  'btn-danger' : 'btn-success'}}" title="{{experience.is_active == '1' ?  'Hide Event' : 'Show event'}}" ng-click="showHideExperience(experience.id, experience.is_active)" ng-disabled="isDisabled"><i class="fa fa-power-off"></i>
                   </button>
                   <button type="button" class="btn btn-success" ng-click="editOpen()"><i class="fa fa-pencil"></i>
                   </button>
@@ -41,7 +41,7 @@
             <div class="col-sm-12">
               <h5>{{experience.title}} is currently <strong>{{experience.is_active == '1' ?  'Live' : 'Hidden'}}</strong> on App</h5>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4" ng-hide="bigTable">
               <div class="col-sm-12">
                 <h5>Card</h5>
                 <div class="card share share-other col no-t-b-border" data-social="item">
@@ -53,7 +53,7 @@
                     </div>
                   </div>
                   <div class="card-footer clearfix">
-                    <div class="fs-12 semi-bold m-t-5"><i class="fa fa-clock-o m-r-5" aria-hidden="true"></i> {{experience.start_time}} to {{experience.end_time}}</div>
+                    <div class="fs-12 semi-bold m-t-5"><i class="fa fa-clock-o m-r-5" aria-hidden="true"></i> {{experience.display_time}}</div>
                     <div class="fs-12 semi-bold m-t-5"><i class="fa fa-map-marker m-r-5" aria-hidden="true"></i> {{experience.address}}</div>
                     <div class="fs-13 bold m-t-5"><i class="fa fa-inr m-r-5" aria-hidden="true"></i>  {{experience.cost}}</div>
                     
@@ -69,7 +69,7 @@
                     <img alt="Card Image" ng-src="{{experience.cover_image}}" class="border-t-radius">
                     <div class="card-description bg-master-dark text-white p-b-10">
                       <h5 class="bold text-white">{{experience.title}}</h5>
-                      <div class="fs-12 semi-bold m-t-5"><i class="fa fa-clock-o m-r-5" aria-hidden="true"></i> {{experience.start_time}} to {{experience.end_time}}</div>
+                      <div class="fs-12 semi-bold m-t-5"><i class="fa fa-clock-o m-r-5" aria-hidden="true"></i> {{experience.display_time}}</div>
                       <div class="fs-12 semi-bold m-t-5"><i class="fa fa-map-marker m-r-5" aria-hidden="true"></i> {{experience.address}}</div>
                       <div class="fs-13 bold m-t-5"><i class="fa fa-inr m-r-5" aria-hidden="true"></i>  {{experience.cost}}</div>
                     </div>
@@ -84,12 +84,15 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class=" {{bigTable ? 'col-sm-12' : 'col-sm-8'}}" >
               <div class="panel panel-transparent">
                 <div class="panel-heading">
                     <div class="panel-title">
+                      Guest List
+                      <button class="btn btn-default" ng-click="bigTable = !bigTable"><i class="fa fa-arrows-alt"></i></button>
                     </div>
                     <div class="clearfix"></div>
+                    
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover demo-table-dynamic">
@@ -101,6 +104,7 @@
                                 <th>Transection Id</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,6 +127,10 @@
                                 <td class="v-align-middle">
                                     <p>{{guest.phone}}</p>
                                 </td>
+                                <td>
+                                  <button class="btn btn-warning" ng-show="guest.refunded == '1' ? false : true" ng-click="initiateRefund(guest.txn_id)">Initiate Refund</button>
+                                  <button class="btn btn-complete" ng-show="guest.refunded == '0' ? false : true" ng-click="refundStatus(guest.txn_id)">Refund Status</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -132,4 +140,22 @@
           </div>
        </div>
    </div>
+</div>
+
+<div class="modal fade slide-up disable-scroll" id="modalSlideUpSmall" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content-wrapper">
+            <div class="modal-content">
+                <div class="modal-body text-center m-t-20">
+
+                    <h4 class="no-margin p-b-10">{{refundDetails.RESPMSG}}</h4>
+                    <p>Refund Date : {{refundDetails.REFUNDDATE}}</p>
+                    <p>Refund Amount : {{refundDetails.REFUNDAMOUNT}}</p>
+
+                    <button type="button" class="btn btn-primary btn-cons" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
 </div>

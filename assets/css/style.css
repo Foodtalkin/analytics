@@ -38,3 +38,10 @@
         display: flex;
   justify-content: center;
       }
+
+
+.multibar .nvtooltip.xy-tooltip h1,.multibar .nvtooltip.xy-tooltip h2,
+.multibar .nvtooltip.xy-tooltip h3, .multibar .nvtooltip.xy-tooltip h4,
+.multibar .nvtooltip.xy-tooltip h5,.multibar .nvtooltip.xy-tooltip h6{
+  font-size: 12px;
+}

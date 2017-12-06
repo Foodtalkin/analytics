@@ -76,66 +76,51 @@ angular.module('app')
 
 
         // chart options
-    	$scope.user_line_options = {
-            chart: {
-                type: 'lineChart',
-                height: 400,
-                x: function(d) {
-                    return d[0]
+        $scope.userbarconfig = {
+            visible: true, // default: true
+            extended: true, // default: false
+            disabled: false, // default: false
+            refreshDataOnly: true, // default: true
+            deepWatchOptions: true, // default: true
+            deepWatchData: true, // default: true
+            deepWatchDataDepth: 2, // default: 2
+            debounce: 10 // default: 10
+        };
+
+        $scope.userBarOption ={
+          chart: {
+            type: "multiBarChart",
+            height: 420,
+            margin: {
+
+              left: 15
+            },
+            clipEdge: true,
+            duration: 500,
+            tooltips: true,
+            tooltipContent: function (key, x, y, e, graph) {
+                  return '<p>' + key + '</p><p>' + y + ' on '+ x + '</p>';
                 },
-                y: function(d) {
-                    return d[1]
-                },
-                color: [
-                    '#259b24 ',
+            stacked: false,
+            color: [
+                    
                         '#e51c23',
-                        '#ff9800'//antarctica
+                        '#ff9800',
+                        '#259b24'//antarctica
 
                 ],
-                useInteractiveGuideline: true,
-                transitionDuration: 500,
-                xAxis: {
-                    tickFormat: function(d) {
-                        return d3.time.format('%d/%m/%Y')(new Date(d))
+            xAxis: {
+              tickFormat: function(d) {
+                        return d3.time.format('%d/%m')(new Date(d))
                     }
-                },
-                yAxis: {
-                    tickFormat: d3.format("")
-                }
+            },
+            reduceXTicks: false,
+            showControls: false,
+            yAxis: {
+              tickFormat: d3.format('d')
             }
+          }
         }
-
-        // $scope.offer_line_options = {
-        //     chart: {
-        //         type: 'lineChart',
-        //         height: 400,
-        //         x: function(d) {
-        //             return d[0]
-        //         },
-        //         y: function(d) {
-        //             return d[1]
-        //         },
-        //         color: [
-        //             '#601adc',
-        //             '#e91e63',
-        //             '#ff9800',
-        //             '#742282',
-        //             '#3fb55f', 
-        //             '#07e2ff'
-
-        //         ],
-        //         useInteractiveGuideline: true,
-        //         transitionDuration: 500,
-        //         xAxis: {
-        //             tickFormat: function(d) {
-        //                 return d3.time.format('%d/%m/%Y')(new Date(d))
-        //             }
-        //         },
-        //         yAxis: {
-        //             tickFormat: d3.format("")
-        //         }
-        //     }
-        // }
 
         $scope.nvd3_area_options = {
             chart: {
@@ -287,34 +272,32 @@ angular.module('app')
                 return temp;
             }
 
+            function barformat(date, count){
+                //var array = date.split('-');
+                var temp = {};
+                //var x = [Date.UTC(parseInt(array[0]), parseInt(array[1])-1, parseInt(array[2]))];
+                var y = parseInt(count);
+                temp.x = date;
+                temp.y = y;
+                return temp;
+            }
+
     		homeFact.getUsers("7", function(response){
     			userApi = response.data.result;
     			// paid user Last 7 days
                 //console.log(userApi);
-    			var mypaidobj = {
-    				"key" : "Paid",
-                    // lineColor:"red",
-    				"values" : []
-    			}
-    			angular.forEach(userApi.datewise.paid, function(value, key) {
-                  var temp = dateformat(value.date, value.count);
-				  mypaidobj.values.push(temp);
-				});
-				allData.user7days.push(mypaidobj);
-                console.log(allData);
-
+    			
 				// unpaid user last 7 days
 				var myunpaidobj = {
-    				"key" : "unPaid",
+    				"key" : "New Users",
                     // lineColor:"red",
     				"values" : []
     			}
-    			angular.forEach(userApi.datewise.unpaid, function(value, key) {
-				  var temp = dateformat(value.date, value.count);
+    			angular.forEach(userApi.datewise.total, function(value, key) {
+				  var temp = barformat(value.date, value.count);
 				  myunpaidobj.values.push(temp);
 				});
 				allData.user7days.push(myunpaidobj);
-
                 // unpaid user last 7 days
                 var mytrialobj = {
                     "key" : "Trial",
@@ -322,34 +305,37 @@ angular.module('app')
                     "values" : []
                 }
                 angular.forEach(userApi.datewise.trial, function(value, key) {
-                  var temp = dateformat(value.date, value.count);
+                  var temp = barformat(value.date, value.count);
                   mytrialobj.values.push(temp);
                 });
                 allData.user7days.push(mytrialobj);
+
+                var mypaidobj = {
+                    "key" : "Paid",
+                    // lineColor:"red",
+                    "values" : []
+                }
+                angular.forEach(userApi.datewise.paid, function(value, key) {
+                  var temp = barformat(value.date, value.count);
+                  mypaidobj.values.push(temp);
+                });
+                allData.user7days.push(mypaidobj);
+                
 
     		});
     		
     		homeFact.getUsers("30", function(response){
     			userApi30 = response.data.result;
     			// paid user 30 days
-    			var mypaidobj = {
-    				"key" : "Paid",
-    				// lineColor:"red",
-                    "values" : []
-    			}
-    			angular.forEach(userApi30.datewise.paid, function(value, key) {
-				   var temp = dateformat(value.date, value.count);
-				  mypaidobj.values.push(temp);
-				});
-				allData.user30days.push(mypaidobj);
+    			
 				// unpaid user 30 days
 				var myunpaidobj = {
-    				"key" : "unPaid",
+    				"key" : "New Users",
     				// lineColor:"red",
                     "values" : []
     			}
-    			angular.forEach(userApi30.datewise.unpaid, function(value, key) {
-				   var temp = dateformat(value.date, value.count);
+    			angular.forEach(userApi30.datewise.total, function(value, key) {
+				   var temp = barformat(value.date, value.count);
 				  myunpaidobj.values.push(temp);
 				});
 				allData.user30days.push(myunpaidobj);
@@ -360,10 +346,21 @@ angular.module('app')
                     "values" : []
                 }
                 angular.forEach(userApi30.datewise.trial, function(value, key) {
-                  var temp = dateformat(value.date, value.count);
+                  var temp = barformat(value.date, value.count);
                   mytrialobj.values.push(temp);
                 });
                 allData.user30days.push(mytrialobj);
+
+                var mypaidobj = {
+                    "key" : "Paid",
+                    // lineColor:"red",
+                    "values" : []
+                }
+                angular.forEach(userApi30.datewise.paid, function(value, key) {
+                   var temp = barformat(value.date, value.count);
+                  mypaidobj.values.push(temp);
+                });
+                allData.user30days.push(mypaidobj);
     		})
 
     		homeFact.getredemption("7", function(response){

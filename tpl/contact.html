@@ -61,7 +61,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12">
-                <button class="btn {{currentMsg.status == '1' ? 'btn-default' : 'btn-primary'}}" ng-click="markDone(currentMsg.id, currentMsg.status)">{{currentMsg.status == '1' ? 'Mark Not done' : 'Mark as done!'}}</button>
+                <button class="btn {{currentMsg.status == '1' ? 'btn-default' : 'btn-primary'}}"  ng-click="markDone(currentMsg.id, currentMsg.status)" ng-disabled="isDisabled">{{currentMsg.status == '1' ? 'Mark Not done' : 'Mark as done!'}}</button>
               </div>
             </div>
           </div>

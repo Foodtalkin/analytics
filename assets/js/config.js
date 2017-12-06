@@ -155,7 +155,8 @@ angular.module('app')
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                     'wizard',
-                                    'inputMask'
+                                    'inputMask',
+                                    'moment'
                                 ], {
                                     insertBefore: '#lazyload_placeholder'
                                 })
@@ -175,7 +176,8 @@ angular.module('app')
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                     'wizard',
-                                    'inputMask'
+                                    'inputMask',
+                                    'moment'
                                 ], {
                                     insertBefore: '#lazyload_placeholder'
                                 })
@@ -345,6 +347,7 @@ angular.module('app')
         UrlFact.experience.main = baseurl + "privilege/experiences";
         UrlFact.experience.data = baseurl + "privilege/experiences/data";
         UrlFact.experience.sortdata = baseurl + "privilege/experiences/sort_data/";
+        UrlFact.experience.refund = baseurl + "privilege/refund/"
 
         UrlFact.home = {};
         UrlFact.home.user = baseurl + "/privilege/analytics/user/";

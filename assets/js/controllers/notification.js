@@ -30,6 +30,7 @@ angular.module('app')
 	}
 
 	$scope.createNotification = function(){
+		$scope.isDisabled = true;
 // "userId": "1384",
 		var data = {
 					  "push_time": $scope.Notification.date + " " + $scope.Notification.time,
@@ -73,6 +74,7 @@ angular.module('app')
 		
 		console.log(data);
 		notificationFact.sendNotification(UrlFact.notification, 'POST', data, function(response){
+			$scope.isDisabled = false;
 			console.log(response);
 			if(response.data.code == "200"){
 				$scope.Notification = {};

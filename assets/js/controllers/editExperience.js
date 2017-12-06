@@ -6,7 +6,7 @@ angular.module('app', ['mgo-angular-wizard'])
 
 .controller('editExperienceCtrl', ['$scope', '$state', '$stateParams', 'WizardHandler','editexperienceFact','$rootScope','$location','Upload', 'cloudinary',
  function($scope, $state, $stateParams, WizardHandler, editexperienceFact, $rootScope,$location, $upload, cloudinary) {	
-
+$scope.experience ={};
 $scope.eventId = $stateParams.id;
 $scope.cover_image = "";
 $scope.card_image = "";
@@ -126,12 +126,78 @@ $scope.uploadCover = function(files){
 	  });
 }
 
+$scope.$watchGroup(["experience['start_time']", "experience['end_time']"], function (newValue, oldValue) {
+    if(!(angular.isUndefined($scope.experience.end_time)) && !(angular.isUndefined($scope.experience.start_time)) && $scope.experience.end_time != "" && $scope.experience.start_time != ""){
+    	if(moment($scope.experience.end_time).isAfter($scope.experience.start_time)){
+    		// end date is after
+    		$scope.checkendDate = false;
+    	}else{
+    		// start date is after
+    		$scope.checkendDate = true;
+    	}
+    }
+  });
+// create date formats
+$scope.customDate = true;
+$scope.genrateDateFormats = function(){
+	if(!$scope.experience.start_time || !$scope.experience.end_time || $scope.experience.start_time == "" || $scope.experience.end_time == ""){
+		return;
+	}else{
+		// Dec 31 at 11PM to 2AM
+		if($scope.experience.timeFormats == '1'){
+			
+			var date1 = moment($scope.experience.start_time).format("MMM Do [at] h[:]mmA");
+			date1 = date1 + " to " + moment($scope.experience.end_time).format("h[:]mmA");
+			$scope.experience.display_time = date1;
+		}
+			
+
+		// Dec 31, 11PM Onwards
+		if($scope.experience.timeFormats == '2'){
+			var date2 = moment($scope.experience.start_time).format("MMM Do[,] h[:]mmA [Onwards]");
+			$scope.experience.display_time = date2;
+		}
+			
+		// Fri, Dec 31, 11PM Onwards
+		if($scope.experience.timeFormats == '3'){
+			var date3 = moment($scope.experience.start_time).format("ddd[,] MMM Do[,] h[:]mmA [Onwards]");
+			$scope.experience.display_time = date3;
+		}
+		
+
+		// 2 Lines: Dec 31 at 11PM to 2AM || 3 hours on Friday night
+		if($scope.experience.timeFormats == '4'){
+			var date4 = moment($scope.experience.start_time).format("MMM Do [at] h[:]mmA");
+			date4 = date4 + " to " + moment($scope.experience.end_time).format("h[:]mmA");
+			date4 = date4 + "\n" + moment($scope.experience.end_time).from(moment($scope.experience.start_time), true);
+			date4 = date4 + " on "+ moment($scope.experience.start_time).format("dddd");
+			$scope.experience.display_time = date4;
+		}
+			
+
+		// 2 Lines: Dec 31, 11PM Onwards || 3 hours on Friday night
+		if($scope.experience.timeFormats == '5'){
+			var date5 = moment($scope.experience.start_time).format("MMM Do[,] h[:]mmA [Onwards]");
+			date5 = date5 + "\n" + moment($scope.experience.end_time).from(moment($scope.experience.start_time), true);
+			date5 = date5 + " on "+ moment($scope.experience.start_time).format("dddd");
+			$scope.experience.display_time = date5;
+		}
+		if($scope.experience.timeFormats == '6'){
+			$scope.customDate = false;
+		}
+
+		console.log($scope.experience.display_time);
+	}
+}
 // edit Event
 $scope.editExperience = function(){
-	
+	$scope.editBtnDisabled = true;
 	if($scope.cover_image != ""){
 		$scope.experience.cover_image = $scope.cover_image;
 	}
+	if($scope.experience.timeFormats == '6'){
+			$scope.experience.display_time = $scope.experience.customeDisplayTime;
+		}
 	var temp = {
 		"title":$scope.experience.title,
 		"cover_image":$scope.experience.cover_image,
@@ -147,12 +213,14 @@ $scope.editExperience = function(){
 		"action_text":$scope.experience.action_text,
 		"tag":$scope.experience.tag,
 		"latitude": $scope.experience.latitude,
-		"longitude": $scope.experience.longitude
+		"longitude": $scope.experience.longitude,
+		"display_time" :$scope.experience.display_time
 	}
 	//console.log(temp);
 	
 	editexperienceFact.editExperience($scope.eventId,temp, function(response){
 		console.log(response);
+		$scope.editBtnDisabled = false;
 		if(response.data.code != '200'){
 			var message ="Oops! somthing went wrong. Please try again"
                         $('body').pgNotification({
@@ -262,12 +330,19 @@ $scope.addItemToDTlist = function(){
 $scope.addData = function(data){
 	editexperienceFact.addData($scope.eventId, data, function(response){
 		editexperienceFact.getExprienceDetails($scope.eventId, function(response){
+			$scope.addTextDisable = false;
+			$scope.addImageDisable = false;
+			$scope.addVideoDisabled = false;
+			$scope.addUrlDisabled = false;
+			$scope.addList1Disabled = false;
+			$scope.addList2Disabled = false;
 			$scope.experience = response.data.result;
 		})
 	})
 }
 $scope.dText = {};
 $scope.saveText = function(){
+	$scope.addTextDisable = true;
 	if($scope.dText.title && $scope.dText.content){
 		var data = {
 			"type":"TEXT",
@@ -281,16 +356,22 @@ $scope.saveText = function(){
 		$scope.hidealldataForm();
 		// $scope.TextDataForm.$setPristine();
 	}else{
+		$scope.addTextDisable = false;
 		alert("all fields are required");
 	}
 }
 $scope.dImage = {};
 $scope.saveImages = function(){
+	$scope.addImageDisable = true;
 	if($scope.dImage.title && $rootScope.photogall.length != 0){
 		var temp = [];
 		angular.forEach($scope.photogall, function(data) {
           temp.push(data.url);
         });
+        // var contentToSend = {
+        // 	"content": $scope.dImage.detail,
+        // 	"images": temp
+        // }
 		var data = {
 			"type":"IMAGE",
 			"title": $scope.dImage.title,
@@ -304,11 +385,13 @@ $scope.saveImages = function(){
 		$scope.hidealldataForm();
 		// $scope.imageDataForm.$setPristine();
 	}else{
+		$scope.addImageDisable = false;
 		alert("all fields are required");
 	}
 }
 $scope.dVideo = {};
 $scope.saveVideo = function(){
+	$scope.addVideoDisabled = true;
 	if($scope.dVideo.title && $scope.dVideo.content){
 		var data = {
 			"type":"VIDEO",
@@ -322,11 +405,13 @@ $scope.saveVideo = function(){
 		$scope.hidealldataForm();
 		// $scope.VideoDataForm.$setPristine();
 	}else{
+		$scope.addVideoDisabled = false;
 		alert("all fields are required");
 	}
 }
 $scope.durl = {};
 $scope.saveUrl = function(){
+	$scope.addUrlDisabled = true;
 	if($scope.durl.title && $scope.durl.content){
 		var data = {
 			"type":"URL",
@@ -341,6 +426,7 @@ $scope.saveUrl = function(){
 		$scope.hidealldataForm();
 		// $scope.urlDataForm.$setPristine();
 	}else{
+		$scope.addUrlDisabled = false;
 		alert("all fields are required");
 	}
 }
@@ -354,6 +440,7 @@ $scope.addItemtolist1 = function(){
 	$scope.dList1.list1item = "";
 }
 $scope.saveList1 = function(){
+	$scope.addList1Disabled = true;
 	if($scope.dList1.title && $scope.dList1.content.length != 0){
 		var data = {
 			"type":"LIST1",
@@ -368,11 +455,13 @@ $scope.saveList1 = function(){
 		$scope.hidealldataForm();
 		// $scope.list1DataForm.$setPristine();
 	}else{
+		$scope.addList1Disabled = false;
 		alert("all fields are required");
 	}
 }
 $scope.dlist2 = {};
 $scope.saveList2 = function(){
+	$scope.addList2Disabled = true;
 	if($scope.dlist2.title){
 		var data = {
 			"type":"LIST2",
@@ -387,12 +476,14 @@ $scope.saveList2 = function(){
 		$scope.hidealldataForm();
 		// $scope.list2DataForm.$setPristine();
 	}else{
+		$scope.addList2Disabled = false;
 		alert("all fields are required");
 	}
 }
 
 // sort data
 	$scope.checkOrder = function(){
+		$scope.arragebtnDisabled = true;
 		var result = document.getElementsByClassName("sortedContainer");
 		var wrappedResult = angular.element(result);
 		//console.log(wrappedResult[0].childNodes);
@@ -404,6 +495,7 @@ $scope.saveList2 = function(){
 		});
 		console.log($scope.ordertemp);
 		editexperienceFact.sortdata($scope.eventId, $scope.ordertemp, function(response){
+			$scope.arragebtnDisabled = false;
 			console.log(response);
 		})
 	}

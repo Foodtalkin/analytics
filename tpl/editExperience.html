@@ -122,6 +122,31 @@
 					                <input type="text" class="form-control" name="end_time" ng-model="experience.end_time" id="date2" ui-jq="mask" ui-options="'9999/99/99 99:99:99'" required>
 					            </div>
 					            <label class="error" for="end_time" ng-show="StaticDataForm.end_time.$invalid && !StaticDataForm.end_time.$pristine">Enter a valid end time.</label>
+					            <label class="error" for="end_time" ng-show="checkendDate">End date cannot be before start date.</label>
+					    	</div>
+					    </div>
+					    <div class="row">
+					    	<div class="col-sm-6">
+					    		<div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.timeFormats.$invalid && !StaticDataForm.timeFormats.$pristine }">
+					                <label>Display Time</label>
+					                <select class="form-control" ng-model="experience.timeFormats" ng-change="genrateDateFormats()" required>
+					                	<option value="">how you want to display time</option>
+					                	<option value="1">Dec 31 at 11PM to 2AM</option>
+					                	<option value="2">Dec 31, 11PM Onwards</option>
+					                	<option value="3">Fri, Dec 31, 11PM Onwards</option>
+					                	<option value="4">2 Lines: Dec 31 at 11PM to 2AM || 3 hours on Friday</option>
+					                	<option value="5">2 Lines: Dec 31, 11PM Onwards || 3 hours on Friday</option>
+					                	<option value="6">Other</option>
+					                </select>
+					            </div>
+					            <label class="error" for="timeFormats" ng-show="StaticDataForm.timeFormats.$invalid && !StaticDataForm.timeFormats.$pristine">This field is required.</label>
+					    	</div>
+					    	<div class="col-sm-6">
+					    		<div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : StaticDataForm.customeDisplayTime.$invalid && !StaticDataForm.customeDisplayTime.$pristine }">
+					                <label>Other</label>
+					                <input type="text" class="form-control" name="customeDisplayTime" ng-model="experience.customeDisplayTime" placeholder="Dec 31 at 11PM to 2AM" ng-disabled="customDate">
+					            </div>
+					            <label class="error" for="customeDisplayTime" ng-show="StaticDataForm.customeDisplayTime.$invalid && !StaticDataForm.customeDisplayTime.$pristine">Enter a valid total seats.</label>
 					    	</div>
 					    </div>
 					    <div class="row">
@@ -183,7 +208,7 @@
 				              </div>
 				            </div>
 				            <div class="card-footer clearfix">
-				              <div class="fs-12 semi-bold m-t-5">{{experience.start_time}} to {{experience.end_time}}</div>
+				              <div class="fs-12 semi-bold m-t-5">{{experience.display_time}}</div>
 				              <div class="fs-12 semi-bold m-t-5">{{experience.address}}</div>
 				              <div class="fs-13 bold m-t-5"><i class="fa fa-inr" ng-show="experience.paid"></i> {{experience.cost}}</div>
 				              
@@ -196,7 +221,7 @@
             <div class="padding-20 bg-white">
                 <ul class="pager wizard">
                     <li class="next">
-                        <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-trash pull-right" ng-click="editExperience()" wz-next>
+                        <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-trash pull-right" ng-disabled="editBtnDisabled" ng-click="editExperience()" wz-next>
                             <span>Next</span>
                         </button>
                     </li>
@@ -347,7 +372,7 @@
 			                                <label class="error" for="content" ng-show="TextDataForm.content.$invalid && !TextDataForm.content.$pristine">This field is required.</label>
 			                            </div>
 			                        </div>
-			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="TextDataForm.$invalid" ng-click="saveText()">Save</button>
+			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="(TextDataForm.$invalid) || (addTextDisable)" ng-click="saveText()">Save</button>
 			                    </form>
 	                		</div>
                 		</div>
@@ -364,6 +389,15 @@
 			                                <label class="error" for="title" ng-show="imageDataForm.title.$invalid && !imageDataForm.title.$pristine">This field is required.</label>
 			                            </div>
 			                        </div>
+			                        <!-- <div class="row clearfix">
+			                        	<div class="row">
+			                        		<div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : imageDataForm.detail.$invalid && !imageDataForm.detail.$pristine }">
+			                                    <label>Text <span class="hint-text">(Max Length 140)</span></label>
+			                                    <textarea name="detail" class="form-control" id="" rows="10" style="height: 50px;" ng-model="dImage.detail" maxlength="140"></textarea>
+			                                </div>
+			                                <label class="error" for="detail" ng-show="imageDataForm.detail.$invalid && !imageDataForm.detail.$pristine">This field is required.</label>
+			                        	</div>
+			                        </div> -->
 			                        <div class="row">
 			                            <div class="col-sm-12">
 			                                <div id="direct_upload" 
@@ -391,7 +425,7 @@
 						                        </div>
 			                            </div>
 			                        </div>
-			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="imageDataForm.$invalid" ng-click="saveImages()">Save</button>
+			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="(imageDataForm.$invalid) || (addImageDisable)" ng-click="saveImages()">Save</button>
 			                    </form>
 	                		</div>
                 		</div>
@@ -417,7 +451,7 @@
 			                                <label class="error" for="content" ng-show="VideoDataForm.content.$invalid && !VideoDataForm.content.$pristine">This field is required.</label>
 			                            </div>
 			                        </div>
-			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="VideoDataForm.$invalid" ng-click="saveVideo()">Save</button>
+			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="(VideoDataForm.$invalid) || (addVideoDisabled)" ng-click="saveVideo()">Save</button>
 			                    </form>
 	                		</div>
                 		</div>
@@ -443,7 +477,7 @@
 			                                <label class="error" for="content" ng-show="urlDataForm.content.$invalid && !urlDataForm.content.$pristine">This field is required.</label>
 			                            </div>
 			                        </div>
-			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="urlDataForm.$invalid" ng-click="saveUrl()">Save</button>
+			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="(urlDataForm.$invalid) || (addUrlDisabled)" ng-click="saveUrl()">Save</button>
 			                    </form>
 	                		</div>
                 		</div>
@@ -476,7 +510,7 @@
 				                        </div>
 			                        </div>
 
-			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="list1DataForm.$invalid" ng-click="saveList1()">Save</button>
+			                        <button class="btn btn-primary pull-right" type="submit" ng-disabled="(list1DataForm.$invalid) || (addList1Disabled)" ng-click="saveList1()">Save</button>
 			                    </form>
 	                		</div>
                 		</div>
@@ -516,7 +550,7 @@
 			                        <div class="col-sm-12" ng-repeat="item in list2">
 			                        	<p><strong>{{item.title}}:</strong> {{item.data}}</p>
 			                        </div>
-			                        <button class="btn btn-primary pull-right" ng-disabled="list2DataForm.$invalid" ng-click="saveList2()">Save</button>
+			                        <button class="btn btn-primary pull-right" ng-disabled="(list2DataForm.$invalid) || (addList2Disabled)" ng-click="saveList2()">Save</button>
 			                    </form>
 	                		</div>
                 		</div>
@@ -602,7 +636,7 @@
             <div class="padding-20 bg-white">
                 <ul class="pager wizard">
                     <li class="next">
-                        <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-check pull-right" ng-click="checkOrder()" wz-next>
+                        <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-check pull-right" ng-click="checkOrder()" ng-disabled="arragebtnDisabled" wz-next>
                             <span>Next</span>
                         </button>
                     </li>
@@ -627,7 +661,7 @@
 				              </div>
 				            </div>
 				            <div class="card-footer clearfix">
-				              <div class="fs-12 semi-bold m-t-5">{{experience.start_time}} to {{experience.end_time}}</div>
+				              <div class="fs-12 semi-bold m-t-5">{{experience.display_time}}</div>
 				              <div class="fs-12 semi-bold m-t-5">{{experience.address}}</div>
 				              <div class="fs-13 bold m-t-5"><i class="fa fa-inr" ng-show="experience.paid"></i> {{experience.cost}}</div>
 				              
@@ -642,7 +676,7 @@
 			                    <img alt="Card Image" ng-src="{{experience.cover_image}}" class="border-t-radius">
 			                    <div class="card-description bg-master-dark text-white p-b-10">
 			                      <h5 class="bold text-white">{{experience.title}}</h5>
-			                      <div class="fs-12 semi-bold m-t-5"><i class="fa fa-clock-o m-r-5" aria-hidden="true"></i> {{experience.start_time}} to {{experience.end_time}}</div>
+			                      <div class="fs-12 semi-bold m-t-5"><i class="fa fa-clock-o m-r-5" aria-hidden="true"></i> {{experience.display_time}}</div>
 			                      <div class="fs-12 semi-bold m-t-5"><i class="fa fa-map-marker m-r-5" aria-hidden="true"></i> {{experience.address}}</div>
 			                      <div class="fs-13 bold m-t-5"><i class="fa fa-inr m-r-5" aria-hidden="true"></i>  {{experience.cost}}</div>
 			                    </div>

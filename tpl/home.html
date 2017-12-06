@@ -58,9 +58,10 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <div id="tab-nvd3-line" style="height: 400px;">
-                            	<!-- <nvd3 options='user_area_options' class="line-chart m-t-30 text-center" data='userOnboard'></nvd3> -->
-                                <nvd3 options='user_line_options' class="line-chart m-t-30 text-center" data='userOnboard' api="nvd3_line_api" data-x-grid="true"></nvd3>
+                            <div id="tab-nvd3-bar" style="height: 400px;">
+                            	<!-- <nvd3 options='nvd3-multi-bar-chart' class="multi-bar-chart m-t-30 text-center" data='userOnboard'></nvd3> -->
+                                <nvd3 options='userBarOption' class="multibar m-t-30 text-center" data='userOnboard'></nvd3>
+                                <!-- <nvd3 options='user_line_options' class="line-chart m-t-30 text-center" data='userOnboard' api="nvd3_line_api" data-x-grid="true"></nvd3> -->
                             </div>
                         </div>
                     </div>
@@ -101,7 +102,7 @@
                         	<div style="height: 400px;">
                             	<!-- <nvd3 options='offer_area_options1' class="line-chart m-t-30 text-center" data='offerRedemp'></nvd3> -->
                                 <!-- <nvd3 options='offer_line_options' class="line-chart m-t-30 text-center" data='offerRedemp' api="nvd3_line_api" data-x-grid="true" ></nvd3> -->
-                                <nvd3 options='nvd3_area_options' class="line-chart m-t-30 text-center" data='offerRedemp' api="nvd3_area_api"></nvd3>
+                                <nvd3 options='nvd3_area_options' config="userbarconfig" class="line-chart m-t-30 text-center" data='offerRedemp' api="nvd3_area_api" ></nvd3>
                             </div>
                             
                         </div>

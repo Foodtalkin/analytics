@@ -27,6 +27,7 @@ angular.module('app')
 	       	console.log($scope.currentMsg);
         }
         $scope.markDone = function(id, status){
+            $scope.isDisabled = true;
         	var active = "";
         	if(status == '1'){
         		active = "0";
@@ -34,6 +35,7 @@ angular.module('app')
         		active = "1";
         	}
         	contactFact.changeStauts(id, active, function(response){
+                $scope.isDisabled = false;
         		if(response){
         			$scope.showDetails = false;
         			$scope.getList($scope.mainpage);

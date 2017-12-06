@@ -82,7 +82,7 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <button class="btn btn-primary" type="submit" ng-disabled="newNoti.$invalid" ng-click="createNotification()">send Notification</button>
+                                        <button class="btn btn-primary" type="submit" ng-disabled="(newNoti.$invalid) || (isDisabled)" ng-click="createNotification()">send Notification</button>
                                     </form>
                                 </div>
                             </div>

@@ -42,7 +42,17 @@ angular.module('app')
     		LoginFact.doLogin($scope.user.username, $scope.user.password, function(response){
     			if(response){
     				$location.path('/app/home');
-    			}
+    			}else{
+                    alert("Invalid Username Or Passwor");
+                    // var message ="Invalid Username Or Password"
+                    //     $('body').pgNotification({
+                    //         style: 'bar',
+                    //         message: message,
+                    //         position: top,
+                    //         timeout: 5000,
+                    //         type: 'error'
+                    //     }).show();
+                }
     		})
     	}
 
