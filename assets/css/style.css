@@ -51,3 +51,7 @@
 .multibar .nvtooltip.xy-tooltip h5,.multibar .nvtooltip.xy-tooltip h6{
   font-size: 12px;
 }
+
+.hide{
+  display: none;
+}
