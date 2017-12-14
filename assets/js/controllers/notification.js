@@ -3,15 +3,22 @@
 /* Controllers */
 
 angular.module('app')
-.controller('notificationCtrl', ['$scope','notificationFact', 'UrlFact', function($scope, notificationFact, UrlFact){
+.controller('notificationCtrl', ['$scope','notificationFact', 'UrlFact',
+ function($scope, notificationFact, UrlFact){
 	$scope.Notification = {};
 	$scope.notificationDetails = {};
+	$scope.eventdatadisabled = true;
 	$scope.getallList = function(){
 		notificationFact.getList(function(response){
 			$scope.allList = response.data.result;
 			console.log($scope.allList);
 		});
 	}
+	var url = UrlFact.experience.main+'?is_active=1';
+	notificationFact.getExprienceList(url, function(response){
+		$scope.experienceList = response.data.result.data;
+		console.log(response);
+	})
 	$scope.getallList();
 	$scope.OpenDetails = function(id){
 		$scope.editDetails = false;
@@ -28,7 +35,20 @@ angular.module('app')
 		
 		})
 	}
-
+	$scope.onScreenselect = function(){
+		if($scope.Notification.screen == 'experiences'){
+			$scope.eventdatadisabled = true;
+		}else{
+			$scope.eventdatadisabled = false;
+		}	
+	}
+	$scope.onEditScreen = function(){
+		if($scope.notificationDetails.screen == 'experiences'){
+			$scope.eventdatadisabled = true;
+		}else{
+			$scope.eventdatadisabled = false;
+		}
+	}
 	$scope.createNotification = function(){
 		$scope.isDisabled = true;
 // "userId": "1384",
@@ -36,8 +56,7 @@ angular.module('app')
 					  "push_time": $scope.Notification.date + " " + $scope.Notification.time,
 					  "push": {
 					    "where": {
-					      
-					      
+					      //"userId": "219"
 					    },
 					    "data": {
 					      "alert": $scope.Notification.msgtxt,
@@ -70,6 +89,21 @@ angular.module('app')
 					          "ios"
 					        ]
 					      };
+		}
+
+		if($scope.Notification.screen == 'experiences'){
+			data.push.data.screen = $scope.Notification.screen;
+		}else if($scope.Notification.screen == 'experiences_details'){
+			data.push.data.screen = $scope.Notification.screen;
+			if($scope.Notification.eventid){
+				data.push.data.id = $scope.Notification.eventid;
+			}else{
+				alert('please select an Experience');
+			}
+			
+		}else{
+			delete data.push.data.id;
+			delete data.push.data.screen;
 		}
 		
 		console.log(data);
@@ -162,6 +196,21 @@ angular.module('app')
 		}else{
 			delete data.push.where.city_id;
 		}
+
+		if($scope.notificationDetails.screen == 'experiences'){
+			data.push.data.screen = $scope.notificationDetails.screen;
+		}else if($scope.notificationDetails.screen == 'experiences_details'){
+			data.push.data.screen = $scope.notificationDetails.screen;
+			if($scope.notificationDetails.eventid){
+				data.push.data.id = $scope.notificationDetails.eventid;
+			}else{
+				alert('please select an Experience');
+			}
+			
+		}else{
+			delete data.push.data.id;
+			delete data.push.data.screen;
+		}
 		console.log(data);
 		notificationFact.sendNotification(UrlFact.notification+'/'+id, 'PUT', data, function(response){
 			if(response.data.code == "200"){
@@ -217,6 +266,14 @@ angular.module('app')
 	}
 }]).factory('notificationFact', ['$http', 'UrlFact', function($http, UrlFact){
 	var notificationFact = {};
+	notificationFact.getExprienceList = function(url,callback){
+		$http({
+			method: 'GET',
+			url: url
+		}).then(function(response) {
+            callback(response);
+        });
+	}
 	notificationFact.getList = function(callback){
 		$http({
 			method: 'GET',

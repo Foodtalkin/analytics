@@ -76,11 +76,11 @@ angular.module('app')
     $scope.usercsv = [];
     $scope.createDownloadList = function(){
         $scope.usercsv = [];
-        $scope.usercsv.push({a:'Guest Name',b:'Total Tickets',c:'Non Vegetarian' , d:'Vegetarian', e:'Txn ID', f:'Email', g:'Phone'})
+        $scope.usercsv.push({a:'Guest Name',b:'Total Tickets',c:'Non Vegetarian' , d:'Vegetarian', e:'Txn ID', f:'Email', g:'Phone', h:'Amount'})
         angular.forEach($scope.guestList, function(item){
             if(item.refunded == '0'){
                 var temp = item.total_tickets - item.non_veg;
-                $scope.usercsv.push({a:item.name,b:item.total_tickets,c:item.non_veg,d:temp,e:item.txn_id, f:item.email, g:item.phone});
+                $scope.usercsv.push({a:item.name,b:item.total_tickets,c:item.non_veg,d:temp,e:item.txn_id, f:item.email, g:item.phone, h:item.txn_amount});
             }
         });
     }

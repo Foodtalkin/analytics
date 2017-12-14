@@ -112,11 +112,10 @@ angular.module('app')
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                    /* 
-                                        Load any ocLazyLoad module here
-                                        ex: 'wysihtml5'
-                                        Open config.lazyload.js for available modules
-                                    */
+                                    'select',
+                                    'moment',
+                                    'datepicker',
+                                    'daterangepicker'
                                 ], {
                                     insertBefore: '#lazyload_placeholder'
                                 })
@@ -362,6 +361,9 @@ angular.module('app')
         UrlFact.privilege = {};
         UrlFact.privilege.restaurant = baseurl + "privilege/restaurant";
         UrlFact.privilege.outlet = baseurl + "privilege/outlet";
+        UrlFact.privilege.cuisine = baseurl + "privilege/cuisine";
+        UrlFact.privilege.outletOffer = baseurl + "privilege/outlet-offer";
+        UrlFact.privilege.offer = baseurl + "privilege/offer";
 
         UrlFact.user = baseurl + "privilege/user";
 

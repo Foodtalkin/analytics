@@ -3,6 +3,12 @@
 * Override Pages default styles or create your own styles here
 
 */
+.gold{
+  color:  #D4AF37;
+}
+.off-white{
+  color: #e8dada;
+}
 .card-description1{
         background: rgba(0,0,0,.65);
         color: #fff;
