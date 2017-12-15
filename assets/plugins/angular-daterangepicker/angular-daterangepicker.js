@@ -4,7 +4,7 @@
   picker = angular.module('daterangepicker', []);
 
   picker.constant('dateRangePickerConfig', {
-    separator: ' - ',
+    separator: ' , ',
     format: 'YYYY-MM-DD',
     clearLabel: 'Clear'
   });

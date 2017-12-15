@@ -16,6 +16,7 @@ angular.module('app', [
     'ngIdle',
     'ngCsv',
     'ngSanitize'
+
 ]);
  
 

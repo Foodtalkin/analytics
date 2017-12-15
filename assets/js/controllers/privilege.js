@@ -198,10 +198,15 @@ angular.module('app')
 	            if($scope.openViaDetails == true){
     				$scope.OpenRestro($scope.Currunt.RestroId);
     				$scope.openViaDetails = false;
+    				$scope.cover = "";
+    				$scope.files = "";
     			}else{
     				$scope.openOutletOfferform();
     				$scope.openViaDetails = false;
+    				$rootScope.photos = "";
+    				$scope.files = "";
     			}
+    			$scope.saveImgBtnOutlet = false;
 	          }else{
 	            alert("oops somthing went wrong try again");
 	            $scope.saveImgBtnOutlet = false;

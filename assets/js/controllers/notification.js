@@ -56,7 +56,7 @@ angular.module('app')
 					  "push_time": $scope.Notification.date + " " + $scope.Notification.time,
 					  "push": {
 					    "where": {
-					      //"userId": "219"
+					      // "userId": "232"
 					    },
 					    "data": {
 					      "alert": $scope.Notification.msgtxt,

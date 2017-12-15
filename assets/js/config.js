@@ -234,6 +234,28 @@ angular.module('app')
                         }]
                     }
                 })
+                .state('app.transections', {
+                    url: "/transections",
+                    templateUrl: "tpl/transactions.html",
+                    controller: 'transactionsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'moment',
+                                    'datepicker',
+                                    'daterangepicker',
+                                    'dataTables'
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/transactions.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
                 .state('access', {
                     url: '/access',
                     template: '<div class="full-height" ui-view></div>'
@@ -364,6 +386,8 @@ angular.module('app')
         UrlFact.privilege.cuisine = baseurl + "privilege/cuisine";
         UrlFact.privilege.outletOffer = baseurl + "privilege/outlet-offer";
         UrlFact.privilege.offer = baseurl + "privilege/offer";
+
+        UrlFact.transactions = baseurl + "privilege/transactions";
 
         UrlFact.user = baseurl + "privilege/user";
 
