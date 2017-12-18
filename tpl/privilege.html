@@ -223,7 +223,7 @@
                             <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : createOutletform.address.$invalid && !createOutletform.address.$pristine }">
                                 <label>Address</label>
                                 <!-- <input type="text" class="form-control" name="address" placeholder="Maximum of 80 characters." ng-model="Currunt.outlet.address" required maxlength="80"> -->
-                                <textarea class="form-control" name="address" placeholder="Maximum of 80 characters." ng-model="Currunt.outlet.address" required maxlength="80" style="height: 50px;"></textarea>
+                                <textarea class="form-control" name="address" placeholder="address" ng-model="Currunt.outlet.address" required style="height: 50px;"></textarea>
                             </div>
                             <label class="error" for="address" ng-show="createOutletform.address.$invalid && !createOutletform.address.$pristine">This field is required.</label>
                             <label class="error" for="address" ng-show="createOutletform.address.$error.minlength">One Liner should have at least 4 characters</label>
@@ -232,7 +232,7 @@
                             <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : createOutletform.suggested_dishes.$invalid && !createOutletform.suggested_dishes.$pristine }">
                                 <label>Suggested Dishes</label>
                                 <!-- <input type="text" class="form-control" name="suggested_dishes" placeholder="Maximum of 80 characters." ng-model="Currunt.outlet.suggested_dishes" required maxlength="80"> -->
-                                <textarea class="form-control" name="suggested_dishes" placeholder="Maximum of 80 characters." ng-model="Currunt.outlet.suggested_dishes" required maxlength="80" style="height: 50px;"></textarea>
+                                <textarea class="form-control" name="suggested_dishes" placeholder="list saprated by comma" ng-model="Currunt.outlet.suggested_dishes" required style="height: 50px;"></textarea>
                             </div>
                             <label class="error" for="suggested_dishes" ng-show="createOutletform.suggested_dishes.$invalid && !createOutletform.suggested_dishes.$pristine">This field is required.</label>
                             <label class="error" for="suggested_dishes" ng-show="createOutletform.suggested_dishes.$error.minlength">One Liner should have at least 4 characters</label>
@@ -277,8 +277,8 @@
                                 <p class="grey-text">{{file.name}} {{f.$error}} {{f.$errorParam}}</p>
                                 <div class="status">{{file.status}}</div>
                                 
-                                <div class="progress-bar">
-                                  <div class="progress grey-text" style="width: {{file.progress}}%" ng-init="progress=0"></div>
+                                <div class="progress">
+                                  <div class="progress-bar" style="width: {{file.progress}}%" ng-init="progress=0"></div>
                                 </div>
                             
                               </div>
@@ -342,7 +342,7 @@
                         <div class="col-sm-6">
                             <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : createOfferForm.short_description.$invalid && !createOfferForm.short_description.$pristine }">
                                 <label>Restaurant Description</label>
-                                <textarea name="" class="form-control" name="short_description" placeholder="Maximum of 80 characters." ng-model="Currunt.offer.short_description" required maxlength="80" style="height: 50px;"></textarea>
+                                <textarea name="" class="form-control" name="short_description" placeholder="Restaurant Description" ng-model="Currunt.offer.short_description" required style="height: 50px;"></textarea>
                             </div>
                             <label class="error" for="short_description" ng-show="createOfferForm.short_description.$invalid && !createOfferForm.short_description.$pristine">This field is required.</label>
                             <label class="error" for="short_description" ng-show="createOfferForm.short_description.$error.minlength">One Liner should have at least 4 characters</label>
@@ -350,7 +350,7 @@
                         <div class="col-sm-6">
                             <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : createOfferForm.description.$invalid && !createOfferForm.description.$pristine }">
                                 <label>Offer Description</label>
-                                <textarea name="" class="form-control" name="description" placeholder="Maximum of 80 characters." ng-model="Currunt.offer.description" required maxlength="80" style="height: 50px;"></textarea>
+                                <textarea name="" class="form-control" name="description" placeholder="Offer Description" ng-model="Currunt.offer.description" required style="height: 50px;"></textarea>
                             </div>
                             <label class="error" for="description" ng-show="createOfferForm.description.$invalid && !createOfferForm.description.$pristine">This field is required.</label>
                             <label class="error" for="description" ng-show="createOfferForm.description.$error.minlength">One Liner should have at least 4 characters</label>
@@ -374,6 +374,13 @@
                                     </div>
                                 </div>
                               </form>
+                            </div>
+                            <div class="col-sm-12 p-t-20">
+                              <div ng-repeat="file in files">
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width:{{file.progress}}%"></div>
+                                        </div>
+                              </div>
                             </div>
                           </div>
                         </div>
