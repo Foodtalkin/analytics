@@ -173,9 +173,9 @@
                       </div>
                       <div class="col-sm-6">
                         <label for="">City Zone</label>
-                          <select class="cs-select cs-skin-slide" ng-model="Currunt.outlet.city_zone_id" cs-select>
-                             <option value=""> --select city zone-- </option>
-                            <option ng-repeat="zone in zonelist" ng-value="{{zone.id}}">{{zone.name}}</option>
+                          <select class="cs-select cs-skin-slide" ng-model="Currunt.outlet.city_zone_id"  ng-options="zone as zone.name for zone in zonelist track by zone.id" cs-select>
+                            <!--  <option value=""> --select city zone-- </option>
+                            <option ng-repeat="zone in zonelist" value="{{zone.id}}">{{zone.name}}</option> -->
                           </select>
                       </div>
                     </div>

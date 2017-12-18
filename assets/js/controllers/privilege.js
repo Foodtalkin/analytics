@@ -135,17 +135,20 @@ angular.module('app')
 		    ];
 
 		  $scope.selectCityChange = function(){
-		    if($scope.Currunt.outlet.city_id == "1"){
+		  	
+		    if($scope.Currunt.outlet.city_id == 1){
 		      $scope.zonelist = $scope.delzone;
 		      $http.get('assets/js/controllers/delhiarea.js').success(function(data) {
 		       $scope.arealist = data;
 		      });
-		    }else if($scope.Currunt.outlet.city_id == "2"){
+		    }else if($scope.Currunt.outlet.city_id == 2){
 		      $scope.zonelist = $scope.mumbzone;
 		      console.log($scope.zonelist);
 		      $http.get('assets/js/controllers/mumbaiarea.js').success(function(data) {
 		       $scope.arealist = data;
 		      });
+		    }else{
+		    	console.log($scope.Currunt.outlet.city_id);
 		    }
 		  }
 
