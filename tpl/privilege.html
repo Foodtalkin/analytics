@@ -341,16 +341,16 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : createOfferForm.short_description.$invalid && !createOfferForm.short_description.$pristine }">
-                                <label>Restaurant Description</label>
-                                <textarea name="" class="form-control" name="short_description" placeholder="Restaurant Description" ng-model="Currunt.offer.short_description" required style="height: 50px;"></textarea>
+                                <label>Offer Description</label>
+                                <textarea name="" class="form-control" name="short_description" placeholder="Offer Description" ng-model="Currunt.offer.short_description" required style="height: 50px;"></textarea>
                             </div>
                             <label class="error" for="short_description" ng-show="createOfferForm.short_description.$invalid && !createOfferForm.short_description.$pristine">This field is required.</label>
                             <label class="error" for="short_description" ng-show="createOfferForm.short_description.$error.minlength">One Liner should have at least 4 characters</label>
                         </div>
                         <div class="col-sm-6">
                             <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : createOfferForm.description.$invalid && !createOfferForm.description.$pristine }">
-                                <label>Offer Description</label>
-                                <textarea name="" class="form-control" name="description" placeholder="Offer Description" ng-model="Currunt.offer.description" required style="height: 50px;"></textarea>
+                                <label>Restaurant Description</label>
+                                <textarea name="" class="form-control" name="description" placeholder="Restaurant Description" ng-model="Currunt.offer.description" required style="height: 50px;"></textarea>
                             </div>
                             <label class="error" for="description" ng-show="createOfferForm.description.$invalid && !createOfferForm.description.$pristine">This field is required.</label>
                             <label class="error" for="description" ng-show="createOfferForm.description.$error.minlength">One Liner should have at least 4 characters</label>
