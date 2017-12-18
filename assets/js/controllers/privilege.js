@@ -159,6 +159,7 @@ angular.module('app')
 				alert('all Fields are required');
 				return;
 			}else{
+				//$scope.Currunt.outlet.city_zone_id = $scope.Currunt.outlet.city_zone_id.id;
 				$scope.Currunt.outlet.resturant_id = $scope.Currunt.RestroId;
 				privilegeFact.createOutlet($scope.Currunt.outlet, function(response){
 					if(response){
@@ -476,6 +477,8 @@ angular.module('app')
 	    	$scope.editing = true;
 	    	$scope.openViaDetails = true;
 	    	$scope.opencreateOutletform();
+	    	$scope.selectCityChange();
+	    	//console.log($scope.Currunt.outlet);
 	    }
 
 	    $scope.updateOutlet = function(){
@@ -499,6 +502,7 @@ angular.module('app')
 	    			$scope.OpenRestro($scope.Currunt.RestroId);
 	    			$scope.editing = false;
 	    			$scope.openViaDetails = false;
+	    			$scope.Currunt.outlet = {};
 	    		}
 	      })
 	    }

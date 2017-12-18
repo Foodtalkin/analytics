@@ -165,7 +165,7 @@
                     <div class="row p-t-5 p-b-5">
                       <div class="col-sm-6">
                           <label for="">City</label>
-                          <select class="cs-select cs-skin-slide" ng-change="selectCityChange()" ng-model="Currunt.outlet.city_id" cs-select>
+                          <select class="cs-select cs-skin-slide" ng-change="selectCityChange()" ng-model="Currunt.outlet.city_id" >
                             <option value=""> --select city-- </option>
                             <option value="1">Delhi NCR</option>
                             <option value="2">Mumbai</option>
@@ -173,9 +173,10 @@
                       </div>
                       <div class="col-sm-6">
                         <label for="">City Zone</label>
-                          <select class="cs-select cs-skin-slide" ng-model="Currunt.outlet.city_zone_id"  ng-options="zone as zone.name for zone in zonelist track by zone.id" cs-select>
-                            <!--  <option value=""> --select city zone-- </option>
-                            <option ng-repeat="zone in zonelist" value="{{zone.id}}">{{zone.name}}</option> -->
+                          <select class="cs-select cs-skin-slide" ng-model="Currunt.outlet.city_zone_id" ng-options="zone.id as zone.name for zone in zonelist" cs-select>
+                          <!--   
+                             <option value=""> select city zone</option>
+                            <option ng-repeat="zone in zonelist" ng-value="{{zone.id}}">{{zone.name}}</option>-->
                           </select>
                       </div>
                     </div>
@@ -491,7 +492,7 @@
                                             <!-- START PANEL -->
                                             <div class="panel panel-transparent">
                                                 <div class="panel-heading">
-                                                    <div class="panel-title">Address
+                                                    <div class="panel-title hint-text">Address
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
