@@ -16,7 +16,7 @@ angular.module('app')
                 $scope.allData = response;
                 $scope.userOnboard = $scope.allData.user7days;
                 $scope.offerRedemp = $scope.allData.Offers7days;
-                //console.log($scope.allData);
+                console.log($scope.allData);
             });
         }
         	
@@ -75,17 +75,7 @@ angular.module('app')
         // end call chart
 
 
-        // chart options
-        $scope.userbarconfig = {
-            visible: true, // default: true
-            extended: true, // default: false
-            disabled: false, // default: false
-            refreshDataOnly: true, // default: true
-            deepWatchOptions: true, // default: true
-            deepWatchData: true, // default: true
-            deepWatchDataDepth: 2, // default: 2
-            debounce: 10 // default: 10
-        };
+        
 
         $scope.userBarOption ={
           chart: {
