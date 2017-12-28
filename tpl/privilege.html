@@ -312,7 +312,7 @@
                     <div class="row clearfix">
                         <div class="col-sm-12">
                             <label>Offer Type</label>
-                            <select class="cs-select cs-skin-slide" ng-disabled="editing" ng-model="Currunt.offer.offer_id"  cs-select>
+                            <select class="cs-select cs-skin-slide" ng-model="Currunt.offer.offer_id"  cs-select>
                                 <option ng-repeat="item in default.defaultOffersList" value="{{item.id}}">{{item.title}}</option>
                             </select>
                         </div>
@@ -530,6 +530,7 @@
                                                         <th>Name</th>
                                                         <th>Type</th>
                                                         <th>Actions</th>
+                                                        <!-- <th></th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -548,6 +549,9 @@
                                                             <button class="btn btn-sm {{offer.pivot.is_disabled == '0' ? 'btn-danger' : 'btn-success'}} pull-right" ng-click="deleteoffer(offer.pivot.id, offer.pivot.is_disabled)">{{offer.pivot.is_disabled == '0' ? 'hide' : 'show'}}</button>
                                                           </div>
                                                         </td>
+                                                        <!-- <td><button class="btn btn-default" ng-click="deleteoffercompletly(offer.pivot.id)">
+                                                          <i class="fa fa-trash"></i>
+                                                        </button></td> -->
                                                     </tr>
                                                 </tbody>
                                             </table>

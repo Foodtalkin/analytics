@@ -526,7 +526,8 @@ angular.module('app')
 	        'short_description' : $scope.Currunt.offer.short_description,
 	        'start_date' : moment($scope.Currunt.offer.start_date).format("YYYY-MM-DD"),
 	        'end_date' : moment($scope.Currunt.offer.end_date).format("YYYY-MM-DD"),
-	        'description' : $scope.Currunt.offer.description
+	        'description' : $scope.Currunt.offer.description,
+	        'offer_id': $scope.Currunt.offer.offer_id
 		    }
 		    privilegeFact.updateOffer($scope.Currunt.offer.id, data, function(response){
 		    	if(response){
@@ -624,6 +625,27 @@ angular.module('app')
 	      }
 	      return hasFile ? "dragover" : "dragover-err";
 	    };
+
+
+
+	    // $scope.deleteoffercompletly = function(id){
+	    //   var retVal = confirm("Do you want to delete this item ?");
+	    //    if( retVal == true ){
+	    //      privilegeFact.deleteoffercompletly(id, function(response){
+	    //      	console.log(response);
+	    //         if(response){
+	    //             $scope.OpenRestro($scope.Currunt.RestroId);
+	    // 			$scope.editing = false;
+	    // 			$scope.openViaDetails = false;
+	    //           }else{
+	    //             alert("oops somthing went wrong try again");
+	    //           }
+	    //       })
+	    //    }
+	    //    else{
+	    //       return false;
+	    //    }
+	    // }
 
     }])
     .factory('privilegeFact', ['$http','UrlFact', function($http, UrlFact){
@@ -986,5 +1008,21 @@ angular.module('app')
 				  }
 				});
 			}
+		// privilegeFact.deleteoffercompletly = function(id, callback){
+		//     $http({
+		//       method: 'DELETE',
+		//       url: UrlFact.privilege.outletOffer+'/'+id
+		//     }).then(function (response) {
+		//         if(response.data.code === "200"){
+		//             callback(true);
+		//             console.log(response);
+		//         }else{
+		//           //Create an error Box and display the 
+		//           alert('something went wrong please try again after refreshing the page');
+		//           console.log(response);
+		//           callback(false);
+		//         }
+		//     });
+		//   }
     	return privilegeFact;
     }])
