@@ -390,6 +390,7 @@ angular.module('app')
         UrlFact.transactions = baseurl + "privilege/transactions";
 
         UrlFact.user = baseurl + "privilege/user";
+        UrlFact.privilege.salesRevenue = baseurl + "privilege/analytics/sales-revenue/";
 
         return UrlFact;
     })
