@@ -179,8 +179,9 @@ angular.module('app')
                 },
                 stacked: false,
                 color: [
-                    '#259b24',
-                    '#e51c23'
+                    '#e51c23',
+                    '#ff9800',
+                    '#259b24'
                 ],
                 xAxis: {
                     tickFormat: function(d) {
