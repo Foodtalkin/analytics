@@ -8,10 +8,12 @@ angular.module('app')
 	// varibles declartion
     $scope.redeemFeedUrl = UrlFact.appfeed.redmption;
     $scope.purchaseFeedUrl = UrlFact.appfeed.purchase;
+    $scope.eventPurchaseFeedUrl = UrlFact.appfeed.eventPurchase;
     $scope.signupFeedUrl = UrlFact.appfeed.signup;
     $scope.redeemptions =  {};
     $scope.purchases = {};
     $scope.signups = {};
+    $scope.eventPurchases = {};
 
     // Data fatching functions definations
     $scope.GetRedeemFeed = function(url){
@@ -26,6 +28,13 @@ angular.module('app')
     		$scope.purchaseFeedNextUrl = response.data.result.next_page_url;
     	});
     }
+	$scope.GetEventPurchaseFeed = function(url){
+		appfeedFact.getFeedData(url, function(response){
+			$scope.eventPurchases = response.data.result.data;
+			$scope.eventPurchaseFeedNextUrl = response.data.result.next_page_url;
+			console.log($scope.eventPurchases);
+		});
+	}
     $scope.GetSignupFeed = function(url){
     	appfeedFact.getFeedData(url, function(response){
     		$scope.signups = response.data.result.data;
@@ -46,7 +55,10 @@ angular.module('app')
     			// $scope.signups = response.data.result.data;
     			$scope.signups = $scope.signups.concat(response.data.result.data);
     			$scope.signupFeedNextUrl = response.data.result.next_page_url;
-    		}
+    		}else if(type == "event-purchase"){
+				$scope.eventPurchases = $scope.eventPurchases.concat(response.data.result.data);
+				$scope.eventPurchaseFeedNextUrl = response.data.result.next_page_url;
+			}
     		
     	});
     }
@@ -55,6 +67,7 @@ angular.module('app')
     $scope.GetRedeemFeed($scope.redeemFeedUrl);
     $scope.GetPurchaseFeed($scope.purchaseFeedUrl);
     $scope.GetSignupFeed($scope.signupFeedUrl);
+    $scope.GetEventPurchaseFeed($scope.eventPurchaseFeedUrl);
 }])
 .factory('appfeedFact', ['$http', function($http){
 	var appfeedFact = {};

@@ -360,6 +360,7 @@ angular.module('app')
         UrlFact.appfeed = {};
         UrlFact.appfeed.redmption = baseurl + "privilege/feeds/redeemptions";
         UrlFact.appfeed.purchase = baseurl + "privilege/feeds/purchases";
+        UrlFact.appfeed.eventPurchase = baseurl + "privilege/feeds/event-purchases";
         UrlFact.appfeed.signup = baseurl + "privilege/feeds/signups";
 
         UrlFact.contact = baseurl + "contact";
