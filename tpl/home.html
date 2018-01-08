@@ -143,6 +143,45 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Sales Revenue
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li>
+                                        <div class="dropdown">
+                                            <a id="portlet-settings" data-target="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                                                <i class="portlet-icon portlet-icon-settings "></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="portlet-settings">
+                                                <li><a ng-click="analyticsSales = allSalesData.daily">Daily</a></li>
+                                                <li><a ng-click="analyticsSales = allSalesData.weekly">Weekly</a></li>
+                                                <li><a ng-click="analyticsSales = allSalesData.monthly">Monthly</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li><a href="" ng-click="getAnalyticsSales()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="tab-nvd3-bar" style="height: 500px;">
+                                <!-- <nvd3 options='nvd3-multi-bar-chart' class="multi-bar-chart m-t-30 text-center" data='userOnboard'></nvd3> -->
+                                <nvd3 options='analyticsSalesOption' class="multibar m-t-30 text-center" data='analyticsSales'></nvd3>
+                                <!-- <nvd3 options='user_line_options' class="line-chart m-t-30 text-center" data='userOnboard' api="nvd3_line_api" data-x-grid="true"></nvd3> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
     	<div class="col-sm-4">
     		<div class="panel panel-transparent">
                 <div class="panel-body no-padding">

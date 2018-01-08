@@ -7,6 +7,8 @@ angular.module('app')
         $scope.users = {};
         $scope.restaurant = {};
         $scope.topUsers = {};
+        $scope.analyticsSales = {};
+        $scope.allSalesData = {};
         $scope.users.all = 0;
         $scope.users.paid = 0;
         $scope.users.unpaid = 0;
@@ -32,7 +34,14 @@ angular.module('app')
                 //console.log(response);
                 $scope.topUsers = response.data.result;
             });
-        }  
+        }
+
+        $scope.getAnalyticsSales = function(){
+            homeFact.getSalesAnalytics(function(response){
+                $scope.allSalesData = response.data;
+                $scope.analyticsSales = $scope.allSalesData.daily;
+            });
+        }
 
         $scope.getUsersStats();
         $scope.getUserChart = function(){
@@ -43,7 +52,7 @@ angular.module('app')
                 //console.log($scope.userpie);
             });
         }
-            
+
         $scope.getRedemptionchart = function(){
             homeFact.getredemption("30", function(response){
                 $scope.offerall = response.data.result.overall;
@@ -72,6 +81,7 @@ angular.module('app')
         $scope.getUserChart();
         $scope.getRestaurantStats();
         $scope.getareaChats();
+        $scope.getAnalyticsSales();
         // end call chart
 
 
@@ -151,6 +161,40 @@ angular.module('app')
                     margin: {
                         top: 5
                     }
+                }
+            }
+        }
+
+        $scope.analyticsSalesOption ={
+            chart: {
+                type: "multiBarChart",
+                height: 500,
+                margin: {
+                },
+                clipEdge: true,
+                duration: 500,
+                tooltips: true,
+                tooltipContent: function (key, x, y, e, graph) {
+                    return '<p>' + key + '</p><p>' + y + ' on '+ x + '</p>';
+                },
+                stacked: false,
+                color: [
+                    '#259b24',
+                    '#e51c23'
+                ],
+                xAxis: {
+                    tickFormat: function(d) {
+                        var arr = d.split(',');
+                        if (arr.length == 1) {
+                            return d3.time.format('%d/%m')(new Date(arr[0]))
+                        }
+                        return d3.time.format('%d/%m')(new Date(arr[0])) + ' - ' + d3.time.format('%d/%m')(new Date(arr[1]))
+                    }
+                },
+                reduceXTicks: false,
+                showControls: false,
+                yAxis: {
+                    tickFormat: d3.format('d')
                 }
             }
         }
@@ -240,6 +284,15 @@ angular.module('app')
                 callback(response);
             });
         }
+
+        homeFact.getSalesAnalytics = function(callback){
+            $http({
+                method: 'GET',
+                url: UrlFact.privilege.salesRevenue
+            }).then(function (response) {
+                callback(response);
+            });
+        }
     	return homeFact;
     }]).factory('sortData', ['homeFact', function(homeFact){
     	var sortData = {};
@@ -310,8 +363,6 @@ angular.module('app')
                   mypaidobj.values.push(temp);
                 });
                 allData.user7days.push(mypaidobj);
-                
-
     		});
     		
     		homeFact.getUsers("30", function(response){
