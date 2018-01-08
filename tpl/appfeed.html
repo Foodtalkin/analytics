@@ -68,11 +68,11 @@
                             <div class="b-b b-transparent m-b-10" ng-repeat="eventPurchase in eventPurchases">
                                 <p class="fs-11 text-right hint-text bold">{{eventPurchase.purchased_on}}</p>
                                 <p style="display: block;" class="fs-14">
+                                    Event: <strong>{{eventPurchase.title}}</strong> <br>
                                     User: <strong>{{eventPurchase.name}}</strong><br>
                                     Email: <strong>{{eventPurchase.email}}</strong> <br>
                                     Phone: <strong>{{eventPurchase.phone}}</strong> <br>
-                                    Amount: <strong>{{eventPurchase.txn_amount}}</strong> <br>
-                                    Status: <strong>{{ eventPurchase.payment_status == 'TXN_FAILURE' ? 'FAILED' : 'SUCCESS' }}</strong>
+                                    Amount: <strong>{{eventPurchase.txn_amount}}</strong>
                                 </p>
                             </div>
                             <h6 ng-click="GetNextPage(eventPurchaseFeedNextUrl, 'event-purchase')" class="text-center" style="cursor: pointer;"><i class="fa fa-chevron-down"></i></h6>
