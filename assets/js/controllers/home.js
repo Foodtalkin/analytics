@@ -8,6 +8,7 @@ angular.module('app')
         $scope.restaurant = {};
         $scope.topUsers = {};
         $scope.analyticsSales = {};
+        $scope.liveEventsData = {};
         $scope.allSalesData = {};
         $scope.users.all = 0;
         $scope.users.paid = 0;
@@ -40,6 +41,13 @@ angular.module('app')
             homeFact.getSalesAnalytics(function(response){
                 $scope.allSalesData = response.data;
                 $scope.analyticsSales = $scope.allSalesData.daily;
+            });
+        }
+
+        $scope.getLiveEvents = function(){
+            homeFact.getLiveEventsData(function(response){
+                $scope.liveEventsData = {};
+                $scope.liveEventsData = response.data.data;
             });
         }
 
@@ -82,6 +90,7 @@ angular.module('app')
         $scope.getRestaurantStats();
         $scope.getareaChats();
         $scope.getAnalyticsSales();
+        $scope.getLiveEvents();
         // end call chart
 
 
@@ -290,6 +299,15 @@ angular.module('app')
             $http({
                 method: 'GET',
                 url: UrlFact.privilege.salesRevenue
+            }).then(function (response) {
+                callback(response);
+            });
+        }
+
+        homeFact.getLiveEventsData = function(callback){
+            $http({
+                method: 'GET',
+                url: UrlFact.privilege.liveEvents
             }).then(function (response) {
                 callback(response);
             });

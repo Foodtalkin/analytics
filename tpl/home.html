@@ -299,5 +299,52 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-4">
+            <div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Live Events Data
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li>
+                                        <a href="" ng-click="getLiveEvents()" class="portlet-refresh">
+                                            <i class="portlet-icon portlet-icon-refresh"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body liveEventsData">
+                            <div class="row bold fs-13">
+                                <div class="col-md-7">
+                                    Title
+                                </div>
+                                <div class="col-md-3">
+                                    Available
+                                </div>
+                                <div class="col-md-2">
+                                    Booked
+                                </div>
+                            </div>
+                            <div ng-repeat="liveEvent in liveEventsData">
+                                <div class="row bold fs-13">
+                                    <div class="col-md-7">
+                                        {{ liveEvent.title }}
+                                    </div>
+                                    <div class="col-md-3 text-complete">
+                                        {{ liveEvent.avilable_seats }}
+                                    </div>
+                                    <div class="col-md-2 text-complete">
+                                        {{ liveEvent.booked_seats }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -55,3 +55,13 @@
 .hide{
   display: none;
 }
+
+.liveEventsData .row.bold {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.liveEventsData {
+    height: 380px !important;
+    overflow-y: scroll;
+}
