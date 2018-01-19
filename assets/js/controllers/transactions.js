@@ -32,9 +32,9 @@ angular.module('app')
 
 	    $scope.createDownloadList = function(){
 	        $scope.usercsv = [];
-	        $scope.usercsv.push({a:'Title',b:'Amount',c:'Txn Id' , d:'User Id', e:'Order Id', f:'Created At'})
+	        $scope.usercsv.push({a:'Title',b:'Amount',c:'Txn Id' , d:'User Id', e: 'User Name', f: 'User Email', g: 'User Phone', h:'Order Id', i:'Created At'})
 	        angular.forEach($scope.txnHistory, function(item){
-	            $scope.usercsv.push({a:item.title,b:item.txn_amount,c:item.txn_id,d:item.user_id,e:item.order_id, f:item.created_at});
+	            $scope.usercsv.push({a:item.title,b:item.txn_amount,c:item.txn_id,d:item.user_id,e:item.name,f:item.email,g:item.phone,h:item.order_id,i:item.created_at});
 	        });
 	    }
 	}])

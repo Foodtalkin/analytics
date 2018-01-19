@@ -42,10 +42,13 @@
                                     <!-- NOTE * : Inline Style Width For Table Cell is Required as it may differ from user to user 
                                         Comman Practice Followed
                                         -->
-                                    <th style="width:35%">Title</th>
-                                    <th style="width:6%">Amount</th>
-                                    <th style="width:8%">Txn Id</th>
-                                    <th style="width:6%">User Id</th>
+                                    <th style="width:30%">Title</th>
+                                    <th style="width:4%">Amount</th>
+                                    <th style="width:4%">Txn Id</th>
+                                    <th style="width:3%">User Id</th>
+                                    <th style="width:4%">User Name</th>
+                                    <th style="width:5%">User Email</th>
+                                    <th style="width:4%">User Phone</th>
                                     <th style="width:30%">Order Id</th>
                                     <th style="width:15%">Created At</th>
                                 </tr>
@@ -56,6 +59,9 @@
                                     <td class="v-align-middle bold">{{item.txn_amount}}</td>
                                     <td class="v-align-middle semi-bold">{{item.txn_id}}</td>
                                     <td class="v-align-middle bold">{{item.user_id}}</td>
+                                    <td class="v-align-middle semi-bold">{{item.name}}</td>
+                                    <td class="v-align-middle semi-bold">{{item.email}}</td>
+                                    <td class="v-align-middle semi-bold">{{item.phone}}</td>
                                     <td class="v-align-middle semi-bold">{{item.order_id}}</td>
                                     <td class="v-align-middle semi-bold">{{item.created_at}}</td>
                                 </tr>
