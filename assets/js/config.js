@@ -283,6 +283,26 @@ angular.module('app')
                         }]
                     }
                 })
+                .state('app.coupon', {
+                    url: "/coupon",
+                    templateUrl: "tpl/coupon.html",
+                    controller: 'couponCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'moment',
+                                'datepicker',
+                                'timepicker'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            }).then(function() {
+                                return $ocLazyLoad.load([
+                                    'assets/js/controllers/coupon.js'
+                                ]);
+                            });
+                        }]
+                    }
+                })
 
         }
     ]);
@@ -394,6 +414,8 @@ angular.module('app')
         UrlFact.privilege.salesRevenue = baseurl + "privilege/analytics/sales-revenue";
 
         UrlFact.privilege.liveEvents = baseurl + "privilege/details/live-events";
+
+        UrlFact.coupon = baseurl + "privilege/coupons";
 
         return UrlFact;
     })
