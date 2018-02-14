@@ -7,6 +7,7 @@ angular.module('app')
         $scope.users = {};
         $scope.restaurant = {};
         $scope.topUsers = {};
+        $scope.valuableUsers = {};
         $scope.analyticsSales = {};
         $scope.liveEventsData = {};
         $scope.allSalesData = {};
@@ -22,18 +23,24 @@ angular.module('app')
                 console.log($scope.allData);
             });
         }
-        	
+
         $scope.getRestaurantStats = function(){
             homeFact.getRestaurant("30","10", function(response){
                 //console.log(response);
                 $scope.restaurant = response.data.result;
             });
         }
-        
+
         $scope.getUsersStats = function(){
             homeFact.getTopUsers("30","10", function(response){
                 //console.log(response);
                 $scope.topUsers = response.data.result;
+            });
+        }
+
+        $scope.getValuableUsers = function(){
+            homeFact.getValuableUsersData(function(response){
+                $scope.valuableUsers = response.data.data;
             });
         }
 
@@ -79,7 +86,7 @@ angular.module('app')
                 getpercent($scope.buffet, $scope.offertotalredmp)];
             });
         }
-            
+
         function getpercent(a, t) {
             var temp = a * 100 / t;
             return temp;
@@ -91,10 +98,11 @@ angular.module('app')
         $scope.getareaChats();
         $scope.getAnalyticsSales();
         $scope.getLiveEvents();
+        $scope.getValuableUsers();
         // end call chart
 
 
-        
+
 
         $scope.userBarOption ={
           chart: {
@@ -112,7 +120,7 @@ angular.module('app')
                 },
             stacked: false,
             color: [
-                    
+
                         '#e51c23',
                         '#ff9800',
                         '#259b24'//antarctica
@@ -149,7 +157,7 @@ angular.module('app')
                     '#e91e63',
                     '#ff9800',
                     '#742282',
-                    '#3fb55f', 
+                    '#3fb55f',
                     '#07e2ff'
 
                 ],
@@ -227,10 +235,10 @@ angular.module('app')
                         '#ff9800']
             };
         });
-            
+
         $scope.$watch('offerpie', function(){
             $scope.offer_pie_options = {
-                type: 'pie', 
+                type: 'pie',
                 width: '200',
                 height: '200',
                 tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
@@ -248,12 +256,12 @@ angular.module('app')
                     '#e91e63',
                     '#ff9800',
                     '#742282',
-                    '#3fb55f', 
+                    '#3fb55f',
                     '#07e2ff']
 
             };
         })
-            
+
 
     }])
     .factory('homeFact', ['$http', 'UrlFact', function($http, UrlFact){
@@ -290,6 +298,15 @@ angular.module('app')
             $http({
                 method: 'GET',
                 url: UrlFact.home.topuser+days+'/'+top
+            }).then(function (response) {
+                callback(response);
+            });
+        }
+
+        homeFact.getValuableUsersData = function(callback){
+            $http({
+                method: 'GET',
+                url: UrlFact.privilege.valuableUsers
             }).then(function (response) {
                 callback(response);
             });
