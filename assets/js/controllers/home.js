@@ -11,6 +11,7 @@ angular.module('app')
         $scope.analyticsSales = {};
         $scope.liveEventsData = {};
         $scope.allSalesData = {};
+        $scope.onboardedUsersData = {};
         $scope.users.all = 0;
         $scope.users.paid = 0;
         $scope.users.unpaid = 0;
@@ -20,7 +21,6 @@ angular.module('app')
                 $scope.allData = response;
                 $scope.userOnboard = $scope.allData.user7days;
                 $scope.offerRedemp = $scope.allData.Offers7days;
-                console.log($scope.allData);
             });
         }
 
@@ -91,6 +91,13 @@ angular.module('app')
             var temp = a * 100 / t;
             return temp;
         }
+
+        $scope.getOnboardedUsersData = function(){
+            homeFact.getOnboardedUsersData(function(response){
+                $scope.onboardedUsersData = response.data;
+            });
+        }
+
         // call Charts
         $scope.getRedemptionchart();
         $scope.getUserChart();
@@ -99,6 +106,7 @@ angular.module('app')
         $scope.getAnalyticsSales();
         $scope.getLiveEvents();
         $scope.getValuableUsers();
+        $scope.getOnboardedUsersData();
         // end call chart
 
 
@@ -271,7 +279,6 @@ angular.module('app')
 				method: 'GET',
 				url: UrlFact.home.user +days
 			}).then(function (response) {
-                console.log(response);
 	            callback(response);
 	        });
     	}
@@ -316,6 +323,15 @@ angular.module('app')
             $http({
                 method: 'GET',
                 url: UrlFact.privilege.salesRevenue
+            }).then(function (response) {
+                callback(response);
+            });
+        }
+
+        homeFact.getOnboardedUsersData = function(callback){
+            $http({
+                method: 'GET',
+                url: UrlFact.privilege.onboardedUsersCount
             }).then(function (response) {
                 callback(response);
             });

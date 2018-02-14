@@ -415,6 +415,7 @@ angular.module('app')
 
         UrlFact.privilege.liveEvents = baseurl + "privilege/details/live-events";
         UrlFact.privilege.valuableUsers = baseurl + "privilege/analytics/valuable-users";
+        UrlFact.privilege.onboardedUsersCount = baseurl + "privilege/analytics/onboarded-users-count";
 
         UrlFact.coupon = baseurl + "privilege/coupons";
 

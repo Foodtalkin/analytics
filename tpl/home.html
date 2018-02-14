@@ -385,6 +385,29 @@
                         </div>
                     </div>
                 </div>
+        <div class="col-sm-4">
+            <div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Onboarded Users count
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getOnboardedUsersData()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h6 class="bold text-complete">With Coupon Code</h6>
+                            <h3>{{ onboardedUsersData.with_coupon_code }}</h3>
+
+                            <h6 class="bold text-complete">Without Coupon Code</h6>
+                            <h3>{{ onboardedUsersData.without_coupon_code }}</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
