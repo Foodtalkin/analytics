@@ -42,7 +42,22 @@
                         <div class="panel-body" style="height: calc(100vh - 260px); overflow-y: auto;">
                             <div class="b-b b-transparent m-b-10" ng-repeat="purchases in purchases">
                                 <p class="fs-11 text-right hint-text bold">{{purchases.purchased_on}}</p>
-                                <p style="display: block;" class="fs-14">New Paid User <strong>{{purchases.name}}</strong><br>Email: <strong>{{purchases.email}}</strong> <br>Phone: <strong>{{purchases.phone}}</strong></p>
+                                <p style="display: block;" class="fs-14">
+                                    New Paid User
+                                    <strong>{{purchases.name}}</strong>
+                                    <br>
+
+                                    Email:
+                                    <strong>{{purchases.email}}</strong>
+                                    <br>
+
+                                    Phone:
+                                    <strong>{{purchases.phone}}</strong>
+                                    <br>
+
+                                    Coupon:
+                                    <strong>{{purchases.coupon}}</strong>
+                                </p>
                             </div>
                             <h6 ng-click="GetNextPage(purchaseFeedNextUrl, 'purchase')" class="text-center" style="cursor: pointer;"><i class="fa fa-chevron-down"></i></h6>
                         </div>
