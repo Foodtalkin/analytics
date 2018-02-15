@@ -135,7 +135,40 @@
                         <div class="col-sm-12">
                             <button class="btn btn-primary" ng-click="openedit()">Edit Coupon</button>
                             <button class="btn btn-danger pull-right" ng-click="deleteCoupon(couponDetails.id)" ng-disabled="couponDetails.is_disabled">Delete Coupon</button>
-                        </div>    
+                        </div>
+                        <div class="col-xs-12">
+                            <hr />
+                        </div>
+                        <div class="col-xs-12">
+                            <p class="hint-text m-t-0 m-b-5 bold fs-13">Redeemed Users List</p>
+                        </div>
+                        <div class="col-sm-12">
+                            <table class="table table-hover" id="basicTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width:30%">Name</th>
+                                        <th style="width:40%">Phone</th>
+                                        <th style="width: 30%">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="user in couponDetails.users">
+                                        <td class="v-align-middle">
+                                            <p>{{ user.name}}</p>
+                                        </td>
+                                        <td class="v-align-middle">
+                                            <p>{{ user.phone}}</p>
+                                        </td>
+                                        <!--<td class="v-align-middle">
+                                          <p>{{ subEvent.order_id }}</p>
+                                        </td>-->
+                                        <td class="v-align-middle">
+                                            <p>{{ user.created_at }}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="col-xs-12 m-t-40" ng-show="editDetails">
                         <div class="col-md-10 col-md-offset-1">
