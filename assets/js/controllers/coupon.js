@@ -38,8 +38,10 @@ angular.module('app')
             discount: $scope.Coupon.discount,
             duration: $scope.Coupon.duration,
             qty: $scope.Coupon.qty,
-            expire_at: $scope.Coupon.expire_at
+            expire_at: $scope.Coupon.expire_at,
+            note: $scope.Coupon.note
 		}
+		console.log(data);
 		couponFact.saveCouponCode(UrlFact.coupon, 'POST', data, function(response){
 			$scope.isDisabled = false;
 			console.log(response);
@@ -82,7 +84,8 @@ angular.module('app')
             discount: $scope.couponDetails.discount,
             duration: $scope.couponDetails.duration,
             qty: $scope.couponDetails.qty,
-            expire_at: $scope.couponDetails.expire_at
+            expire_at: $scope.couponDetails.expire_at,
+            note: $scope.couponDetails.note
         }
         couponFact.saveCouponCode(UrlFact.coupon+'/'+id, 'PUT', data, function(response) {
 			if (response.data.code == 200) {

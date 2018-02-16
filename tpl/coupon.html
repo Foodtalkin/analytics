@@ -48,14 +48,14 @@
                                             <div class="col-sm-6">
                                                 <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : newCoupon.discount.$invalid && !newCoupon.discount.$pristine }">
                                                     <label>discount</label>
-                                                    <input type="text" class="form-control" placeholder="Discount Rate" id="discount-rate" ng-model="Coupon.discount" name="discount">
+                                                    <input type="number" class="form-control" placeholder="Discount Rate" id="discount-rate" ng-model="Coupon.discount" name="discount">
                                                 </div>
                                                 <label class="error" for="date" ng-show="newCoupon.discount.$invalid && !newCoupon.discount.$pristine">This field is required.</label>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : newCoupon.duration.$invalid && !newCoupon.duration.$pristine }">
                                                     <label>Duration</label>
-                                                    <input type="text" class="form-control" placeholder="Duration in Month" id="discount-rate" ng-model="Coupon.duration" name="duration">
+                                                    <input type="number" class="form-control" placeholder="Duration in Month" id="discount-rate" ng-model="Coupon.duration" name="duration">
                                                 </div>
                                                 <label class="error" for="date" ng-show="newCoupon.duration.$invalid && !newCoupon.duration.$pristine">This field is required.</label>
                                             </div>
@@ -64,7 +64,7 @@
                                             <div class="col-sm-6">
                                                 <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : newCoupon.qty.$invalid && !newCoupon.qty.$pristine }">
                                                     <label>quantity</label>
-                                                    <input type="qty" class="form-control" placeholder="how many time this coupon use" id="qty" ng-model="Coupon.qty" name="discount">
+                                                    <input type="number" class="form-control" placeholder="how many time this coupon use" id="qty" ng-model="Coupon.qty" name="discount">
                                                 </div>
                                                 <label class="error" for="date" ng-show="newCoupon.qty.$invalid && !newCoupon.qty.$pristine">This field is required.</label>
                                             </div>
@@ -78,6 +78,15 @@
                                                 </div>
                                                 <label class="error" for="date" ng-show="newCoupon.expire_at.$invalid && !newCoupon.expire_at.$pristine">This field is required.</label>
                                                 <label class="error" for="date" ng-show="newCoupon.expire_at.$error.minlength">date should have at least 4 characters</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : newCoupon.note.$invalid && !newCoupon.note.$pristine }">
+                                                    <label>Notes</label>
+                                                    <textarea class="form-control" rows="5" name="note" placeholder="Coupon notes" ng-model="Coupon.note" required></textarea>
+                                                </div>
+                                                <label class="error" for="one_liner" ng-show="newCoupon.note.$invalid && !newCoupon.note.$pristine">This field is required.</label>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -131,7 +140,13 @@
                                     <h5>{{ couponDetails.expire_at }}</h5>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="m-t-20 m-l-15">
+                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Notes</p>
+                                <p>{{ couponDetails.note}}</p>
+                            </div>
+                        </div>
                         <div class="col-sm-12">
                             <button class="btn btn-primary" ng-click="openedit()">Edit Coupon</button>
                             <button class="btn btn-danger pull-right" ng-click="deleteCoupon(couponDetails.id)" ng-disabled="couponDetails.is_disabled">Delete Coupon</button>
@@ -203,14 +218,14 @@
                                                     <div class="col-sm-6">
                                                         <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : couponEdit.discount.$invalid && !couponEdit.discount.$pristine }">
                                                             <label>discount</label>
-                                                            <input type="text" class="form-control" placeholder="Discount Rate" id="discount-rate" ng-model="couponDetails.discount" name="discount">
+                                                            <input type="number" class="form-control" placeholder="Discount Rate" id="discount-rate" ng-model="couponDetails.discount" name="discount">
                                                         </div>
                                                         <label class="error" for="date" ng-show="couponEdit.discount.$invalid && !couponEdit.discount.$pristine">This field is required.</label>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : couponEdit.duration.$invalid && !couponEdit.duration.$pristine }">
                                                             <label>Duration</label>
-                                                            <input type="text" class="form-control" placeholder="Duration in Month" id="discount-rate" ng-model="couponDetails.duration" name="duration">
+                                                            <input type="number" class="form-control" placeholder="Duration in Month" id="discount-rate" ng-model="couponDetails.duration" name="duration">
                                                         </div>
                                                         <label class="error" for="date" ng-show="couponEdit.duration.$invalid && !couponEdit.duration.$pristine">This field is required.</label>
                                                     </div>
@@ -219,7 +234,7 @@
                                                     <div class="col-sm-6">
                                                         <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : couponEdit.qty.$invalid && !couponEdit.qty.$pristine }">
                                                             <label>quantity</label>
-                                                            <input type="qty" class="form-control" placeholder="how many time this coupon use" id="qty" ng-model="couponDetails.qty" name="discount">
+                                                            <input type="number" class="form-control" placeholder="how many time this coupon use" id="qty" ng-model="couponDetails.qty" name="discount">
                                                         </div>
                                                         <label class="error" for="date" ng-show="couponEdit.qty.$invalid && !couponEdit.qty.$pristine">This field is required.</label>
                                                     </div>
@@ -233,6 +248,15 @@
                                                         </div>
                                                         <label class="error" for="date" ng-show="couponEdit.expire_at.$invalid && !couponEdit.expire_at.$pristine">This field is required.</label>
                                                         <label class="error" for="date" ng-show="couponEdit.expire_at.$error.minlength">date should have at least 4 characters</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : couponEdit.note.$invalid && !couponEdit.note.$pristine }">
+                                                            <label>Notes</label>
+                                                            <textarea class="form-control" rows="5" name="note" placeholder="Coupon notes" ng-model="couponDetails.note" required></textarea>
+                                                        </div>
+                                                        <label class="error" for="one_liner" ng-show="couponEdit.note.$invalid && !couponEdit.note.$pristine">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix"></div>
