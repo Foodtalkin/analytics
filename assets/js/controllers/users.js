@@ -5,7 +5,11 @@
 angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
  function($scope, userFact, UrlFact){
 	$scope.showDetails = false;
+	$scope.showDelete = false;
 	$scope.mainpage = UrlFact.user;
+    $scope.UserSearch = {};
+    $scope.searchUserList = {};
+    $scope.noSearchData = true;
     $scope.getList = function(url){
     	userFact.getList(url,function(response){
     		$scope.usersList = response.data.result.data;
@@ -31,6 +35,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
         })
     }
      $scope.OpenMessage = function(id){
+        $scope.showDelete = false;
     	$scope.showDetails = true;
     	
     	userFact.getredemption(id, function(response){
@@ -40,6 +45,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
      }
 
      $scope.saveNotes = function(id){
+        $scope.showDelete = false;
         $scope.isDisabled = true;
         userFact.saveNotes(id, $scope.currentUser.notes, function(response){
             $scope.isDisabled = false;
@@ -65,6 +71,37 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
                         }).show();
                 }
         })
+     }
+
+     $scope.openDeleteModel = function () {
+         $scope.showDelete = true;
+     }
+
+     $scope.searchUser = function () {
+        $scope.noSearchData = true;
+        $scope.searchUserList = {};
+        userFact.searchUser($scope.UserSearch.phone, function (response) {
+            $scope.searchUserList = response.data.result.data;
+            if ($scope.searchUserList.length) {
+                $scope.noSearchData = false;
+            }
+
+         })
+     }
+
+     $scope.deleteUser = function (id) {
+         userFact.deleteUser(id, function (response) {
+             var message ="Hurray! User deleted!"
+             $('body').pgNotification({
+                 style: 'bar',
+                 message: message,
+                 position: 'top',
+                 timeout: 5000,
+                 type: 'success'
+             }).show();
+
+            $scope.searchUser();
+         });
      }
 }])
 .factory('userFact', ['$http','UrlFact', function($http, UrlFact){
@@ -103,6 +140,23 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
                   //console.log(response);
                   callback(false);
                 }
+            });
+        }
+        userFact.searchUser = function (phone, callback) {
+            $http({
+                method: 'GET',
+                url: UrlFact.user+"/phone?phone="+phone
+            }).then(function(response) {
+                callback(response);
+            });
+        }
+
+        userFact.deleteUser = function (id, callback) {
+            $http({
+                method: 'DELETE',
+                url: UrlFact.user+"/"+id
+            }).then(function(response) {
+                callback(response);
             });
         }
 	return userFact;
