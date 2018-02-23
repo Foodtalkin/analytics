@@ -372,7 +372,7 @@ angular.module('app')
     .factory('UrlFact', function(){
         var UrlFact = {}
         var stg = "http://stg-api.foodtalk.in/";
-        var live = "http://foodtalk-api.test/";
+        var live = "http://api.foodtalk.in/";
 
         // change before pushing online
         var baseurl = live;
