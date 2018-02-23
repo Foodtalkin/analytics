@@ -390,6 +390,36 @@
                 <div class="panel-body no-padding">
                     <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
                         <div class="panel-heading ">
+                            <div class="panel-title">Redemption of each Coupon Code
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a href="" ng-click="getAnalyticsCouponOnBoard()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <div jq-sparkline class="sparkline-chart m-t-20" ng-model="couponOnBoard" opts="{{ coupon_pie_options }}"></div>
+                            </div>
+                            <div class="col-sm-4 m-t-10 text-center" ng-repeat="coupon in couponOnBoardPieChartData.users">
+                                <span class="hint-text fs-10 bold" style="">{{coupon.code}}</span>
+                                <h5>
+                                    {{coupon.total}}
+                                </h5>
+                            </div>
+                            <span class="fs-10 hint-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                        <div class="panel-heading ">
                             <div class="panel-title">Onboarded Users count
                             </div>
                             <div class="panel-controls">
@@ -410,5 +440,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

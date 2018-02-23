@@ -372,7 +372,7 @@ angular.module('app')
     .factory('UrlFact', function(){
         var UrlFact = {}
         var stg = "http://stg-api.foodtalk.in/";
-        var live = "http://api.foodtalk.in/";
+        var live = "http://foodtalk-api.test/";
 
         // change before pushing online
         var baseurl = live;
@@ -416,6 +416,7 @@ angular.module('app')
         UrlFact.privilege.liveEvents = baseurl + "privilege/details/live-events";
         UrlFact.privilege.valuableUsers = baseurl + "privilege/analytics/valuable-users";
         UrlFact.privilege.onboardedUsersCount = baseurl + "privilege/analytics/onboarded-users-count";
+        UrlFact.privilege.couponOnBoardPieChart = baseurl + "privilege/analytics/coupon-boarded-pie-chart";
 
         UrlFact.coupon = baseurl + "privilege/coupons";
 

@@ -12,6 +12,7 @@ angular.module('app')
         $scope.liveEventsData = {};
         $scope.allSalesData = {};
         $scope.onboardedUsersData = {};
+        $scope.couponOnBoardPieChartData = {}
         $scope.users.all = 0;
         $scope.users.paid = 0;
         $scope.users.unpaid = 0;
@@ -49,6 +50,48 @@ angular.module('app')
                 $scope.allSalesData = response.data;
                 $scope.analyticsSales = $scope.allSalesData.daily;
             });
+        }
+
+        $scope.getAnalyticsCouponOnBoard = function(){
+            homeFact.getAnalyticsCouponOnBoard(function(response){
+                $scope.couponOnBoardPieChartData = response.data;
+                $scope.couponOnBoard = response.data.users.map(function (item) {
+                    return getpercent(item.total, response.data.total);
+                })
+            });
+        }
+
+        $scope.getAnalyticsCouponOnBoardConfig = function(data){
+            return {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Browser market shares January, 2015 to May, 2015'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: data
+                }]
+            }
         }
 
         $scope.getLiveEvents = function(){
@@ -107,6 +150,7 @@ angular.module('app')
         $scope.getLiveEvents();
         $scope.getValuableUsers();
         $scope.getOnboardedUsersData();
+        $scope.getAnalyticsCouponOnBoard();
         // end call chart
 
 
@@ -270,7 +314,20 @@ angular.module('app')
             };
         })
 
-
+        $scope.$watch('couponOnBoard', function(){
+            $scope.coupon_pie_options = {
+                type: 'pie',
+                width: '200',
+                height: '200',
+                tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
+                transitionDuration: 500,
+                tooltipValueLookups: {
+                    'offset': $scope.couponOnBoardPieChartData.users.map(function (item) {
+                        return item.code
+                    })
+                }
+            };
+        })
     }])
     .factory('homeFact', ['$http', 'UrlFact', function($http, UrlFact){
     	var homeFact = {};
@@ -323,6 +380,15 @@ angular.module('app')
             $http({
                 method: 'GET',
                 url: UrlFact.privilege.salesRevenue
+            }).then(function (response) {
+                callback(response);
+            });
+        }
+
+        homeFact.getAnalyticsCouponOnBoard = function (callback) {
+            $http({
+                method: 'GET',
+                url: UrlFact.privilege.couponOnBoardPieChart
             }).then(function (response) {
                 callback(response);
             });
