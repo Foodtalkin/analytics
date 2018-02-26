@@ -175,8 +175,8 @@ angular.module('app')
 
                         '#e51c23',
                         '#ff9800',
-                        '#259b24'//antarctica
-
+                        '#259b24',//antarctica
+                        '#601adc'
                 ],
             xAxis: {
               tickFormat: function(d) {
@@ -481,6 +481,17 @@ angular.module('app')
                   mypaidobj.values.push(temp);
                 });
                 allData.user7days.push(mypaidobj);
+
+                var mypaidobj = {
+                    "key" : "Coupon Used",
+                    // lineColor:"red",
+                    "values" : []
+                }
+                angular.forEach(userApi.datewise.couponUsed, function(value, key) {
+                  var temp = barformat(value.date, value.count);
+                  mypaidobj.values.push(temp);
+                });
+                allData.user7days.push(mypaidobj);
     		});
     		
     		homeFact.getUsers("30", function(response){
@@ -516,6 +527,17 @@ angular.module('app')
                     "values" : []
                 }
                 angular.forEach(userApi30.datewise.paid, function(value, key) {
+                   var temp = barformat(value.date, value.count);
+                  mypaidobj.values.push(temp);
+                });
+                allData.user30days.push(mypaidobj);
+
+                var mypaidobj = {
+                    "key" : "Coupon Used",
+                    // lineColor:"red",
+                    "values" : []
+                }
+                angular.forEach(userApi30.datewise.couponUsed, function(value, key) {
                    var temp = barformat(value.date, value.count);
                   mypaidobj.values.push(temp);
                 });
