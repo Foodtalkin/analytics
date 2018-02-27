@@ -223,7 +223,7 @@
                         </div>
                         <div class="panel-body">
                             <div ng-repeat="latest in restaurant.latest_top">
-                            	<h5 class="text-gray bold fs-13">{{latest.name}} <span class="pull-right text-complete">{{latest.count}}</span></h5>
+                            	<h5 class="text-gray bold fs-13">{{latest.name}} - <small>{{ latest.area }}</small> <span class="pull-right text-complete">{{latest.count}}</span></h5>
                             </div>
                         </div>
                     </div>
@@ -246,7 +246,7 @@
                         </div>
                         <div class="panel-body">
 							<div ng-repeat="allTime in restaurant.top">
-                            	<h5 class="text-gray bold fs-13">{{allTime.name}} <span class="pull-right text-complete">{{allTime.count}}</span></h5>
+                  <h5 class="text-gray bold fs-13">{{allTime.name}} - <small>{{ allTime.area }}</small> <span class="pull-right text-complete">{{allTime.count}}</span></h5>
                             </div>
                         </div>
                     </div>
