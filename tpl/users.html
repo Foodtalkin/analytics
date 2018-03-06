@@ -12,7 +12,7 @@
            <!-- Restro List -->
             <div class="p-t-20 p-b-20 scrollable" style="height: calc(100% - 170px); width: 100%;">
                <!--  " -->
-               <button class="btn btn-white btn-block text-left" ng-repeat="req in usersList" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenMessage(req.id)">{{ req.name }}</button>
+               <button class="btn btn-white btn-block text-left" ng-repeat="req in usersList" style="overflow: hidden;text-overflow: ellipsis;" ng-click="OpenMessage(req.id)">{{ req.id }}: {{ req.name }}</button>
                <h6 ng-click="nextPage(NextUrl)" class="text-center" style="cursor: pointer;"><i class="fa fa-chevron-down"></i></h6>
            </div>
 
@@ -142,7 +142,7 @@
                    </div>
                    <label class="error" for="phone" ng-show="userSearchForm.phone.$invalid && !userSearchForm.phone.$pristine">This field is required.</label>
                  </div>
-                 <div class="col-sm-6"><button class="btn btn-primary" type="submit" ng-disabled="(userSearchForm.$invalid) || (isDisabled)" ng-click="searchUser()">Search User</button></div>
+                 <div class="col-sm-6"><button class="btn btn-primary" type="submit" ng-disabled="(userSearchForm.$invalid) || (isDisabled)" ng-click="searchUserByPhone()">Search User</button></div>
                </div>
                <div class="row">
                  <div class="col-sm-12">

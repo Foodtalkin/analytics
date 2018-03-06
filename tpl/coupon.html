@@ -161,18 +161,22 @@
                             <table class="table table-hover" id="basicTable">
                                 <thead>
                                     <tr>
-                                        <th style="width:30%">Name</th>
-                                        <th style="width:40%">Phone</th>
+                                        <th style="width:10%">Id</th>
+                                        <th style="width:25%">Name</th>
+                                        <th style="width:35%">Phone</th>
                                         <th style="width: 30%">Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="user in couponDetails.users">
                                         <td class="v-align-middle">
-                                            <p>{{ user.name}}</p>
+                                            <p>{{ user.id }}</p>
                                         </td>
                                         <td class="v-align-middle">
-                                            <p>{{ user.phone}}</p>
+                                            <p>{{ user.name }}</p>
+                                        </td>
+                                        <td class="v-align-middle">
+                                            <p>{{ user.phone }}</p>
                                         </td>
                                         <!--<td class="v-align-middle">
                                           <p>{{ subEvent.order_id }}</p>

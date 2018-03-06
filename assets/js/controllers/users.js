@@ -77,7 +77,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
          $scope.showDelete = true;
      }
 
-     $scope.searchUser = function () {
+     $scope.searchUserByPhone = function () {
         $scope.noSearchData = true;
         $scope.searchUserList = {};
         userFact.searchUser($scope.UserSearch.phone, function (response) {
