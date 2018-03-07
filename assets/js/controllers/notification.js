@@ -9,15 +9,20 @@ angular.module('app')
 	$scope.notificationDetails = {};
 	$scope.eventdatadisabled = true;
 	$scope.getallList = function(){
-		notificationFact.getList(function(response){
-			$scope.allList = response.data.result;
-			console.log($scope.allList);
+		notificationFact.getList(UrlFact.notification, function(response){
+			$scope.allList = response.data.result.data;
+            $scope.NextUrl = response.data.result.next_page_url;
 		});
 	}
+     $scope.nextPage = function(url){
+         notificationFact.getList(url,function(response){
+             $scope.allList = $scope.allList.concat(response.data.result.data);
+             $scope.NextUrl = response.data.result.next_page_url;
+         })
+     }
 	var url = UrlFact.experience.main+'?is_active=1';
 	notificationFact.getExprienceList(url, function(response){
 		$scope.experienceList = response.data.result.data;
-		console.log(response);
 	})
 	$scope.getallList();
 	$scope.OpenDetails = function(id){
@@ -54,6 +59,7 @@ angular.module('app')
 // "userId": "1384",
 		var data = {
 					  "push_time": $scope.Notification.date + " " + $scope.Notification.time,
+					  "title": $scope.Notification.title,
 					  "push": {
 					    "where": {
 					      // "userId": "1219"
@@ -136,8 +142,9 @@ angular.module('app')
 	
 	$scope.openedit = function(){
 		$scope.editDetails = true;
+        $scope.notificationDetails.title = $scope.notificationDetails.title;
 		$scope.notificationDetails.push_time = $scope.notificationDetails.push_time.split(' ');
-		if($scope.notificationDetails.push.data.alert){
+        if($scope.notificationDetails.push.data.alert){
 			$scope.notificationDetails.msg = $scope.notificationDetails.push.data.alert;
 		}else{
 			$scope.notificationDetails.msg = "";
@@ -163,6 +170,7 @@ angular.module('app')
 		console.log($scope.notificationDetails.myusergroup);
 		var data = {
 					  "push_time": $scope.notificationDetails.push_time[0] + " " + $scope.notificationDetails.push_time[1],
+			          "title": $scope.notificationDetails.title,
 					  "push": {
 					    "where": {
 					      
@@ -274,10 +282,10 @@ angular.module('app')
             callback(response);
         });
 	}
-	notificationFact.getList = function(callback){
+	notificationFact.getList = function(url, callback){
 		$http({
 			method: 'GET',
-			url: UrlFact.notification
+			url: url
 		}).then(function (response) {
 			//console.log(response);
             callback(response);
