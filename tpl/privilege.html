@@ -428,6 +428,16 @@
                                 <h5 class="semi-bold m-t-0">{{RestaurantData.cost}}</h5>
                             </div>
                         </div>
+                      <div class="row">
+                        <div class="col-xs-6">
+                          <p class="hint-text m-t-0 m-b-5 bold fs-13">Total Rating (users)</p>
+                          <h5 class="semi-bold m-t-0">{{RestaurantData.rating.total_rating}}</h5>
+                        </div>
+                        <div class="col-xs-6">
+                          <p class="hint-text m-t-0 m-b-5 bold fs-13">Avg Rate</p>
+                          <h5 class="semi-bold m-t-0">{{RestaurantData.rating.rating_avg}}</h5>
+                        </div>
+                      </div>
                     </div>
                     <div class="col-sm-4 text-center">
                         <button class="btn btn-link text-complete pull-right" ng-hide="noCusine" ng-click="$parent.openViaDetails= true; openCuisineForm()">edit</button>
@@ -448,7 +458,7 @@
                <div class="row m-t-20" ng-hide="noOutlet">
                    <div class="col-sm-12">
                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                            <div class="panel panel-default" ng-repeat="outlets in RestaurantData.outlet">
+                            <div class="panel panel-default" ng-repeat="outlets in RestaurantData.outlets">
                                 <div class="panel-heading" role="tab" id="headingOne">
                                     <h4 class="panel-title">
                                     <a ng-class="{collapsed:!collapseOne}" ng-click="collapseOne=!collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -492,6 +502,14 @@
                                                 <p class="hint-text m-t-0 m-b-5 bold fs-13">Suggested Dishes</p>
                                                 <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.suggested_dishes}}</p>
                                               </div>
+                                              <div class="col-xs-6">
+                                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Total Rating (users)</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.rating.total_rating}}</p>
+                                              </div>
+                                              <div class="col-xs-6">
+                                                <p class="hint-text m-t-0 m-b-5 bold fs-13">Avg Rate</p>
+                                                <p class="semi-bold m-t-0 m-b-5 fs-15" >{{outlets.rating.rating_avg}}</p>
+                                              </div>
                                             </div>
                                             
                                         </div>
@@ -534,7 +552,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr ng-repeat="offer in outlets.offer[0]">
+                                                      <tr ng-repeat="offer in outlets.offer[0]">
                                                         <td class="v-align-middle">
                                                             <p>{{offer.title}}</p>
                                                         </td>

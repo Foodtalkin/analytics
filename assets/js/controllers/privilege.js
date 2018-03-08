@@ -368,10 +368,14 @@ angular.module('app')
 		    		if(key.id == response.data.result.id){
 		    			$scope.RestaurantData.outlet[value].offer = [];
 		    			$scope.RestaurantData.outlet[value].offer.push(response.data.result.offer);
+		    			$scope.RestaurantData.outlets[value].offer = [];
+                        $scope.RestaurantData.outlets[value].offer.push(response.data.result.offer);
 		    		}
 		    		privilegeFact.getOutletImages(key.id, function(response){
 		    			if(key.id == response.data.result[0].entity_id){
 		    				$scope.RestaurantData.outlet[value].images = response.data.result;
+                            $scope.RestaurantData.outlets[value].images = [];
+							$scope.RestaurantData.outlets[value].images = response.data.result;
 		    			}
 		    		})
 		    	})
