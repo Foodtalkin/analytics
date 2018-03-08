@@ -13,6 +13,7 @@ angular.module('app')
         $scope.allSalesData = {};
         $scope.onboardedUsersData = {};
         $scope.couponOnBoardPieChartData = {}
+        $scope.restaurantRatings = {}
         $scope.users.all = 0;
         $scope.users.paid = 0;
         $scope.users.unpaid = 0;
@@ -141,6 +142,13 @@ angular.module('app')
             });
         }
 
+        $scope.getRestaurantRating = function(){
+            homeFact.getRestaurantRatingData(function(response){
+                $scope.restaurantRatings = {};
+                $scope.restaurantRatings = response.data.result;
+            });
+        }
+
         // call Charts
         $scope.getRedemptionchart();
         $scope.getUserChart();
@@ -151,6 +159,7 @@ angular.module('app')
         $scope.getValuableUsers();
         $scope.getOnboardedUsersData();
         $scope.getAnalyticsCouponOnBoard();
+        $scope.getRestaurantRating();
         // end call chart
 
 
@@ -407,6 +416,15 @@ angular.module('app')
             $http({
                 method: 'GET',
                 url: UrlFact.privilege.liveEvents
+            }).then(function (response) {
+                callback(response);
+            });
+        }
+
+        homeFact.getRestaurantRatingData = function (callback) {
+            $http({
+                method: 'GET',
+                url: UrlFact.privilege.restaurantRating
             }).then(function (response) {
                 callback(response);
             });
