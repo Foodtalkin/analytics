@@ -5,14 +5,27 @@
 angular.module('app')
 .controller('couponCtrl', ['$scope','couponFact', 'UrlFact',
  function($scope, couponFact, UrlFact){
+ 	$scope.allList = {};
 	$scope.Coupon = {};
 	$scope.couponDetails = {};
 	$scope.eventdatadisabled = true;
+ 	$scope.NextUrl = '';
 	$scope.getallList = function(){
-        couponFact.getList(function(response){
-			$scope.allList = response.data.result;
+        couponFact.getList(UrlFact.coupon, function(response){
+			$scope.allList = response.data.result.data;
+            $scope.NextUrl = response.data.result.next_page_url;
+            console.log('next page', response.data.result.next_page_url)
 		});
 	}
+     $scope.nextPage = function(url){
+         console.log(url);
+         if (url) {
+             couponFact.getList(url, function (response) {
+                 $scope.allList = $scope.allList.concat(response.data.result.data);
+                 $scope.NextUrl = response.data.result.next_page_url;
+             })
+         }
+     }
 	$scope.getallList();
 	$scope.OpenDetails = function(id){
 		$scope.editDetails = false;
@@ -141,10 +154,10 @@ angular.module('app')
 	}
 }]).factory('couponFact', ['$http', 'UrlFact', function($http, UrlFact){
 	var couponFact = {};
-    couponFact.getList = function(callback){
+    couponFact.getList = function(url, callback){
 		$http({
 			method: 'GET',
-			url: UrlFact.coupon
+			url: url
 		}).then(function (response) {
             callback(response);
         })
