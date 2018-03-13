@@ -1,7 +1,7 @@
 <div class="container-fluid container-fixed-lg">
     <div class="row">
         <div class="col-sm-4">
-        	<div class="panel panel-transparent">
+            <div class="panel panel-transparent">
                 <div class="panel-body no-padding">
                     <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
                         <div class="panel-heading ">
@@ -448,13 +448,13 @@
                         </div>
                         <div class="panel-body liveEventsData">
                             <div class="row bold fs-13">
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     Name
                                 </div>
                                 <div class="col-md-3">
                                     Total Rating (users)
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     Avg Rate
                                 </div>
                             </div>
@@ -463,11 +463,12 @@
                                     <div class="col-md-7">
                                         {{ restaurantRate.name }} - <small>{{ restaurantRate.area }}</small>
                                     </div>
-                                    <div class="col-md-3 text-complete">
+                                    <div class="col-md-2 text-complete">
                                         {{ restaurantRate.total_rating }}
                                     </div>
-                                    <div class="col-md-2 text-complete">
-                                        {{ restaurantRate.rating_avg }}
+                                    <div class="col-md-3 text-complete">
+                                        <div star-rating rating="restaurantRate.rating_star" read-only="true" max-rating="5" ></div>
+                                        <span class="label label-primary">{{restaurantRate.rating_avg}}</span>
                                     </div>
                                 </div>
                             </div>
