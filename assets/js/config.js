@@ -418,6 +418,7 @@ angular.module('app')
         UrlFact.privilege.onboardedUsersCount = baseurl + "privilege/analytics/onboarded-users-count";
         UrlFact.privilege.couponOnBoardPieChart = baseurl + "privilege/analytics/coupon-boarded-pie-chart";
         UrlFact.privilege.restaurantRating = baseurl + "privilege/analytics/restaurant-rating";
+        UrlFact.privilege.userSubscriptionState = baseurl + "privilege/analytics/user-state";
 
         UrlFact.coupon = baseurl + "privilege/coupons";
 

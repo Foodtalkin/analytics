@@ -13,6 +13,7 @@ angular.module('app')
         $scope.allSalesData = {};
         $scope.onboardedUsersData = {};
         $scope.couponOnBoardPieChartData = {}
+        $scope.userSubscriptionState = {}
         $scope.restaurantRatings = {}
         $scope.users.all = 0;
         $scope.users.paid = 0;
@@ -149,6 +150,13 @@ angular.module('app')
             });
         }
 
+        $scope.getUserSubscriptionState = function () {
+            homeFact.getUserSubscriptionState(function (response) {
+                console.log(response.data);
+                $scope.userSubscriptionState = response.data.result;
+            })
+        }
+
         // call Charts
         $scope.getRedemptionchart();
         $scope.getUserChart();
@@ -160,6 +168,7 @@ angular.module('app')
         $scope.getOnboardedUsersData();
         $scope.getAnalyticsCouponOnBoard();
         $scope.getRestaurantRating();
+        $scope.getUserSubscriptionState();
         // end call chart
 
 
@@ -429,6 +438,16 @@ angular.module('app')
                 callback(response);
             });
         }
+
+        homeFact.getUserSubscriptionState = function (callback) {
+            $http({
+                method: 'GET',
+                url: UrlFact.privilege.userSubscriptionState
+            }).then(function (response) {
+                callback(response);
+            });
+        }
+
     	return homeFact;
     }]).factory('sortData', ['homeFact', function(homeFact){
     	var sortData = {};
