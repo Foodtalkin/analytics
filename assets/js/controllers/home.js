@@ -364,11 +364,11 @@ angular.module('app')
                 transitionDuration: 500,
                 tooltipValueLookups: {
                     'offset': {
-                        1: 'Paid User',
-                        2: 'Expired Subscription',
-                        3: 'On Trial User',
-                        4: 'Trail not Subscribed',
-                        5: 'Trail Expired'
+                        0: 'Paid User',
+                        1: 'Expired Subscription',
+                        2: 'On Trial User',
+                        3: 'Trail not Subscribed',
+                        4: 'Trail Expired'
                     }
                 }
             };
