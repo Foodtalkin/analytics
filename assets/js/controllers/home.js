@@ -153,10 +153,9 @@ angular.module('app')
         $scope.getUserSubscriptionState = function () {
             homeFact.getUserSubscriptionState(function (response) {
                 $scope.userSubscriptionState = response.data.result;
-                let total = $scope.userSubscriptionState.totalUser + $scope.userSubscriptionState.paidUserCount + $scope.userSubscriptionState.expiredSubscriptionCount + $scope.userSubscriptionState.trailUserCount + $scope.userSubscriptionState.userNotSubscribeCount + $scope.userSubscriptionState.trailExpiredUserCount;
+                let total = $scope.userSubscriptionState.paidUserCount + $scope.userSubscriptionState.expiredSubscriptionCount + $scope.userSubscriptionState.trailUserCount + $scope.userSubscriptionState.userNotSubscribeCount + $scope.userSubscriptionState.trailExpiredUserCount;
 
                 $scope.userStatePie = [
-                    getpercent($scope.userSubscriptionState.totalUser, total),
                     getpercent($scope.userSubscriptionState.paidUserCount, total),
                     getpercent($scope.userSubscriptionState.expiredSubscriptionCount, total),
                     getpercent($scope.userSubscriptionState.trailUserCount, total),
@@ -365,7 +364,6 @@ angular.module('app')
                 transitionDuration: 500,
                 tooltipValueLookups: {
                     'offset': {
-                        0: 'Total User',
                         1: 'Paid User',
                         2: 'Expired Subscription',
                         3: 'On Trial User',
