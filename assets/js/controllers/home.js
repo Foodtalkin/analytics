@@ -152,8 +152,17 @@ angular.module('app')
 
         $scope.getUserSubscriptionState = function () {
             homeFact.getUserSubscriptionState(function (response) {
-                console.log(response.data);
                 $scope.userSubscriptionState = response.data.result;
+                let total = $scope.userSubscriptionState.totalUser + $scope.userSubscriptionState.paidUserCount + $scope.userSubscriptionState.expiredSubscriptionCount + $scope.userSubscriptionState.trailUserCount + $scope.userSubscriptionState.userNotSubscribeCount + $scope.userSubscriptionState.trailExpiredUserCount;
+
+                $scope.userStatePie = [
+                    getpercent($scope.userSubscriptionState.totalUser, total),
+                    getpercent($scope.userSubscriptionState.paidUserCount, total),
+                    getpercent($scope.userSubscriptionState.expiredSubscriptionCount, total),
+                    getpercent($scope.userSubscriptionState.trailUserCount, total),
+                    getpercent($scope.userSubscriptionState.userNotSubscribeCount, total),
+                    getpercent($scope.userSubscriptionState.trailExpiredUserCount, total)
+                ];
             })
         }
 
@@ -346,6 +355,26 @@ angular.module('app')
                 }
             };
         })
+
+        $scope.$watch('userStatePie', function() {
+            $scope.user_state_pie_options = {
+                type: 'pie',
+                width: '200',
+                height: '200',
+                tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
+                transitionDuration: 500,
+                tooltipValueLookups: {
+                    'offset': {
+                        0: 'Total User',
+                        1: 'Paid User',
+                        2: 'Expired Subscription',
+                        3: 'On Trial User',
+                        4: 'Trail not Subscribed',
+                        5: 'Trail Expired'
+                    }
+                }
+            };
+        });
     }])
     .factory('homeFact', ['$http', 'UrlFact', function($http, UrlFact){
     	var homeFact = {};
