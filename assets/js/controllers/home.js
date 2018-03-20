@@ -366,8 +366,8 @@ angular.module('app')
                     'offset': {
                         0: 'Paid User',
                         1: 'Expired Subscription',
-                        2: 'On Trial User',
-                        3: 'Trail not Subscribed',
+                        2: 'Active trials',
+                        3: 'Only Signed up',
                         4: 'Trail Expired'
                     }
                 }
