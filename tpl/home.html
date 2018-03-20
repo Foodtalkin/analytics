@@ -16,14 +16,57 @@
                         </div>
                         <div class="panel-body" style="height: 400px;">
                             <div class="text-center">
-                            	<div jq-sparkline class="sparkline-chart m-t-25" ng-model="userpie" opts="{{ user_pie_options }}"></div>
+                                <div jq-sparkline class="sparkline-chart m-t-25" ng-model="userStatePie" opts="{{ user_state_pie_options }}"></div>
                             </div>
-							<div class="col-sm-3 m-t-30 text-center" ng-repeat="usercount in UserCounts">
-								<span class="hint-text fs-11 bold">{{usercount.status}}</span>
-								<h5>
-									{{usercount.count}}
-								</h5>
-							</div>
+                            <div class="col-sm-4 m-t-10 text-center">
+                                <span class="hint-text fs-10 bold" style="">
+                                    Total User
+                                </span>
+                                <h5>
+                                    {{ userSubscriptionState.totalUser }}
+                                </h5>
+                            </div>
+                            <div class="col-sm-4 m-t-10 text-center">
+                                <span class="hint-text fs-10 bold" style="">
+                                    Paid User
+                                </span>
+                                <h5>
+                                    {{ userSubscriptionState.paidUserCount }}
+                                </h5>
+                            </div>
+                            <div class="col-sm-4 m-t-10 text-center">
+                                <span class="hint-text fs-10 bold" style="">
+                                    Expired Subscription
+                                </span>
+                                <h5>
+                                    {{ userSubscriptionState.expiredSubscriptionCount }}
+                                </h5>
+                            </div>
+
+                            <div class="col-sm-4 m-t-10 text-center">
+                                <span class="hint-text fs-10 bold" style="">
+                                    On Trial User
+                                </span>
+                                <h5>
+                                    {{ userSubscriptionState.trailUserCount }}
+                                </h5>
+                            </div>
+                            <div class="col-sm-4 m-t-10 text-center">
+                                <span class="hint-text fs-10 bold" style="">
+                                    Trail not Subscribed
+                                </span>
+                                <h5>
+                                    {{ userSubscriptionState.userNotSubscribeCount }}
+                                </h5>
+                            </div>
+                            <div class="col-sm-4 m-t-10 text-center">
+                                <span class="hint-text fs-10 bold" style="">
+                                    Trail Expired
+                                </span>
+                                <h5>
+                                    {{ userSubscriptionState.trailExpiredUserCount }}
+                                </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -478,81 +521,6 @@
             </div>
         </div>
 
-
-        <div class="col-sm-5">
-            <div class="panel panel-transparent">
-                <div class="panel-body no-padding">
-                    <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
-                        <div class="panel-heading ">
-                            <div class="panel-title">User Statistics
-                            </div>
-                            <div class="panel-controls">
-                                <ul>
-                                    <li><a href="" ng-click="getUserSubscriptionState()" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="text-center">
-                                <div jq-sparkline class="sparkline-chart m-t-25" ng-model="userStatePie" opts="{{ user_state_pie_options }}"></div>
-                            </div>
-                            <div class="col-sm-4 m-t-10 text-center">
-                                <span class="hint-text fs-10 bold" style="">
-                                    Total User
-                                </span>
-                                <h5>
-                                    {{ userSubscriptionState.totalUser }}
-                                </h5>
-                            </div>
-                            <div class="col-sm-4 m-t-10 text-center">
-                                <span class="hint-text fs-10 bold" style="">
-                                    Paid User
-                                </span>
-                                <h5>
-                                    {{ userSubscriptionState.paidUserCount }}
-                                </h5>
-                            </div>
-                            <div class="col-sm-4 m-t-10 text-center">
-                                <span class="hint-text fs-10 bold" style="">
-                                    Expired Subscription
-                                </span>
-                                <h5>
-                                    {{ userSubscriptionState.expiredSubscriptionCount }}
-                                </h5>
-                            </div>
-
-                            <div class="col-sm-4 m-t-10 text-center">
-                                <span class="hint-text fs-10 bold" style="">
-                                    On Trial User
-                                </span>
-                                <h5>
-                                    {{ userSubscriptionState.trailUserCount }}
-                                </h5>
-                            </div>
-                            <div class="col-sm-4 m-t-10 text-center">
-                                <span class="hint-text fs-10 bold" style="">
-                                    Trail not Subscribed
-                                </span>
-                                <h5>
-                                    {{ userSubscriptionState.userNotSubscribeCount }}
-                                </h5>
-                            </div>
-                            <div class="col-sm-4 m-t-10 text-center">
-                                <span class="hint-text fs-10 bold" style="">
-                                    Trail Expired
-                                </span>
-                                <h5>
-                                    {{ userSubscriptionState.trailExpiredUserCount }}
-                                </h5>
-                            </div>
-                            <span class="fs-10 hint-text"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="col-sm-4">
             <div class="panel panel-transparent">
                 <div class="panel-body no-padding">
