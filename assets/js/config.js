@@ -371,6 +371,7 @@ angular.module('app')
     angular.module('app')
     .factory('UrlFact', function(){
         var UrlFact = {}
+        var local = 'http://foodtalk-api.test/';
         var stg = "http://stg-api.foodtalk.in/";
         var live = "http://api.foodtalk.in/";
 
@@ -404,6 +405,7 @@ angular.module('app')
         UrlFact.privilege = {};
         UrlFact.privilege.restaurant = baseurl + "privilege/restaurant";
         UrlFact.privilege.outlet = baseurl + "privilege/outlet";
+        UrlFact.privilege.outletRedeemedReport = baseurl + "privilege/outlet/redeemed-report";
         UrlFact.privilege.cuisine = baseurl + "privilege/cuisine";
         UrlFact.privilege.outletOffer = baseurl + "privilege/outlet-offer";
         UrlFact.privilege.offer = baseurl + "privilege/offer";

@@ -575,6 +575,46 @@
                                             </table>
                                         </div>
                                         </div>
+                                        <div class="col-sm-12">
+                                            <h5>
+                                                Redeemed Offers
+                                                <span class="pull-right m-l-20">
+                                                    <button class="pull-right btn btn-info btn-block" ng-csv="outlets.usercsv" filename="user-list.csv" field-separator=","
+                                                            decimal-separator=".">Download User List
+                                                    </button>
+                                                </span>
+                                            </h5>
+                                            <div class="panel-body">
+                                                <table class="table table-hover demo-table-dynamic">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>User Name</th>
+                                                        <th>Offer Title</th>
+                                                        <th>Redemption Time</th>
+                                                        <!-- <th></th> -->
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="redeem in outlets.Redeemed[0]">
+                                                        <td class="v-align-middle">
+                                                            <p>{{redeem.id}}</p>
+                                                        </td>
+                                                        <td class="v-align-middle">
+                                                            <p>{{redeem.user}}</p>
+                                                        </td>
+                                                        <td class="v-align-middle">
+                                                            <p>{{redeem.title}}</p>
+                                                        </td>
+                                                        <td class="v-align-middle">
+                                                            <p>{{redeem.created_at}}</p>
+                                                        </td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
