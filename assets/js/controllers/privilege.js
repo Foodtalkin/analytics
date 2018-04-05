@@ -376,7 +376,6 @@ angular.module('app')
                             h: 'offers_redeemed',
                             i: 'Redemption Time',
                         })
-                        console.log($scope.RestaurantData.outlets[value])
                         angular.forEach(response.data.result, function (result) {
 
                             $scope.RestaurantData.outlets[value].usercsv.push({
@@ -391,7 +390,6 @@ angular.module('app')
                                 i: result.created_at,
                             })
                         })
-                        console.log($scope.RestaurantData.outlets)
 
                         $scope.RestaurantData.outlet[value].Redeemed.push(response.data.result)
                         $scope.RestaurantData.outlets[value].Redeemed.push(response.data.result)
