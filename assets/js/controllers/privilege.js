@@ -367,26 +367,31 @@ angular.module('app')
                         $scope.RestaurantData.outlets[value].usercsv = [];
                         $scope.RestaurantData.outlets[value].usercsv.push({
                             a: 'User Name',
-                            b: 'Redemption Id',
-                            c: 'Outlet Name',
-                            d: 'outlet Address',
-                            e: 'Offer Title',
-                            f: 'offers_redeemed',
-                            g: 'Redemption Time',
+                            b: 'User Phone',
+                            c: 'User Email',
+                            d: 'Redemption Id',
+                            e: 'Outlet Name',
+                            f: 'outlet Address',
+                            g: 'Offer Title',
+                            h: 'offers_redeemed',
+                            i: 'Redemption Time',
                         })
                         console.log($scope.RestaurantData.outlets[value])
                         angular.forEach(response.data.result, function (result) {
 
                             $scope.RestaurantData.outlets[value].usercsv.push({
                                 a: result.user,
-                                b: result.id,
-                                c: $scope.RestaurantData.outlets[value].name,
-                                d: $scope.RestaurantData.outlets[value].address,
-                                e: result.title,
-                                f: result.offers_redeemed,
-                                g: result.created_at,
+                                b: result.phone,
+                                c: result.email,
+                                d: result.id,
+                                e: $scope.RestaurantData.outlets[value].name,
+                                f: $scope.RestaurantData.outlets[value].address,
+                                g: result.title,
+                                h: result.offers_redeemed,
+                                i: result.created_at,
                             })
                         })
+                        console.log($scope.RestaurantData.outlets)
 
                         $scope.RestaurantData.outlet[value].Redeemed.push(response.data.result)
                         $scope.RestaurantData.outlets[value].Redeemed.push(response.data.result)
