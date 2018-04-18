@@ -3,7 +3,16 @@
    <div class="row">
        <div class="col-md-4" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px);">
            <div class="p-t-30 p-b-10">
-             <button class="btn btn-primary btn-block" ng-click="openDeleteModel()">Delete User</button>
+             <div class="row">
+               <div class="col-sm-6">
+                 <button class="btn btn-warning btn-block" ng-click="openDeleteModel()">Delete User</button>
+               </div>
+               <div class="col-sm-6">
+                 <button class="btn btn-primary btn-block" ng-click="openDownloadModel()">Download User</button>
+               </div>
+             </div>
+
+
               <h5>Privilege Users</h5>
               <div class="form-group">
                   <input type="text" ng-model="searchTerm" ng-keyup="searchUser()" class="form-control" placeholder="serach...">
@@ -18,7 +27,7 @@
 
        </div>
        <div class="col-md-8">
-          <div ng-hide="showDelete">
+          <div ng-hide="showDelete || showDownload">
             <div class="col-sm-12" ng-show="showDetails">
               <div class="col-sm-6 m-t-20" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px); overflow: auto;">
                 <div class="row">
@@ -180,6 +189,34 @@
                </div>
              </form>
 
+           </div>
+         </div>
+         <div class="col-sm-12" ng-show="showDownload">
+           <div class="col-sm-12 m-t-20" style="border-right: 1px solid rgba(230, 230, 230, 0.7); height: calc(100vh - 135px); overflow: auto;">
+             <form name="userSearchForm" id="form-user-search" role="form" novalidate>
+               <h4>Download User csv</h4>
+               <br /><br/>
+               <div class="row">
+                 <div class="col-sm-1">&nbsp;</div>
+                 <div class="col-sm-4">
+                   <a href="{{ paidUserCsvUrl }}" target="_blank" class="btn btn-primary btn-block" >Paid User</a>
+                 </div>
+                 <div class="col-sm-2">&nbsp;</div>
+                 <div class="col-sm-4">
+                   <a href="{{ activetrialsCsvUrl }}" target="_blank" class="btn btn-primary btn-block" >Active trials</a>
+                 </div>
+               </div>
+               <div class="row m-t-20">
+                 <div class="col-sm-1">&nbsp;</div>
+                 <div class="col-sm-4">
+                   <a href="{{ onlySignedUpCsvUrl }}" target="_blank" class="btn btn-primary btn-block" >Only Signed up</a>
+                 </div>
+                 <div class="col-sm-2">&nbsp;</div>
+                 <div class="col-sm-4">
+                   <a href="{{ trailExpiredCsvUrl }}" target="_blank" class="btn btn-primary btn-block" >Trail Expired</a>
+                 </div>
+               </div>
+             </form>
            </div>
          </div>
        </div>

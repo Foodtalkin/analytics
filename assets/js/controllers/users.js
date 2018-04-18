@@ -2,19 +2,27 @@
 
 /* Controllers */
 
-angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
- function($scope, userFact, UrlFact){
+angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact', '$cookies',
+ function($scope, userFact, UrlFact, $cookies){
 	$scope.showDetails = false;
 	$scope.showDelete = false;
+	$scope.showDownload = false;
 	$scope.mainpage = UrlFact.user;
     $scope.UserSearch = {};
     $scope.searchUserList = {};
     $scope.noSearchData = true;
+    $scope.APPSESSID = $cookies["APPSESSID"];
+    $scope.setupUrl = function () {
+        $scope.paidUserCsvUrl = UrlFact.privilege.userReport +'?type=paid_user&APPSESSID='+$scope.APPSESSID
+        $scope.activetrialsCsvUrl = UrlFact.privilege.userReport +'?type=active_trials&APPSESSID='+$scope.APPSESSID
+        $scope.onlySignedUpCsvUrl = UrlFact.privilege.userReport +'?type=only_signed_up&APPSESSID='+$scope.APPSESSID
+        $scope.trailExpiredCsvUrl = UrlFact.privilege.userReport +'?type=trail_expired&APPSESSID='+$scope.APPSESSID
+    }
+    $scope.setupUrl();
     $scope.getList = function(url){
-    	userFact.getList(url,function(response){
+        userFact.getList(url,function(response){
     		$scope.usersList = response.data.result.data;
-    		console.log(response.data.result);
-        	$scope.NextUrl = response.data.result.next_page_url;
+    		$scope.NextUrl = response.data.result.next_page_url;
         })
     }
 
@@ -36,6 +44,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
     }
      $scope.OpenMessage = function(id){
         $scope.showDelete = false;
+        $scope.showDownload = false;
     	$scope.showDetails = true;
     	
     	userFact.getredemption(id, function(response){
@@ -46,6 +55,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
 
      $scope.saveNotes = function(id){
         $scope.showDelete = false;
+        $scope.showDownload = false;
         $scope.isDisabled = true;
         userFact.saveNotes(id, $scope.currentUser.notes, function(response){
             $scope.isDisabled = false;
@@ -75,6 +85,12 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact',
 
      $scope.openDeleteModel = function () {
          $scope.showDelete = true;
+         $scope.showDownload = false;
+     }
+
+     $scope.openDownloadModel = function () {
+         $scope.showDelete = false;
+         $scope.showDownload = true;
      }
 
      $scope.searchUserByPhone = function () {
