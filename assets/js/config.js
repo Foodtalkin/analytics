@@ -409,6 +409,7 @@ angular.module('app')
         UrlFact.privilege.cuisine = baseurl + "privilege/cuisine";
         UrlFact.privilege.outletOffer = baseurl + "privilege/outlet-offer";
         UrlFact.privilege.offer = baseurl + "privilege/offer";
+        UrlFact.privilege.userReport = baseurl + "privilege/analytics/user-csv";
 
         UrlFact.transactions = baseurl + "privilege/transactions";
 
