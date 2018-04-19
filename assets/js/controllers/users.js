@@ -13,6 +13,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact', '$
     $scope.noSearchData = true;
     $scope.APPSESSID = $cookies["APPSESSID"];
     $scope.setupUrl = function () {
+        $scope.allUserCsvUrl = UrlFact.privilege.userReport +'?type=all_user&APPSESSID='+$scope.APPSESSID
         $scope.paidUserCsvUrl = UrlFact.privilege.userReport +'?type=paid_user&APPSESSID='+$scope.APPSESSID
         $scope.activetrialsCsvUrl = UrlFact.privilege.userReport +'?type=active_trials&APPSESSID='+$scope.APPSESSID
         $scope.onlySignedUpCsvUrl = UrlFact.privilege.userReport +'?type=only_signed_up&APPSESSID='+$scope.APPSESSID
