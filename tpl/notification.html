@@ -118,6 +118,21 @@
                                                 <label class="error" for="eventid" ng-show="newNoti.eventid.$invalid && !newNoti.eventid.$pristine">Enter a valid Experience.</label>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : newNoti.userType.$invalid && !newNoti.userType.$pristine }">
+                                                    <label>User Type</label>
+                                                    <select class="cs-select cs-skin-slide" ng-model="Notification.userType" ng-change="onScreenselect()" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
+                                                        <option value="">--select user type--</option>
+                                                        <option value="all_paid_users">All Paid users</option>
+                                                        <option value="all_trail_users">All Trial Users</option>
+                                                        <option value="all_expired_users">All Expired users</option>
+
+                                                    </select>
+                                                </div>
+                                                <label class="error" for="screen" ng-show="newNoti.userType.$invalid && !newNoti.userType.$pristine">Enter a valid screen.</label>
+                                            </div>
+                                        </div>
                                         <div class="clearfix"></div>
                                         <button class="btn btn-primary" type="submit" ng-disabled="(newNoti.$invalid) || (isDisabled)" ng-click="createNotification()">send Notification</button>
                                     </form>
@@ -277,6 +292,21 @@
                                                 <label class="error" for="eventid" ng-show="editnoti.eventid.$invalid && !editnoti.eventid.$pristine">Enter a valid Experience.</label>
                                             </div>
                                         </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : newNoti.userType.$invalid && !newNoti.userType.$pristine }">
+                                                            <label>User Type</label>
+                                                            <select class="cs-select cs-skin-slide" ng-model="notificationDetails.userType" ng-change="onScreenselect()" requried style="background: #fff; border:0px solid rgba(0, 0, 0, 0.07); width: 100%">
+                                                                <option value="">--select user type--</option>
+                                                                <option value="all_paid_users">All Paid users</option>
+                                                                <option value="all_trail_users">All Trial Users</option>
+                                                                <option value="all_expired_users">All Expired users</option>
+
+                                                            </select>
+                                                        </div>
+                                                        <label class="error" for="screen" ng-show="newNoti.userType.$invalid && !newNoti.userType.$pristine">Enter a valid screen.</label>
+                                                    </div>
+                                                </div>
                                                 <div class="clearfix"></div>
                                                 <button class="btn btn-danger" ng-click="stopedit()">cancel</button>
                                                 <button class="btn btn-primary" type="submit" ng-disabled="editnoti.$invalid" ng-click="editNotification(notificationDetails.id)">Edit Notification</button>

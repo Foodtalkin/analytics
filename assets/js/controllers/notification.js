@@ -116,6 +116,16 @@ angular.module('app')
                     }
                 }
 
+                if ($scope.Notification.userType == 'all_paid_users') {
+                    data.push.where.subscription_type_id = 1;
+                } else if ($scope.Notification.userType == 'all_trail_users') {
+                    data.push.where.subscription_type_id = 3;
+                } else if ($scope.Notification.userType == 'all_expired_users') {
+                    data.push.where.subscription_type_id = {
+                        "$exists": false
+                    };
+                }
+
                 if ($scope.Notification.screen == 'experiences') {
                     data.push.data.screen = $scope.Notification.screen
                 } else if ($scope.Notification.screen == 'experiences_details') {
@@ -178,6 +188,16 @@ angular.module('app')
                 } else {
                     $scope.notificationDetails.myusergroup = 'all'
                 }
+
+                if ($scope.notificationDetails.push.where.subscription_type_id) {
+                    if ($scope.notificationDetails.push.where.subscription_type_id == 1){
+                        $scope.notificationDetails.userType = 'all_paid_users';
+                    } else if ($scope.notificationDetails.push.where.subscription_type_id == 3){
+                        $scope.notificationDetails.userType = 'all_trail_users';
+                    } else {
+                        $scope.notificationDetails.userType = 'all_expired_users';
+                    }
+                }
                 console.log($scope.notificationDetails.myusergroup)
             }
             $scope.openCreateform = function () {
@@ -235,6 +255,16 @@ angular.module('app')
                 } else {
                     delete data.push.data.id
                     delete data.push.data.screen
+                }
+
+                if ($scope.notificationDetails.userType == 'all_paid_users') {
+                    data.push.where.subscription_type_id = 1;
+                } else if ($scope.notificationDetails.userType == 'all_trail_users') {
+                    data.push.where.subscription_type_id = 3;
+                } else if ($scope.notificationDetails.userType == 'all_expired_users') {
+                    data.push.where.subscription_type_id = {
+                        "$exists": false
+                    };
                 }
                 console.log(data)
                 notificationFact.sendNotification(UrlFact.notification + '/' + id, 'PUT', data, function (response) {
