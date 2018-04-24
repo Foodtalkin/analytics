@@ -55,7 +55,17 @@
                             <label class="error" for="one_liner" ng-show="CreateNewRestro.one_liner.$invalid && !CreateNewRestro.one_liner.$pristine">This field is required.</label>
                             <label class="error" for="one_liner" ng-show="CreateNewRestro.one_liner.$error.minlength">One Liner should have at least 4 characters</label>
                         </div>
-                    </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : CreateNewRestro.partner_pin.$invalid && !CreateNewRestro.partner_pin.$pristine }">
+                                <label>Partner Pin</label>
+                                <input type="text" class="form-control" name="partner_pin" ng-model="restro.partner_pin" minlength="4" maxlength="80">
+                            </div>
+                            <label class="error" for="one_liner" ng-show="CreateNewRestro.partner_pin.$invalid && !CreateNewRestro.partner_pin.$pristine">This field is required.</label>
+                            <label class="error" for="one_liner" ng-show="CreateNewRestro.partner_pin.$error.minlength">Partner PIN should have at least 4 characters</label>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div id="direct_upload" 
@@ -437,6 +447,12 @@
                           <p class="hint-text m-t-0 m-b-5 bold fs-13">Avg Rate</p>
                           <h5 class="semi-bold m-t-0">{{RestaurantData.rating.rating_avg}}</h5>
                         </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-6">
+                              <p class="hint-text m-t-0 m-b-5 bold fs-13">Partner PIN</p>
+                              <h5 class="semi-bold m-t-0">{{RestaurantData.partner_pin}}</h5>
+                          </div>
                       </div>
                     </div>
                     <div class="col-sm-4 text-center">

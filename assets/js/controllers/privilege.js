@@ -492,6 +492,7 @@ angular.module('app')
                 $scope.restro.one_liner = $scope.RestaurantData.one_liner
                 $scope.restro.cost = $scope.RestaurantData.cost
                 $scope.restro.card_image = $scope.RestaurantData.card_image
+                $scope.restro.partner_pin = $scope.RestaurantData.partner_pin
                 $scope.editing = true
                 $scope.openViaDetails = true
                 $scope.openCreateform()
