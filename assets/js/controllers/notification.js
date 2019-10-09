@@ -9,10 +9,11 @@ angular.module('app')
             $scope.notificationDetails = {}
             $scope.eventdatadisabled = true
             $scope.getAllList = function (url) {
-                notificationFact.getList(url, function (response) {
+                //disable as app integration closed
+                /*notificationFact.getList(url, function (response) {
                     $scope.allList = response.data.result.data
                     $scope.NextUrl = response.data.result.next_page_url
-                })
+                })*/
             }
             $scope.nextPage = function (url) {
                 notificationFact.getList(url, function (response) {
@@ -21,16 +22,18 @@ angular.module('app')
                 })
             }
             var url = UrlFact.experience.main + '?is_active=1'
-            notificationFact.getExprienceList(url, function (response) {
+            //disable as app integration closed
+            /*notificationFact.getExprienceList(url, function (response) {
                 $scope.experienceList = response.data.result.data
-            })
+            })*/
             $scope.getAllList(UrlFact.notification)
 
             $scope.getSearchList = function (data) {
-                notificationFact.getSearchList(data, function (response) {
+                //disable as app integration closed
+                /*notificationFact.getSearchList(data, function (response) {
                     $scope.allList = response.data.result.data;
                     $scope.NextUrl = ''
-                })
+                })*/
             }
 
             $scope.searchNotification = function () {
@@ -141,8 +144,8 @@ angular.module('app')
                     delete data.push.data.screen
                 }
 
-                console.log(data)
-                notificationFact.sendNotification(UrlFact.notification, 'POST', data, function (response) {
+                return //disable as app integration closed
+                /*notificationFact.sendNotification(UrlFact.notification, 'POST', data, function (response) {
                     $scope.isDisabled = false
                     console.log(response)
                     if (response.data.code == '200') {
@@ -166,7 +169,7 @@ angular.module('app')
                             type: 'error'
                         }).show()
                     }
-                })
+                })*/
             }
 
             $scope.openedit = function () {

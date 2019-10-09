@@ -64,10 +64,11 @@ angular.module('app')
     }
 
     // getting data
-    $scope.GetRedeemFeed($scope.redeemFeedUrl);
+		// disable as app integration closed
+    /*$scope.GetRedeemFeed($scope.redeemFeedUrl);
     $scope.GetPurchaseFeed($scope.purchaseFeedUrl);
     $scope.GetSignupFeed($scope.signupFeedUrl);
-    $scope.GetEventPurchaseFeed($scope.eventPurchaseFeedUrl);
+    $scope.GetEventPurchaseFeed($scope.eventPurchaseFeedUrl);*/
 }])
 .factory('appfeedFact', ['$http', function($http){
 	var appfeedFact = {};

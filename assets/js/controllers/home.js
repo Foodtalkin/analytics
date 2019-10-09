@@ -35,23 +35,26 @@ angular.module('app')
         }
 
         $scope.getUsersStats = function(){
-            homeFact.getTopUsers("30","10", function(response){
+            //disable as app integration closed
+            /*homeFact.getTopUsers("30","10", function(response){
                 //console.log(response);
                 $scope.topUsers = response.data.result;
-            });
+            });*/
         }
 
         $scope.getValuableUsers = function(){
-            homeFact.getValuableUsersData(function(response){
+            //disable as app integration closed
+            /*homeFact.getValuableUsersData(function(response){
                 $scope.valuableUsers = response.data.data;
-            });
+            });*/
         }
 
         $scope.getAnalyticsSales = function(){
-            homeFact.getSalesAnalytics(function(response){
+          //disable as app integration closed
+            /*homeFact.getSalesAnalytics(function(response){
                 $scope.allSalesData = response.data;
                 $scope.analyticsSales = $scope.allSalesData.daily;
-            });
+            });*/
         }
 
         $scope.getAnalyticsCouponOnBoard = function(){
@@ -151,7 +154,8 @@ angular.module('app')
         }
 
         $scope.getUserSubscriptionState = function () {
-            homeFact.getUserSubscriptionState(function (response) {
+            //disable as app integration closed
+            /*homeFact.getUserSubscriptionState(function (response) {
                 $scope.userSubscriptionState = response.data.result;
                 let total = $scope.userSubscriptionState.paidUserCount + $scope.userSubscriptionState.expiredSubscriptionCount + $scope.userSubscriptionState.trailUserCount + $scope.userSubscriptionState.userNotSubscribeCount + $scope.userSubscriptionState.trailExpiredUserCount;
 
@@ -162,7 +166,7 @@ angular.module('app')
                     getpercent($scope.userSubscriptionState.userNotSubscribeCount, total),
                     getpercent($scope.userSubscriptionState.trailExpiredUserCount, total)
                 ];
-            })
+            })*/
         }
 
         // call Charts
@@ -377,12 +381,13 @@ angular.module('app')
     .factory('homeFact', ['$http', 'UrlFact', function($http, UrlFact){
     	var homeFact = {};
     	homeFact.getUsers = function(days, callback){
-    		$http({
+        //disable as app integration closed
+    		/*$http({
 				method: 'GET',
 				url: UrlFact.home.user +days
 			}).then(function (response) {
 	            callback(response);
-	        });
+	        });*/
     	}
 
     	homeFact.getredemption = function(days, callback){
