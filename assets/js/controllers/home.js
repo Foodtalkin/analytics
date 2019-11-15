@@ -20,6 +20,7 @@ angular.module('app')
         $scope.users.unpaid = 0;
         $scope.users.trial = 0;
         window.location = '#/app/contact'
+        return
 
         $scope.getareaChats = function(){
             sortData.doSorting(function(response){
@@ -37,7 +38,6 @@ angular.module('app')
         }
 
         $scope.getUsersStats = function(){
-          alert('hello world');
             //disable as app integration closed
             /*homeFact.getTopUsers("30","10", function(response){
                 //console.log(response);
