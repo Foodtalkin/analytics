@@ -9,6 +9,9 @@ angular.module('app')
 	    $scope.mainpage = UrlFact.contact;
 	    $scope.getList = function(url){
 	    	contactFact.getList(url,function(response){
+	    		if (response.data.code == 401) {
+	    			$location.path('/access/login')
+					}
 	    		$scope.contactData = response.data.result.data;
 	        	$scope.NextUrl = response.data.result.next_page_url;
 	        })
@@ -60,7 +63,7 @@ angular.module('app')
         	})
         }
     }])
-    .factory('contactFact', ['$http','UrlFact', 
+    .factory('contactFact', ['$http','UrlFact',
     	function($http, UrlFact){
     	var contactFact = {};
     	contactFact.getList = function(url, callback){
@@ -82,7 +85,7 @@ angular.module('app')
 		                callback(true);
 		                console.log(response);
 		            }else{
-		              //Create an error Box and display the 
+		              //Create an error Box and display the
 		              console.log(response);
 		              callback(false);
 
