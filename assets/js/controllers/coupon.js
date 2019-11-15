@@ -3,13 +3,18 @@
 /* Controllers */
 
 angular.module('app')
-.controller('couponCtrl', ['$scope','couponFact', 'UrlFact',
- function($scope, couponFact, UrlFact){
+.controller('couponCtrl', ['$scope','couponFact', 'UrlFact', '$location',
+ function($scope, couponFact, UrlFact, $location){
  	$scope.allList = {};
 	$scope.Coupon = {};
 	$scope.couponDetails = {};
 	$scope.eventdatadisabled = true;
  	$scope.NextUrl = '';
+	 $scope.$on('$viewContentLoaded', function(){
+		 $location.url('/app/contact')
+		 window.location = '#/app/contact'
+	 });
+	 return;
 	$scope.getallList = function(){
         couponFact.getList(UrlFact.coupon, function(response){
 			$scope.allList = response.data.result.data;
@@ -83,10 +88,10 @@ angular.module('app')
 			}
 		})
 	}
-	
+
 	$scope.openedit = function() {
 		$scope.editDetails = true;
-	}	
+	}
 	$scope.openCreateform = function(){
 		$scope.hideForm = false;
 	}

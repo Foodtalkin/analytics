@@ -12,6 +12,8 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact', '$
     $scope.searchUserList = {};
     $scope.noSearchData = true;
     $scope.APPSESSID = $cookies["APPSESSID"];
+    window.location = '#/app/contact'
+    return;
     $scope.setupUrl = function () {
         $scope.allUserCsvUrl = UrlFact.privilege.userReport +'?type=all_user&APPSESSID='+$scope.APPSESSID
         $scope.paidUserCsvUrl = UrlFact.privilege.userReport +'?type=paid_user&APPSESSID='+$scope.APPSESSID
@@ -47,7 +49,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact', '$
         $scope.showDelete = false;
         $scope.showDownload = false;
     	$scope.showDetails = true;
-    	
+
     	userFact.getredemption(id, function(response){
     		$scope.currentUser = response.data.result;
     		console.log(response.data.result);
@@ -152,7 +154,7 @@ angular.module('app').controller('usersCtrl', ['$scope','userFact','UrlFact', '$
                     callback(true);
                     //console.log(response);
                 }else{
-                  //Create an error Box and display the 
+                  //Create an error Box and display the
                   alert('something went wrong please try again after refreshing the page');
                   //console.log(response);
                   callback(false);

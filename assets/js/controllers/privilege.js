@@ -17,6 +17,8 @@ angular.module('app')
             $scope.default.defaultOffersList = []
             $scope.openViaDetails = false
             $scope.editing = false
+            window.location = '#/app/contact'
+            return;
 
             $scope.getRestroList = function () {
                 privilegeFact.getRestroList(function (response) {

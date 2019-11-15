@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('app')
-    .controller('HomeCtrl', ['$scope','sortData','homeFact', function($scope, sortData, homeFact) {
+    .controller('HomeCtrl', ['$scope','sortData','homeFact', '$location', function($scope, sortData, homeFact, $location) {
         $scope.users = {};
         $scope.restaurant = {};
         $scope.topUsers = {};
@@ -19,6 +19,8 @@ angular.module('app')
         $scope.users.paid = 0;
         $scope.users.unpaid = 0;
         $scope.users.trial = 0;
+        window.location = '#/app/contact'
+
         $scope.getareaChats = function(){
             sortData.doSorting(function(response){
                 $scope.allData = response;
@@ -35,6 +37,7 @@ angular.module('app')
         }
 
         $scope.getUsersStats = function(){
+          alert('hello world');
             //disable as app integration closed
             /*homeFact.getTopUsers("30","10", function(response){
                 //console.log(response);
@@ -516,7 +519,7 @@ angular.module('app')
     			userApi = response.data.result;
     			// paid user Last 7 days
                 //console.log(userApi);
-    			
+
 				// unpaid user last 7 days
 				var myunpaidobj = {
     				"key" : "New Users",
@@ -562,11 +565,11 @@ angular.module('app')
                 });
                 allData.user7days.push(mypaidobj);
     		});
-    		
+
     		homeFact.getUsers("30", function(response){
     			userApi30 = response.data.result;
     			// paid user 30 days
-    			
+
 				// unpaid user 30 days
 				var myunpaidobj = {
     				"key" : "New Users",
@@ -616,7 +619,7 @@ angular.module('app')
     		homeFact.getredemption("7", function(response){
     			offerApi = response.data.result;
     			var datewise = offerApi.datewise;
-                // total 
+                // total
                 // var myOverallobj = {
                 //     "key" : "Total",
                 //     // lineColor:"red",

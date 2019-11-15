@@ -6,6 +6,8 @@ angular.module('app')
 
 .controller('experienceCtrl', ['$scope','experienceFact','$state','UrlFact', function($scope,experienceFact,$state,UrlFact) {
 	var mainurl = UrlFact.experience.main;
+  window.location = '#/app/contact'
+  return;
 	$scope.experience = {}
 	$scope.getList = function(url){
 		experienceFact.getExprienceList(url,function(response){
@@ -22,7 +24,7 @@ angular.module('app')
         })
     }
 	$scope.getList(mainurl);
-    
+
     $scope.OpenEvent = function(id){
     	experienceFact.getExprienceDetails(id, function(response){
     		$scope.showEvent = true;
@@ -63,7 +65,7 @@ angular.module('app')
            else{
               return false;
            }
-    	
+
     }
 
     $scope.getUserlist = function(id){
@@ -114,11 +116,11 @@ angular.module('app')
            else{
               return false;
            }
-            
+
     }
 
     $scope.refundStatus = function(txn_id){
-        
+
         experienceFact.refundStatus(txn_id, function(response){
             console.log(response);
             $('#modalSlideUpSmall').modal('show');
